@@ -1,0 +1,26 @@
+{
+  "name": "write-a-skill",
+  "version": "1.0.0",
+  "description": "Agent Skill (SKILL.md + reference) for authoring and improving portable Agent Skills across Cursor, Claude Code, OpenCode, Windsurf, and similar tools.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "cursor",
+    "claude-code",
+    "skill",
+    "prompt",
+    "agentskills"
+  ],
+  "files": [
+    "SKILL.md",
+    "reference.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./skill": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./reference": "./reference.md",
+    "./reference.md": "./reference.md"
+  }
+}
