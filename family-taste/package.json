@@ -1,0 +1,13 @@
+{
+  "name": "@its-thepoe/family-taste",
+  "version": "1.0.0",
+  "description": "Agent Skill: Family Values UI philosophy (simplicity, fluidity, delight).",
+  "license": "MIT",
+  "keywords": ["agent-skills", "ui", "product-design", "cursor"],
+  "files": ["SKILL.md", "LOVABLE.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./LOVABLE.md": "./LOVABLE.md"
+  }
+}

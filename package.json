@@ -1,0 +1,19 @@
+{
+  "name": "its-thepoe-skills-monorepo",
+  "private": true,
+  "description": "Local workspace for @its-thepoe Agent Skills and the @its-thepoe/skills orchestrator CLI.",
+  "license": "MIT",
+  "workspaces": [
+    "skills",
+    "alt-text",
+    "design-and-refine",
+    "design-engineering",
+    "design-motion-principles",
+    "family-taste",
+    "write-a-skill"
+  ],
+  "scripts": {
+    "skills": "node skills/bin/cli.mjs",
+    "validate": "node scripts/validate-packs.mjs"
+  }
+}
