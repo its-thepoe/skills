@@ -1,26 +1,61 @@
-# Skills
+# Agent Skills
 
-This repo is for sharing my skills (things I'm learning or can build with).
+This repository is the source of truth for reusable agent skills.
 
-## How to add your skills
+Each skill lives in one folder at the repo root:
 
-Copy one entry format below and paste it into the **My skills** section.
+```text
+skills/
+  <skill-name>/
+    SKILL.md
+    reference.md        # optional
+    LOVABLE.md          # optional
+    package.json        # optional
+```
 
-**Entry format**
+## Workflow for this repo
 
-- **Skill** — Level: `Beginner` \| `Intermediate` \| `Advanced` — Notes: *what you built or practice you did*
+- Default workflow is **commit directly on `main`** for normal updates.
+- Create feature branches only when explicitly needed.
 
-## My skills
+## Install a skill locally
 
-- **JavaScript** — Level: `Intermediate` — Notes: Built small UI widgets and scripts; comfortable with async/DOM patterns.
-- **TypeScript** — Level: `Beginner` — Notes: Working on typed React/component code; improving type accuracy.
-- **Git & GitHub** — Level: `Intermediate` — Notes: PRs, branching workflow, and basic conflict resolution.
+Use symlinks so updates in this repo instantly reflect in your agents.
 
-## Profile (optional)
+### One skill
 
-- Name:
-- Focus area (frontend/backend/full-stack):
-- Links (optional):
-  - Website:
-  - LinkedIn:
-  - Portfolio/GitHub:
+```bash
+SKILL_SRC="/Users/MAC/Desktop/Desktop - Poe's MacBook Pro/Engineering/Builds/skills/<skill-name>"
+mkdir -p ~/.cursor/skills ~/.claude/skills ~/.config/opencode/skills ~/.codeium/windsurf/skills
+ln -sfn "$SKILL_SRC" ~/.cursor/skills/<skill-name>
+ln -sfn "$SKILL_SRC" ~/.claude/skills/<skill-name>
+ln -sfn "$SKILL_SRC" ~/.config/opencode/skills/<skill-name>
+ln -sfn "$SKILL_SRC" ~/.codeium/windsurf/skills/<skill-name>
+```
+
+### Install all skills in this repo
+
+```bash
+SKILLS_ROOT="/Users/MAC/Desktop/Desktop - Poe's MacBook Pro/Engineering/Builds/skills"
+mkdir -p ~/.cursor/skills ~/.claude/skills ~/.config/opencode/skills ~/.codeium/windsurf/skills
+for skill_dir in "$SKILLS_ROOT"/*; do
+  [ -d "$skill_dir" ] || continue
+  [ -f "$skill_dir/SKILL.md" ] || continue
+  skill_name="$(basename "$skill_dir")"
+  ln -sfn "$skill_dir" ~/.cursor/skills/"$skill_name"
+  ln -sfn "$skill_dir" ~/.claude/skills/"$skill_name"
+  ln -sfn "$skill_dir" ~/.config/opencode/skills/"$skill_name"
+  ln -sfn "$skill_dir" ~/.codeium/windsurf/skills/"$skill_name"
+done
+```
+
+Reload/restart Cursor, Claude Code, OpenCode, and Windsurf after installing.
+
+## Optional: Gemini / Antigravity
+
+Path differs by setup. Common pattern:
+
+```bash
+mkdir -p ~/.gemini/skills
+ln -sfn "$SKILL_SRC" ~/.gemini/skills/<skill-name>
+```
