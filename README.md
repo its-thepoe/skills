@@ -28,10 +28,64 @@ Compare with the npm registry (optional, needs network):
 npx @its-thepoe/skills@latest check --online
 ```
 
-Install **one** skill by folder name (same names as in this repo):
+Install **several** skills by name:
 
 ```bash
 npx @its-thepoe/skills@latest install alt-text design-engineering
+```
+
+### Install commands for **each** skill (`npx`)
+
+Requires **`@its-thepoe/skills` on npm** (or use [manual symlinks](#install-from-this-repo-without-npm) below). Reload agents after install.
+
+| Skill | Install |
+|--------|---------|
+| **alt-text** | `npx @its-thepoe/skills@latest install alt-text` |
+| **design-and-refine** | `npx @its-thepoe/skills@latest install design-and-refine` |
+| **design-engineering** | `npx @its-thepoe/skills@latest install design-engineering` |
+| **design-motion-principles** | `npx @its-thepoe/skills@latest install design-motion-principles` |
+| **family-taste** | `npx @its-thepoe/skills@latest install family-taste` |
+| **write-a-skill** | `npx @its-thepoe/skills@latest install write-a-skill` |
+
+Sync or re-link one skill after an update:
+
+```bash
+npx @its-thepoe/skills@latest sync alt-text
+```
+
+Remove one skill:
+
+```bash
+npx @its-thepoe/skills@latest remove alt-text
+```
+
+### Install from this repo **without** npm
+
+If the packages are **not** on the registry yet, symlink folders from your clone into each agent’s skills directory.
+
+**One skill** (example: `alt-text` — repeat `SKILL_NAME` and paths for others):
+
+```bash
+SKILLS_ROOT="/path/to/this/repo"   # e.g. .../Engineering/Builds/skills
+SKILL_NAME=alt-text
+mkdir -p ~/.cursor/skills ~/.claude/skills ~/.config/opencode/skills ~/.codeium/windsurf/skills
+ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.cursor/skills/"$SKILL_NAME"
+ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.claude/skills/"$SKILL_NAME"
+ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.config/opencode/skills/"$SKILL_NAME"
+ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.codeium/windsurf/skills/"$SKILL_NAME"
+```
+
+**All six skills** at once:
+
+```bash
+SKILLS_ROOT="/path/to/this/repo"
+mkdir -p ~/.cursor/skills ~/.claude/skills ~/.config/opencode/skills ~/.codeium/windsurf/skills
+for SKILL_NAME in alt-text design-and-refine design-engineering design-motion-principles family-taste write-a-skill; do
+  ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.cursor/skills/"$SKILL_NAME"
+  ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.claude/skills/"$SKILL_NAME"
+  ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.config/opencode/skills/"$SKILL_NAME"
+  ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.codeium/windsurf/skills/"$SKILL_NAME"
+done
 ```
 
 Preview changes without writing:
