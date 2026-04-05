@@ -2,6 +2,8 @@
 
 This repository is the source of truth for reusable **Agent Skills** (each folder has a `SKILL.md`). Skills are published to npm under the **`@its-thepoe`** scope.
 
+**If `npx @its-thepoe/skills@latest` returns `404 Not Found`:** that package is **not on the registry yet** (publish not completed). Use **[Install from this repo without npm](#install-from-this-repo-without-npm)** below, or run the CLI from a **clone** of this repo (`git clone` → `npm install` → `npm run skills -- install alt-text`). After you successfully `npm publish` `@its-thepoe/skills`, `npx` will work from any directory.
+
 ## Install everything (recommended)
 
 Use the **orchestrator** package **`@its-thepoe/skills`**. It links or copies **all** skills into your local agent skill directories (Cursor, Claude Code, OpenCode, Windsurf).
@@ -87,6 +89,20 @@ for SKILL_NAME in alt-text design-and-refine design-engineering design-motion-pr
   ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.codeium/windsurf/skills/"$SKILL_NAME"
 done
 ```
+
+### Run the orchestrator from a **clone** (no `npx`, no npm publish)
+
+Use this when **`@its-thepoe/skills` is not on npm** but you have this repo locally:
+
+```bash
+git clone https://github.com/its-thepoe/skills.git ~/path/to/skills
+cd ~/path/to/skills
+npm install
+npm run skills -- install alt-text
+# or: npm run skills -- install --all
+```
+
+Links still go to `~/.cursor/skills`, `~/.claude/skills`, etc., resolving skills from the workspace `node_modules`.
 
 Preview changes without writing:
 
@@ -197,6 +213,7 @@ Path differs by setup. After installing skills, symlink or copy into the path yo
 
 | Issue | What to try |
 |-------|-------------|
+| **`npx @its-thepoe/skills` → 404** | Package not published yet — use [manual symlinks](#install-from-this-repo-without-npm) or clone repo + `npm run skills -- install …` |
 | `check` says bundle not resolvable | Run `npx @its-thepoe/skills@latest` (fresh install) so `node_modules` includes all skill deps |
 | Symlink permission errors (Windows) | `install --all --strategy copy` |
 | Nothing updates | Use `@latest` on the package: `npx @its-thepoe/skills@latest ...` |
