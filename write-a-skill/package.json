@@ -1,6 +1,6 @@
 {
   "name": "@its-thepoe/write-a-skill",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Agent Skill (SKILL.md + reference) for authoring and improving portable Agent Skills across Cursor, Claude Code, OpenCode, Windsurf, and similar tools.",
   "license": "MIT",
   "keywords": [
@@ -11,7 +11,7 @@
     "prompt",
     "agentskills"
   ],
-  "files": ["SKILL.md", "reference.md", "package.json"],
+  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
   "exports": {
     ".": "./SKILL.md",
     "./skill": "./SKILL.md",

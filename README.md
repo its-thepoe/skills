@@ -164,7 +164,7 @@ Official paths vary. After you have a skill folder, symlink or copy it into the 
 
 ## Repository layout (contributors)
 
-This repo is an npm **workspace**: one folder per skill plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. To add a skill, ship `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`. Publishing order and scripts: [`scripts/PUBLISH_ORDER.md`](scripts/PUBLISH_ORDER.md).
+This repo is an npm **workspace**: one folder per skill plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. To add a skill, ship `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), a short **`README.md`** (npmjs.com shows this per package), list `README.md` in `package.json` **`files`**, register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`. Publishing order and scripts: [`scripts/PUBLISH_ORDER.md`](scripts/PUBLISH_ORDER.md).
 
 ```text
 skills/          → @its-thepoe/skills (CLI)

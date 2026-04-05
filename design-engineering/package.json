@@ -1,10 +1,10 @@
 {
   "name": "@its-thepoe/design-engineering",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Agent Skill: UI craft — motion, easing, component feel, polish (design engineering).",
   "license": "MIT",
   "keywords": ["agent-skills", "design-engineering", "motion", "ui", "cursor"],
-  "files": ["SKILL.md", "LOVABLE.md", "package.json"],
+  "files": ["README.md", "SKILL.md", "LOVABLE.md", "package.json"],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",

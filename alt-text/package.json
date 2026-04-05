@@ -1,10 +1,10 @@
 {
   "name": "@its-thepoe/alt-text",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Agent Skill: scan and draft alt text for images (Next.js, React, Astro, Vue, CMS) with review table before apply.",
   "license": "MIT",
   "keywords": ["agent-skills", "accessibility", "alt-text", "a11y", "cursor"],
-  "files": ["SKILL.md", "reference.md", "package.json"],
+  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",

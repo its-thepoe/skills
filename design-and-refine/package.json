@@ -1,10 +1,10 @@
 {
   "name": "@its-thepoe/design-and-refine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Agent Skill: Design & Refine / 0x Designer workflow (manual playbook + Design Lab guidance).",
   "license": "MIT",
   "keywords": ["agent-skills", "design", "ui", "cursor"],
-  "files": ["SKILL.md", "reference.md", "package.json"],
+  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",
