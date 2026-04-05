@@ -1,74 +1,144 @@
-# Agent Skills (`@its-thepoe`)
+# @its-thepoe Agent Skills
 
-This repository is the source of truth for reusable **Agent Skills** (each folder has a `SKILL.md`). Skills are published to npm under the **`@its-thepoe`** scope.
+**Agent Skills** are portable instruction packs (`SKILL.md` + optional references) for AI coding assistants. This collection installs into **Cursor**, **Claude Code**, **OpenCode**, and **Windsurf** skill directories on your machine.
 
-**If `npx @its-thepoe/skills@latest` returns `404 Not Found`:** that package is **not on the registry yet** (publish not completed). Use **[Install from this repo without npm](#install-from-this-repo-without-npm)** below, or run the CLI from a **clone** of this repo (`git clone` → `npm install` → `npm run skills -- install alt-text`). After you successfully `npm publish` `@its-thepoe/skills`, `npx` will work from any directory.
+**Registry:** packages are published on [npm](https://www.npmjs.com/) under the **`@its-thepoe`** scope ([search](https://www.npmjs.com/search?q=scope%3Aits-thepoe)).
 
-## Install everything (recommended)
+---
 
-Use the **orchestrator** package **`@its-thepoe/skills`**. It links or copies **all** skills into your local agent skill directories (Cursor, Claude Code, OpenCode, Windsurf).
+## Quick start
+
+Install **all** skills (recommended):
 
 ```bash
 npx @its-thepoe/skills@latest install --all
 ```
 
-Update or repair installs (idempotent):
+Restart or reload your editor / agent so new skills are picked up.
+
+**Update** installs (safe to run anytime):
 
 ```bash
 npx @its-thepoe/skills@latest sync --all
 ```
 
-Verify installs (symlinks / copies, `SKILL.md` present):
+**Check** that skills are linked and `SKILL.md` is present:
 
 ```bash
 npx @its-thepoe/skills@latest check
 ```
 
-Compare with the npm registry (optional, needs network):
+(Optional, needs network — compare local versions to the registry:)
 
 ```bash
 npx @its-thepoe/skills@latest check --online
 ```
 
-Install **several** skills by name:
+---
+
+## Install one skill
+
+| Skill | Command |
+|--------|---------|
+| alt-text | `npx @its-thepoe/skills@latest install alt-text` |
+| design-and-refine | `npx @its-thepoe/skills@latest install design-and-refine` |
+| design-engineering | `npx @its-thepoe/skills@latest install design-engineering` |
+| design-motion-principles | `npx @its-thepoe/skills@latest install design-motion-principles` |
+| family-taste | `npx @its-thepoe/skills@latest install family-taste` |
+| write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
+
+Install several at once:
 
 ```bash
 npx @its-thepoe/skills@latest install alt-text design-engineering
 ```
 
-### Install commands for **each** skill (`npx`)
-
-Requires **`@its-thepoe/skills` on npm** (or use [manual symlinks](#install-from-this-repo-without-npm) below). Reload agents after install.
-
-| Skill | Install |
-|--------|---------|
-| **alt-text** | `npx @its-thepoe/skills@latest install alt-text` |
-| **design-and-refine** | `npx @its-thepoe/skills@latest install design-and-refine` |
-| **design-engineering** | `npx @its-thepoe/skills@latest install design-engineering` |
-| **design-motion-principles** | `npx @its-thepoe/skills@latest install design-motion-principles` |
-| **family-taste** | `npx @its-thepoe/skills@latest install family-taste` |
-| **write-a-skill** | `npx @its-thepoe/skills@latest install write-a-skill` |
-
-Sync or re-link one skill after an update:
+Re-link one skill after an update:
 
 ```bash
 npx @its-thepoe/skills@latest sync alt-text
 ```
 
-Remove one skill:
+Remove one skill from agent directories:
 
 ```bash
 npx @its-thepoe/skills@latest remove alt-text
 ```
 
-### Install from this repo **without** npm
+---
 
-If the packages are **not** on the registry yet, symlink folders from your clone into each agent’s skills directory.
+## CLI options
 
-**One skill** (example: `alt-text` — repeat `SKILL_NAME` and paths for others):
+Preview actions (no files changed):
 
 ```bash
-SKILLS_ROOT="/path/to/this/repo"   # e.g. .../Engineering/Builds/skills
+npx @its-thepoe/skills@latest install --all --dry-run
+```
+
+Only some agents (comma-separated: `cursor`, `claude`, `opencode`, `windsurf`):
+
+```bash
+npx @its-thepoe/skills@latest install --all --only=cursor,claude
+```
+
+If **symlinks fail** (often on Windows without dev mode), use **copy** mode:
+
+```bash
+npx @its-thepoe/skills@latest install --all --strategy copy
+```
+
+Remove all skills installed by this tool:
+
+```bash
+npx @its-thepoe/skills@latest remove --all
+```
+
+---
+
+## What each package is
+
+| npm package | What it does |
+|-------------|----------------|
+| `@its-thepoe/skills` | **CLI** — `install`, `sync`, `check`, `remove` |
+| `@its-thepoe/alt-text` | Image alt text: scan, draft, review table, then apply (Next.js, React, Astro, Vue, CMS-shaped content) |
+| `@its-thepoe/design-and-refine` | Design & Refine / Design Lab style workflow |
+| `@its-thepoe/design-engineering` | UI craft: motion, easing, component polish |
+| `@its-thepoe/design-motion-principles` | Motion audit (multi-file references) |
+| `@its-thepoe/family-taste` | Family Values UI philosophy |
+| `@its-thepoe/write-a-skill` | How to author and ship Agent Skills |
+
+Skills follow the [Agent Skills](https://agentskills.io) idea: each folder is self-contained with `SKILL.md` at the root.
+
+---
+
+## Troubleshooting
+
+| Problem | What to do |
+|---------|------------|
+| **`npx …` → 404 Not Found** | The package is not on npm yet, or the name is wrong. Use **From source** below, or ask the maintainer to publish. |
+| **EOTP / one-time password** | Your npm account uses 2FA for publish; end users normally do not see this when **installing**. |
+| **`check` reports MISSING** | Run `install` or `sync` again; confirm paths like `~/.cursor/skills/<name>` exist. |
+| **Symlink errors (Windows)** | Use `--strategy copy`. |
+| **Skills don’t appear** | Fully restart the app or reload the window after `install`. |
+
+---
+
+## From source (GitHub, no npm)
+
+If `npx @its-thepoe/skills@latest` is not available yet, clone and run the same CLI locally:
+
+```bash
+git clone https://github.com/its-thepoe/skills.git
+cd skills
+npm install
+npm run skills -- install --all
+# or one skill: npm run skills -- install alt-text
+```
+
+**Manual symlinks** — set `SKILLS_ROOT` to your clone and `SKILL_NAME` to the folder name:
+
+```bash
+SKILLS_ROOT="$HOME/src/skills"
 SKILL_NAME=alt-text
 mkdir -p ~/.cursor/skills ~/.claude/skills ~/.config/opencode/skills ~/.codeium/windsurf/skills
 ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.cursor/skills/"$SKILL_NAME"
@@ -77,145 +147,39 @@ ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.config/opencode/skills/"$SKILL_NAME"
 ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.codeium/windsurf/skills/"$SKILL_NAME"
 ```
 
-**All six skills** at once:
+---
 
-```bash
-SKILLS_ROOT="/path/to/this/repo"
-mkdir -p ~/.cursor/skills ~/.claude/skills ~/.config/opencode/skills ~/.codeium/windsurf/skills
-for SKILL_NAME in alt-text design-and-refine design-engineering design-motion-principles family-taste write-a-skill; do
-  ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.cursor/skills/"$SKILL_NAME"
-  ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.claude/skills/"$SKILL_NAME"
-  ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.config/opencode/skills/"$SKILL_NAME"
-  ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.codeium/windsurf/skills/"$SKILL_NAME"
-done
-```
+## Other agents (e.g. Gemini / Antigravity)
 
-### Run the orchestrator from a **clone** (no `npx`, no npm publish)
+Official paths vary. After you have a skill folder, symlink or copy it into the directory your product documents (often under `~/.gemini/skills/` or a project `.agent/skills/` path).
 
-Use this when **`@its-thepoe/skills` is not on npm** but you have this repo locally:
+---
 
-```bash
-git clone https://github.com/its-thepoe/skills.git ~/path/to/skills
-cd ~/path/to/skills
-npm install
-npm run skills -- install alt-text
-# or: npm run skills -- install --all
-```
+## More documentation
 
-Links still go to `~/.cursor/skills`, `~/.claude/skills`, etc., resolving skills from the workspace `node_modules`.
+- [docs/publishing-jargon.md](docs/publishing-jargon.md) — npm terms explained (`npx`, `semver`, `files`, etc.) and **what install feels like** per method.
+- [docs/publish-step-by-step.md](docs/publish-step-by-step.md) — **maintainers:** how to publish to npm (login, OTP, order).
 
-Preview changes without writing:
+---
 
-```bash
-npx @its-thepoe/skills@latest install --all --dry-run
-```
+## Repository layout (contributors)
 
-Limit targets (comma-separated):
-
-```bash
-npx @its-thepoe/skills@latest install --all --only=cursor,claude
-```
-
-If **symlinks fail** (common on some Windows setups), use **copy** mode:
-
-```bash
-npx @its-thepoe/skills@latest install --all --strategy copy
-```
-
-Remove managed installs:
-
-```bash
-npx @its-thepoe/skills@latest remove --all
-```
-
-Reload or restart Cursor, Claude Code, OpenCode, and Windsurf after installing.
-
-## Monorepo layout
-
-Each publishable skill is an npm workspace folder at the repo root. The orchestrator CLI lives in [`skills/`](skills/) (package name **`@its-thepoe/skills`**, binary name **`skills`**).
+This repo is an npm **workspace**: one folder per skill plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. To add a skill, ship `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`. Publishing order and scripts: [`scripts/PUBLISH_ORDER.md`](scripts/PUBLISH_ORDER.md).
 
 ```text
-<repo>/
-  package.json              # private workspace root
-  skills/                   # @its-thepoe/skills (orchestrator)
-  alt-text/                 # @its-thepoe/alt-text
-  design-and-refine/
-  design-engineering/
-  design-motion-principles/
-  family-taste/
-  write-a-skill/
+skills/          → @its-thepoe/skills (CLI)
+alt-text/        → @its-thepoe/alt-text
+design-and-refine/
+design-engineering/
+design-motion-principles/
+family-taste/
+write-a-skill/
 ```
 
-Adding a new skill: create the folder + `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), then add it to [`skills/skills.manifest.json`](skills/skills.manifest.json) and to **`dependencies`** in [`skills/package.json`](skills/package.json).
-
-## Local development (this repo)
-
-Install workspace dependencies:
+Maintainer one-liner (after `npm login`; use a fresh OTP if 2FA is on):
 
 ```bash
-npm install
+npm install && npm run validate && NPM_OTP=123456 ./scripts/publish-all.sh
 ```
 
-Run the CLI without `npx`:
-
-```bash
-npm run skills -- check
-npm run skills -- install --all --dry-run
-```
-
-Validate pack contents for every workspace package:
-
-```bash
-npm run validate
-```
-
-## Publishing
-
-**Step-by-step (start here):** [`docs/publish-step-by-step.md`](docs/publish-step-by-step.md)
-
-Quick path after `npm login`:
-
-```bash
-npm install
-npm run validate
-NPM_OTP=123456 ./scripts/publish-all.sh   # replace 123456 with your authenticator code if 2FA is on
-```
-
-Order and troubleshooting: [`scripts/PUBLISH_ORDER.md`](scripts/PUBLISH_ORDER.md). Skill packages must be published **before** `@its-thepoe/skills` so dependency versions resolve on the registry.
-
-## Docs
-
-- [`docs/publish-step-by-step.md`](docs/publish-step-by-step.md) — numbered publish checklist (login, validate, OTP, verify)
-- [`docs/publishing-jargon.md`](docs/publishing-jargon.md) — plain-language npm terms (`semver`, `npx`, `files`, etc.)
-
-## Workflow for this repo
-
-- Default workflow is **commit directly on `main`** for normal updates.
-- Feature branches only when explicitly needed.
-
-## Optional: Gemini / Antigravity
-
-Path differs by setup. After installing skills, symlink or copy into the path your tool documents (often under `~/.gemini/skills/`).
-
-## Package index
-
-| Package | Purpose |
-|--------|---------|
-| `@its-thepoe/skills` | **Orchestrator** — `install`, `sync`, `check`, `remove` |
-| `@its-thepoe/alt-text` | Alt text audit + review table workflow |
-| `@its-thepoe/design-and-refine` | Design & Refine / Design Lab playbook |
-| `@its-thepoe/design-engineering` | Design engineering / UI craft |
-| `@its-thepoe/design-motion-principles` | Motion audit (multi-reference skill) |
-| `@its-thepoe/family-taste` | Family Values UI philosophy |
-| `@its-thepoe/write-a-skill` | Authoring Agent Skills |
-
-## Troubleshooting
-
-| Issue | What to try |
-|-------|-------------|
-| **`npx @its-thepoe/skills` → 404** | Package not published yet — use [manual symlinks](#install-from-this-repo-without-npm) or clone repo + `npm run skills -- install …` |
-| `check` says bundle not resolvable | Run `npx @its-thepoe/skills@latest` (fresh install) so `node_modules` includes all skill deps |
-| Symlink permission errors (Windows) | `install --all --strategy copy` |
-| Nothing updates | Use `@latest` on the package: `npx @its-thepoe/skills@latest ...` |
-| `npm publish` fails | Run `npm whoami`; use `--access public` for scoped packages |
-| Wrong / partial skill after install | Check `package.json#files` in that skill; run `npm run validate` in this repo |
+Replace `123456` with your authenticator code, or omit `NPM_OTP=...` if publish does not require OTP.

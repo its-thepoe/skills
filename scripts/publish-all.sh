@@ -5,23 +5,27 @@
 #
 # If npm 2FA is enabled, set a one-time code (valid ~30s) when you run:
 #   NPM_OTP=123456 ./scripts/publish-all.sh
-set -euo pipefail
+set -eo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-OTP_ARGS=()
-if [ -n "${NPM_OTP:-}" ]; then
-  OTP_ARGS+=(--otp="$NPM_OTP")
-fi
+run_publish() {
+  local workspace="$1"
+  if [ -n "${NPM_OTP:-}" ]; then
+    npm publish --access public --otp="$NPM_OTP" -w "$workspace"
+  else
+    npm publish --access public -w "$workspace"
+  fi
+}
 
 npm run validate
 
-npm publish --access public "${OTP_ARGS[@]}" -w @its-thepoe/alt-text
-npm publish --access public "${OTP_ARGS[@]}" -w @its-thepoe/design-and-refine
-npm publish --access public "${OTP_ARGS[@]}" -w @its-thepoe/design-engineering
-npm publish --access public "${OTP_ARGS[@]}" -w @its-thepoe/design-motion-principles
-npm publish --access public "${OTP_ARGS[@]}" -w @its-thepoe/family-taste
-npm publish --access public "${OTP_ARGS[@]}" -w @its-thepoe/write-a-skill
-npm publish --access public "${OTP_ARGS[@]}" -w @its-thepoe/skills
+run_publish @its-thepoe/alt-text
+run_publish @its-thepoe/design-and-refine
+run_publish @its-thepoe/design-engineering
+run_publish @its-thepoe/design-motion-principles
+run_publish @its-thepoe/family-taste
+run_publish @its-thepoe/write-a-skill
+run_publish @its-thepoe/skills
 
 echo "Done. Smoke test: npx @its-thepoe/skills@latest check"
