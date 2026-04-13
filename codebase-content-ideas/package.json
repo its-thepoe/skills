@@ -1,0 +1,22 @@
+{
+  "name": "@its-thepoe/codebase-content-ideas",
+  "version": "1.0.1",
+  "description": "Agent Skill: scan a repo and propose blog posts, short notes, X threads, and LinkedIn angles grounded in real code and local notes (bugs, ADRs, TILs).",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "cursor",
+    "claude-code",
+    "blog",
+    "technical-writing",
+    "content",
+    "agentskills"
+  ],
+  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./reference": "./reference.md",
+    "./reference.md": "./reference.md"
+  }
+}

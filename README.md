@@ -45,6 +45,7 @@ npx @its-thepoe/skills@latest check --online
 | design-engineering | `npx @its-thepoe/skills@latest install design-engineering` |
 | design-motion-principles | `npx @its-thepoe/skills@latest install design-motion-principles` |
 | family-taste | `npx @its-thepoe/skills@latest install family-taste` |
+| codebase-content-ideas | `npx @its-thepoe/skills@latest install codebase-content-ideas` |
 | write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
 
 Install several at once:
@@ -105,6 +106,7 @@ npx @its-thepoe/skills@latest remove --all
 | `@its-thepoe/design-engineering` | UI craft: motion, easing, component polish |
 | `@its-thepoe/design-motion-principles` | Motion audit (multi-file references) |
 | `@its-thepoe/family-taste` | Family Values UI philosophy |
+| `@its-thepoe/codebase-content-ideas` | Blog and social content ideas from real repo work and notes |
 | `@its-thepoe/write-a-skill` | How to author and ship Agent Skills |
 
 Skills follow the [Agent Skills](https://agentskills.io) idea: each folder is self-contained with `SKILL.md` at the root.
@@ -169,6 +171,7 @@ This repo is an npm **workspace**: one folder per skill plus [`skills/`](skills/
 ```text
 skills/          → @its-thepoe/skills (CLI)
 alt-text/        → @its-thepoe/alt-text
+codebase-content-ideas/
 design-and-refine/
 design-engineering/
 design-motion-principles/

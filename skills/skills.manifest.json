@@ -5,6 +5,7 @@
     { "name": "design-engineering", "package": "@its-thepoe/design-engineering" },
     { "name": "design-motion-principles", "package": "@its-thepoe/design-motion-principles" },
     { "name": "family-taste", "package": "@its-thepoe/family-taste" },
+    { "name": "codebase-content-ideas", "package": "@its-thepoe/codebase-content-ideas" },
     { "name": "write-a-skill", "package": "@its-thepoe/write-a-skill" }
   ]
 }
