@@ -179,6 +179,12 @@ family-taste/
 write-a-skill/
 ```
 
+**Republish only `codebase-content-ideas` + CLI** (order fixed): see [docs/publish-step-by-step.md](docs/publish-step-by-step.md) TL;DR, or after `chmod +x`:
+
+```bash
+./scripts/publish-codebase-content-ideas-and-cli.sh
+```
+
 Maintainer one-liner (after `npm login`; use a fresh OTP if 2FA is on):
 
 ```bash

@@ -1,0 +1,21 @@
+---
+description: "@its-thepoe skills monorepo — npm publish order, codebase-content-ideas + CLI, bin field"
+alwaysApply: true
+---
+
+# npm republish (this repo)
+
+When publishing **`@its-thepoe/codebase-content-ideas`** and **`@its-thepoe/skills`**:
+
+1. **Never** republish the same version twice. Bump semver first.
+2. **Order:** publish **`@its-thepoe/codebase-content-ideas`** first, then **`@its-thepoe/skills`** (orchestrator lists the skill in `dependencies`; npm must resolve it).
+3. **Commands** (repo root):
+
+```bash
+npm publish --access public -w @its-thepoe/codebase-content-ideas
+npm publish --access public -w @its-thepoe/skills
+```
+
+4. **`skills/package.json` `bin`:** must be **`"skills": "./bin/cli.mjs"`** (with **`./`**). Do **not** run **`npm pkg fix`** in `skills/`; it removes `./` and **`npm publish` can drop `bin`**.
+5. **Script:** `./scripts/publish-codebase-content-ideas-and-cli.sh` after `npm run validate` (optional `NPM_OTP=...`).
+6. **Docs:** [docs/publish-step-by-step.md](docs/publish-step-by-step.md) TL;DR section.
