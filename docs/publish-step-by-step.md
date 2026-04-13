@@ -91,9 +91,11 @@ Replace **`123456`** with your **current** code.
 The script:
 
 1. Runs `npm run validate` again.
-2. Publishes **six** skill packages, then **`@its-thepoe/skills`**, in the correct order.
+2. Publishes **every skill package** listed in the script, then **`@its-thepoe/skills`**, in the correct order.
 
-**If the OTP expires** before all seven finish, note which package failed, generate a **new** code, and run the remaining publishes by hand (see [scripts/PUBLISH_ORDER.md](../scripts/PUBLISH_ORDER.md) for the exact `npm publish` lines).
+**If the OTP expires** before the script finishes, note which package failed, generate a **new** code, and run the remaining publishes by hand (see [scripts/PUBLISH_ORDER.md](../scripts/PUBLISH_ORDER.md) for the exact `npm publish` lines).
+
+**Critical:** Any **new** `@its-thepoe/<skill>` must be **`npm publish`’d before** (or at least not after) you publish a **`@its-thepoe/skills`** version that lists it in `dependencies`. Otherwise `npx @its-thepoe/skills` installs will **404** on the missing skill package. If that happens, publish the missing skill package first; you usually **do not** need to republish the orchestrator.
 
 **If you do not use 2FA** for publish (or use an automation token that bypasses it), you can run without `NPM_OTP`:
 
@@ -151,6 +153,7 @@ You **cannot** republish the same version twice; npm will reject it.
 | **401** / `npm whoami` fails | Not logged in — run **Step 2**. |
 | **EOTP** | Need `--otp` — **Step 6–7** (`NPM_OTP=...`). |
 | **404** on `PUT` for `@its-thepoe/...` | No permission for that scope — **Step 1**. |
+| **404** on `GET` for `@its-thepoe/...` when **installing** `@its-thepoe/skills` | A skill package in the orchestrator’s `dependencies` is **not on the registry yet**. Publish that skill package (`npm publish -w @its-thepoe/<name>`), then retry. |
 | **403** forbidden | Token/user cannot publish this package. |
 
 ---
@@ -165,6 +168,7 @@ npm publish --access public --otp=CODE -w @its-thepoe/design-and-refine
 npm publish --access public --otp=CODE -w @its-thepoe/design-engineering
 npm publish --access public --otp=CODE -w @its-thepoe/design-motion-principles
 npm publish --access public --otp=CODE -w @its-thepoe/family-taste
+npm publish --access public --otp=CODE -w @its-thepoe/codebase-content-ideas
 npm publish --access public --otp=CODE -w @its-thepoe/write-a-skill
 npm publish --access public --otp=CODE -w @its-thepoe/skills
 ```
