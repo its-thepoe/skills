@@ -1,6 +1,6 @@
 {
   "name": "@its-thepoe/codebase-content-ideas",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Agent Skill: scan a repo and propose blog posts, short notes, X threads, and LinkedIn angles grounded in real code and local notes (bugs, ADRs, TILs).",
   "license": "MIT",
   "keywords": [
