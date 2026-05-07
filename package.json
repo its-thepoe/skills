@@ -6,6 +6,7 @@
   "workspaces": [
     "skills",
     "alt-text",
+    "canva-app-builder",
     "codebase-content-ideas",
     "design-and-refine",
     "design-engineering",

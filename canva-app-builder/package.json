@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/canva-app-builder",
+  "version": "1.0.0",
+  "description": "Agent Skill: build Canva Apps against Apps SDK docs and UI guidelines with a spec-first workflow.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "canva",
+    "apps-sdk",
+    "ui-kit",
+    "cursor"
+  ],
+  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./reference.md": "./reference.md"
+  }
+}

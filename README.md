@@ -45,6 +45,7 @@ npx @its-thepoe/skills@latest check --online
 | design-engineering | `npx @its-thepoe/skills@latest install design-engineering` |
 | design-motion-principles | `npx @its-thepoe/skills@latest install design-motion-principles` |
 | family-taste | `npx @its-thepoe/skills@latest install family-taste` |
+| canva-app-builder | `npx @its-thepoe/skills@latest install canva-app-builder` |
 | codebase-content-ideas | `npx @its-thepoe/skills@latest install codebase-content-ideas` |
 | write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
 
@@ -106,6 +107,7 @@ npx @its-thepoe/skills@latest remove --all
 | `@its-thepoe/design-engineering` | UI craft: motion, easing, component polish |
 | `@its-thepoe/design-motion-principles` | Motion audit (multi-file references) |
 | `@its-thepoe/family-taste` | Family Values UI philosophy |
+| `@its-thepoe/canva-app-builder` | Build Canva Apps against SDK docs, UI kit, and review constraints |
 | `@its-thepoe/codebase-content-ideas` | Blog and social content ideas from real repo work and notes |
 | `@its-thepoe/write-a-skill` | How to author and ship Agent Skills |
 

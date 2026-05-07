@@ -7,9 +7,10 @@ Publish **skill content packages** first, then the **orchestrator** (`@its-thepo
 3. `design-engineering`
 4. `design-motion-principles`
 5. `family-taste`
-6. `codebase-content-ideas`
-7. `write-a-skill`
-8. `skills` (package name `@its-thepoe/skills`)
+6. `canva-app-builder`
+7. `codebase-content-ideas`
+8. `write-a-skill`
+9. `skills` (package name `@its-thepoe/skills`)
 
 From repo root after `npm login`:
 
@@ -28,6 +29,7 @@ npm publish --access public -w @its-thepoe/design-and-refine
 npm publish --access public -w @its-thepoe/design-engineering
 npm publish --access public -w @its-thepoe/design-motion-principles
 npm publish --access public -w @its-thepoe/family-taste
+npm publish --access public -w @its-thepoe/canva-app-builder
 npm publish --access public -w @its-thepoe/codebase-content-ideas
 npm publish --access public -w @its-thepoe/write-a-skill
 npm publish --access public -w @its-thepoe/skills

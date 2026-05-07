@@ -6,10 +6,10 @@ Follow these steps **in order** on the machine where you want to publish (your l
 
 ## TL;DR — `codebase-content-ideas` + CLI (the flow that works)
 
-Use this when you changed `**codebase-content-ideas/`** and/or bumped its version in `**skills/package.json**`.
+Use this when you changed **`codebase-content-ideas/`** and/or bumped its version in **`skills/package.json`**.
 
-1. Bump `**codebase-content-ideas/package.json**` `version` (never republish an existing version).
-2. Set `**skills/package.json**` `"@its-thepoe/codebase-content-ideas"` to that same version and bump `**@its-thepoe/skills**` `version`.
+1. Bump **`codebase-content-ideas/package.json`** `version` (never republish an existing version).
+2. Set **`skills/package.json`** `"@its-thepoe/codebase-content-ideas"` to that same version and bump **`@its-thepoe/skills`** `version`.
 3. From **repo root**: `npm install && npm run validate`
 4. Publish **in this order only** (skill first, orchestrator second):
 
@@ -27,7 +27,7 @@ NPM_OTP=789012 npm publish --access public -w @its-thepoe/skills
 
 One script (same order): `chmod +x scripts/publish-codebase-content-ideas-and-cli.sh` then `./scripts/publish-codebase-content-ideas-and-cli.sh` (or `NPM_OTP=... ./scripts/...`).
 
-`**@its-thepoe/skills` `bin` field:** keep `**"skills": "./bin/cli.mjs"`** (leading `**./**`). Do **not** run `**npm pkg fix`** inside `**skills/**` — it rewrites the path to `bin/cli.mjs`, and `**npm publish` then strips `bin**` from the published package (broken `npx`).
+**`@its-thepoe/skills` `bin` field:** keep **`"skills": "./bin/cli.mjs"`** (leading `./`). Do **not** run **`npm pkg fix`** inside **`skills/`** — it rewrites the path to `bin/cli.mjs`, and `npm publish` can strip `bin` from the published package (broken `npx`).
 
 ---
 
@@ -35,7 +35,7 @@ One script (same order): `chmod +x scripts/publish-codebase-content-ideas-and-cl
 
 Packages are named `@its-thepoe/alt-text`, `@its-thepoe/skills`, etc.
 
-- Your npm **username** should be `**its-thepoe`**, **or** you must be a member of the npm **organization** `its-thepoe` with publish rights.
+- Your npm **username** should be **`its-thepoe`**, **or** you must be a member of the npm **organization** `its-thepoe` with publish rights.
 - If your username is different and you have no org, either create the org on [npmjs.com](https://www.npmjs.com/) or rename every `package.json` `name` to your scope (out of scope for this doc).
 
 ---
@@ -56,7 +56,7 @@ Check:
 npm whoami
 ```
 
-You should see `**its-thepoe**` (or the account that owns the `@its-thepoe` scope).
+You should see **`its-thepoe`** (or the account that owns the `@its-thepoe` scope).
 
 ---
 
@@ -96,7 +96,7 @@ Every line should be `OK @its-thepoe/...`. If something fails, fix `package.json
 
 ## Step 6 — Two-factor authentication (2FA)
 
-If your npm account requires a **one-time password** to publish, npm will error with **EOTP** unless you pass `**--otp`**.
+If your npm account requires a **one-time password** to publish, npm will error with **EOTP** unless you pass `--otp`.
 
 1. Open your authenticator app.
 2. Generate a **new** 6-digit code (they expire quickly).
@@ -113,7 +113,7 @@ From the **repo root**:
 NPM_OTP=123456 ./scripts/publish-all.sh
 ```
 
-Replace `**123456**` with your **current** code.
+Replace `123456` with your **current** code.
 
 The script:
 
