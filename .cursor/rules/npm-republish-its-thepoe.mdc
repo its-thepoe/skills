@@ -1,21 +1,46 @@
 ---
-description: "@its-thepoe skills monorepo — npm publish order, codebase-content-ideas + CLI, bin field"
+description: "@its-thepoe skills monorepo — npm publish: read docs/publish-step-by-step.md, order, new packages before CLI, browser 2FA vs OTP, bin field"
 alwaysApply: true
 ---
 
-# npm republish (this repo)
+# npm publish (this repo)
 
-When publishing **`@its-thepoe/codebase-content-ideas`** and **`@its-thepoe/skills`**:
+**Canonical instructions:** [docs/publish-step-by-step.md](docs/publish-step-by-step.md) — use it for full flow, error table, smoke tests, and `publish-all.sh` behavior. This rule is a short checklist the agent must not contradict.
 
-1. **Never** republish the same version twice. Bump semver first.
-2. **Order:** publish **`@its-thepoe/codebase-content-ideas`** first, then **`@its-thepoe/skills`** (orchestrator lists the skill in `dependencies`; npm must resolve it).
-3. **Commands** (repo root):
+## Before any publish
+
+1. Run **`npm install && npm run validate`** from the repo root.
+2. **Never** republish the same semver twice; bump versions first.
+
+## New skill packages + orchestrator (404 prevention)
+
+Any **`@its-thepoe/<skill>`** that appears in **`skills/package.json` `dependencies`** must **already exist on the npm registry** before users can install that **`@its-thepoe/skills`** version. If you add a new skill: **`npm publish --access public -w @its-thepoe/<skill>`** (or ship it via `publish-all.sh` **before** the `run_publish @its-thepoe/skills` line runs). If **`npx @its-thepoe/skills`** fails with **404** on a scoped package, publish that missing skill first; you usually **do not** need to republish the orchestrator.
+
+## `codebase-content-ideas` + CLI (paired bump)
+
+When **`codebase-content-ideas/`** or its pinned version in **`skills/package.json`** changes:
+
+1. Bump **`codebase-content-ideas/package.json`** `version`.
+2. Set **`skills/package.json`** `"@its-thepoe/codebase-content-ideas"` to that same version and bump **`@its-thepoe/skills`** `version`.
+3. Publish **in order only:** **`@its-thepoe/codebase-content-ideas`** first, then **`@its-thepoe/skills`**.
 
 ```bash
 npm publish --access public -w @its-thepoe/codebase-content-ideas
 npm publish --access public -w @its-thepoe/skills
 ```
 
-4. **`skills/package.json` `bin`:** must be **`"skills": "./bin/cli.mjs"`** (with **`./`**). Do **not** run **`npm pkg fix`** in `skills/`; it removes `./` and **`npm publish` can drop `bin`**.
-5. **Script:** `./scripts/publish-codebase-content-ideas-and-cli.sh` after `npm run validate` (optional `NPM_OTP=...`).
-6. **Docs:** [docs/publish-step-by-step.md](docs/publish-step-by-step.md) TL;DR section.
+Optional: **`./scripts/publish-codebase-content-ideas-and-cli.sh`** after validate.
+
+## 2FA (this maintainer: browser-based, not OTP-by-default)
+
+- **Default:** run **`npm publish`** (or **`./scripts/publish-all.sh`** without `NPM_OTP`). If npm prints a **browser** URL (“Authenticate your account at…”), complete it in the browser, then **rerun the same publish command** if npm says to.
+- **Only if npm errors with `EOTP`:** pass **`--otp=<code>`** or **`NPM_OTP=...`** for that publish — do not assume OTP is required for every publish in this repo.
+
+## `skills/package.json` `bin`
+
+Must stay **`"skills": "./bin/cli.mjs"`** (with **`./`**). Do **not** run **`npm pkg fix`** inside **`skills/`** — it can strip **`./`** and **`npm publish` can drop `bin`** (breaks `npx`).
+
+## Scripts
+
+- Full monorepo order: **`./scripts/publish-all.sh`** (see [scripts/PUBLISH_ORDER.md](scripts/PUBLISH_ORDER.md)).
+- **`codebase-content-ideas` + CLI only:** **`./scripts/publish-codebase-content-ideas-and-cli.sh`**.

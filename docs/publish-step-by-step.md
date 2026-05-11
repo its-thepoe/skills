@@ -18,14 +18,16 @@ npm publish --access public -w @its-thepoe/codebase-content-ideas
 npm publish --access public -w @its-thepoe/skills
 ```
 
-2FA:
+**2FA — browser (typical for this repo):** run the commands above as-is. If npm opens or prints a **browser** auth URL, complete it, then **rerun** the same `npm publish` line if npm tells you to.
+
+**2FA — OTP (only if npm returns `EOTP`):** use a fresh code per publish:
 
 ```bash
 NPM_OTP=123456 npm publish --access public -w @its-thepoe/codebase-content-ideas
 NPM_OTP=789012 npm publish --access public -w @its-thepoe/skills
 ```
 
-One script (same order): `chmod +x scripts/publish-codebase-content-ideas-and-cli.sh` then `./scripts/publish-codebase-content-ideas-and-cli.sh` (or `NPM_OTP=... ./scripts/...`).
+One script (same order): `chmod +x scripts/publish-codebase-content-ideas-and-cli.sh` then `./scripts/publish-codebase-content-ideas-and-cli.sh` (add `NPM_OTP=...` only if your npm account requires OTP for publish).
 
 **`@its-thepoe/skills` `bin` field:** keep **`"skills": "./bin/cli.mjs"`** (leading `./`). Do **not** run **`npm pkg fix`** inside **`skills/`** — it rewrites the path to `bin/cli.mjs`, and `npm publish` can strip `bin` from the published package (broken `npx`).
 
@@ -118,9 +120,11 @@ If `npm publish` errors with **EOTP**, you need to pass `--otp` (or use `NPM_OTP
 
 ## Step 7 — Publish all packages (script)
 
-From the **repo root**:
+From the **repo root:**
 
-If you use **OTP-based 2FA**, run:
+**Default for this repo:** use **browser-based** publish auth — run **`./scripts/publish-all.sh`** with **no** `NPM_OTP`. Complete any browser prompt npm shows; rerun the script (or the single failed `npm publish`) if npm asks you to.
+
+If you use **OTP-based 2FA** instead, run:
 
 ```bash
 NPM_OTP=123456 ./scripts/publish-all.sh
@@ -133,11 +137,11 @@ If your npm account uses **browser-based publish auth**, run the script without 
 The script:
 
 1. Runs `npm run validate` again.
-2. Publishes **every skill package** listed in the script, then `**@its-thepoe/skills`**, in the correct order.
+2. Publishes **every skill package** listed in the script, then **`@its-thepoe/skills`**, in the correct order.
 
-**If the OTP expires** before the script finishes, note which package failed, generate a **new** code, and run the remaining publishes by hand (see [scripts/PUBLISH_ORDER.md](../scripts/PUBLISH_ORDER.md) for the exact `npm publish` lines).
+**If OTP expires** before the script finishes, note which package failed, generate a **new** code, and run the remaining publishes by hand (see [scripts/PUBLISH_ORDER.md](../scripts/PUBLISH_ORDER.md) for the exact `npm publish` lines).
 
-**Critical:** Any **new** `@its-thepoe/<skill>` must be `**npm publish`’d before** (or at least not after) you publish a `**@its-thepoe/skills`** version that lists it in `dependencies`. Otherwise `npx @its-thepoe/skills` installs will **404** on the missing skill package. If that happens, publish the missing skill package first; you usually **do not** need to republish the orchestrator.
+**Critical:** Any **new** `@its-thepoe/<skill>` must be **`npm publish`’d** (or included in an earlier successful `publish-all.sh` step) **before** a **`@its-thepoe/skills`** release that lists it in **`dependencies`** ships to users. Otherwise `npx @its-thepoe/skills` installs will **404** on the missing skill package. If that happens, publish the missing skill package first; you usually **do not** need to republish the orchestrator.
 
 **If you do not use 2FA** for publish (or use an automation token that bypasses it), you can run without `NPM_OTP`:
 
@@ -180,9 +184,9 @@ npx --yes @its-thepoe/skills@latest check
 
 ## Later releases (bump + publish again)
 
-1. Bump `**version**` in every `package.json` you changed (keep orchestrator and skill versions aligned unless you have a reason not to).
+1. Bump **`version`** in every `package.json` you changed (keep orchestrator and skill versions aligned unless you have a reason not to).
 2. Commit.
-3. Repeat **Step 5** → **Step 7** with a fresh `**NPM_OTP`** if required.
+3. Repeat **Step 5** → **Step 7**. Use a fresh **`NPM_OTP`** only if npm requires OTP (`EOTP`); with **browser** publish auth, rerun publishes after completing the browser step.
 
 You **cannot** republish the same version twice; npm will reject it.
 
@@ -205,17 +209,19 @@ You **cannot** republish the same version twice; npm will reject it.
 
 ## Manual publish (no script)
 
-Same order as `[scripts/publish-all.sh](../scripts/publish-all.sh)`, each with `--access public` and optional `--otp=CODE`:
+Same order as [scripts/publish-all.sh](../scripts/publish-all.sh). Use **`--access public`** on every line. Add **`--otp=CODE`** (or set **`NPM_OTP`**) **only** if npm returns **`EOTP`**; with browser-based publish, omit `--otp` and rerun after browser auth if needed.
 
 ```bash
-npm publish --access public --otp=CODE -w @its-thepoe/alt-text
-npm publish --access public --otp=CODE -w @its-thepoe/design-and-refine
-npm publish --access public --otp=CODE -w @its-thepoe/design-engineering
-npm publish --access public --otp=CODE -w @its-thepoe/design-motion-principles
-npm publish --access public --otp=CODE -w @its-thepoe/family-taste
-npm publish --access public --otp=CODE -w @its-thepoe/codebase-content-ideas
-npm publish --access public --otp=CODE -w @its-thepoe/write-a-skill
-npm publish --access public --otp=CODE -w @its-thepoe/skills
+npm publish --access public -w @its-thepoe/alt-text
+npm publish --access public -w @its-thepoe/design-and-refine
+npm publish --access public -w @its-thepoe/design-engineering
+npm publish --access public -w @its-thepoe/design-motion-principles
+npm publish --access public -w @its-thepoe/family-taste
+npm publish --access public -w @its-thepoe/canva-app-builder
+npm publish --access public -w @its-thepoe/codebase-content-ideas
+npm publish --access public -w @its-thepoe/root-cause-analysis
+npm publish --access public -w @its-thepoe/write-a-skill
+npm publish --access public -w @its-thepoe/skills
 ```
 
-See also `[scripts/PUBLISH_ORDER.md](../scripts/PUBLISH_ORDER.md)`.
+See also [scripts/PUBLISH_ORDER.md](../scripts/PUBLISH_ORDER.md).

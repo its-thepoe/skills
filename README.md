@@ -124,7 +124,7 @@ Skills follow the [Agent Skills](https://agentskills.io) idea: each folder is se
 | Problem | What to do |
 |---------|------------|
 | **`npx …` → 404 Not Found** | The package is not on npm yet, or the name is wrong. Use **From source** below, or ask the maintainer to publish. |
-| **EOTP / one-time password** | Your npm account uses 2FA for publish; end users normally do not see this when **installing**. |
+| **EOTP / one-time password** | Publish-time only: npm wants an authenticator code — pass `--otp` or `NPM_OTP=...` (**[publish doc](docs/publish-step-by-step.md)**). If you use **browser** publish auth instead, complete the browser step and rerun `npm publish`. End users do not see this when **installing**. |
 | **`check` reports MISSING** | Run `install` or `sync` again; confirm paths like `~/.cursor/skills/<name>` exist. |
 | **Symlink errors (Windows)** | Use `--strategy copy`. |
 | **Skills don’t appear** | Fully restart the app or reload the window after `install`. |
@@ -166,7 +166,7 @@ Official paths vary. After you have a skill folder, symlink or copy it into the 
 ## More documentation
 
 - [docs/publishing-jargon.md](docs/publishing-jargon.md) — npm terms explained (`npx`, `semver`, `files`, etc.) and **what install feels like** per method.
-- [docs/publish-step-by-step.md](docs/publish-step-by-step.md) — **maintainers:** how to publish to npm (login, OTP, order).
+- [docs/publish-step-by-step.md](docs/publish-step-by-step.md) — **maintainers:** canonical publish flow (browser vs OTP 2FA, order, new packages before CLI, errors).
 
 ---
 
@@ -192,10 +192,10 @@ write-a-skill/
 ./scripts/publish-codebase-content-ideas-and-cli.sh
 ```
 
-Maintainer one-liner (after `npm login`; use a fresh OTP if 2FA is on):
+Maintainer one-liner (after `npm login`; **browser 2FA:** no `NPM_OTP` — finish browser auth and rerun if npm asks):
 
 ```bash
-npm install && npm run validate && NPM_OTP=123456 ./scripts/publish-all.sh
+npm install && npm run validate && ./scripts/publish-all.sh
 ```
 
-Replace `123456` with your authenticator code, or omit `NPM_OTP=...` if publish does not require OTP.
+If npm returns **EOTP**, use a fresh code: `NPM_OTP=123456 ./scripts/publish-all.sh` (see [docs/publish-step-by-step.md](docs/publish-step-by-step.md)).
