@@ -219,6 +219,7 @@ npm publish --access public -w @its-thepoe/design-motion-principles
 npm publish --access public -w @its-thepoe/family-taste
 npm publish --access public -w @its-thepoe/canva-app-builder
 npm publish --access public -w @its-thepoe/codebase-content-ideas
+npm publish --access public -w @its-thepoe/market-command-matrix
 npm publish --access public -w @its-thepoe/root-cause-analysis
 npm publish --access public -w @its-thepoe/write-a-skill
 npm publish --access public -w @its-thepoe/skills

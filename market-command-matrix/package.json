@@ -1,0 +1,21 @@
+{
+  "name": "@its-thepoe/market-command-matrix",
+  "version": "1.0.0",
+  "description": "Agent Skill: Market Command Matrix — mindshare vs resources, strategic playbooks (attack/monitor/harvest/ignore/partner).",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "competition",
+    "strategy",
+    "positioning",
+    "go-to-market",
+    "market-intelligence",
+    "cursor"
+  ],
+  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./reference.md": "./reference.md"
+  }
+}

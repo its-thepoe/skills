@@ -49,6 +49,7 @@ npx @its-thepoe/skills@latest check --online
 | family-taste | `npx @its-thepoe/skills@latest install family-taste` |
 | canva-app-builder | `npx @its-thepoe/skills@latest install canva-app-builder` |
 | codebase-content-ideas | `npx @its-thepoe/skills@latest install codebase-content-ideas` |
+| market-command-matrix | `npx @its-thepoe/skills@latest install market-command-matrix` |
 | root-cause-analysis | `npx @its-thepoe/skills@latest install root-cause-analysis` |
 | write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
 
@@ -112,6 +113,7 @@ npx @its-thepoe/skills@latest remove --all
 | `@its-thepoe/family-taste` | Family Values UI philosophy |
 | `@its-thepoe/canva-app-builder` | Build Canva Apps against SDK docs, UI kit, and review constraints |
 | `@its-thepoe/codebase-content-ideas` | Blog and social content ideas from real repo work and notes |
+| `@its-thepoe/market-command-matrix` | Competitor matrix: mindshare vs resources → attack/monitor/harvest/ignore/partner |
 | `@its-thepoe/root-cause-analysis` | RCA: mechanism + invariant; optional Fishbone / 5 Whys / CAPA; diagnosis before fixes |
 | `@its-thepoe/write-a-skill` | How to author and ship Agent Skills |
 
@@ -182,6 +184,7 @@ design-and-refine/
 design-engineering/
 design-motion-principles/
 family-taste/
+market-command-matrix/
 root-cause-analysis/
 write-a-skill/
 ```

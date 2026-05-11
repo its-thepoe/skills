@@ -2,6 +2,8 @@
 
 Publish **skill content packages** first, then the **orchestrator** (`@its-thepoe/skills`), because the orchestrator lists them as `dependencies`.
 
+Order matches [`publish-all.sh`](publish-all.sh):
+
 1. `alt-text`
 2. `design-and-refine`
 3. `design-engineering`
@@ -9,8 +11,10 @@ Publish **skill content packages** first, then the **orchestrator** (`@its-thepo
 5. `family-taste`
 6. `canva-app-builder`
 7. `codebase-content-ideas`
-8. `write-a-skill`
-9. `skills` (package name `@its-thepoe/skills`)
+8. `market-command-matrix`
+9. `root-cause-analysis`
+10. `write-a-skill`
+11. `skills` (package name `@its-thepoe/skills`)
 
 From repo root after `npm login`:
 
@@ -31,6 +35,8 @@ npm publish --access public -w @its-thepoe/design-motion-principles
 npm publish --access public -w @its-thepoe/family-taste
 npm publish --access public -w @its-thepoe/canva-app-builder
 npm publish --access public -w @its-thepoe/codebase-content-ideas
+npm publish --access public -w @its-thepoe/market-command-matrix
+npm publish --access public -w @its-thepoe/root-cause-analysis
 npm publish --access public -w @its-thepoe/write-a-skill
 npm publish --access public -w @its-thepoe/skills
 ```
@@ -46,13 +52,9 @@ Publishing a **scoped** package requires you to be allowed to publish under that
 
 If `npm publish` returns **404** on `PUT` for `@its-thepoe/...`, fix scope ownership first; if **401**, run `npm login`.
 
-If publish fails with **EOTP** / “one-time password”, your account has **2FA** enabled. Use a fresh code from your authenticator:
+If publish fails with **EOTP** / “one-time password”, your account has **OTP-style** 2FA. Use a fresh code from your authenticator, or see [docs/publish-step-by-step.md](../docs/publish-step-by-step.md) for **browser-based** publish auth.
 
-```bash
-NPM_OTP=123456 ./scripts/publish-all.sh
-```
-
-If the OTP **expires** partway through seven publishes, run the remaining `npm publish --access public --otp=... -w <pkg>` lines from this doc with a new code (or temporarily use an npm **automation** token / granular token if your org allows it).
+If the OTP **expires** partway through publishes, run the remaining `npm publish --access public -w <pkg>` lines from this doc with a new code.
 
 ## Smoke tests (after publish)
 
