@@ -4,6 +4,8 @@
 
 **Registry:** packages are published on [npm](https://www.npmjs.com/) under the **`@its-thepoe`** scope ([search](https://www.npmjs.com/search?q=scope%3Aits-thepoe)).
 
+**A note from me:** A bunch of these skills are ones I scaffolded for my own day-to-day use — workflows I actually run, not generic filler. I packaged them so I (and anyone else) can install them cleanly across Cursor, Claude Code, and the other agents below. Treat the collection as “here’s what I reach for,” with npm as the shareable layer on top.
+
 ---
 
 ## Quick start
@@ -47,6 +49,7 @@ npx @its-thepoe/skills@latest check --online
 | family-taste | `npx @its-thepoe/skills@latest install family-taste` |
 | canva-app-builder | `npx @its-thepoe/skills@latest install canva-app-builder` |
 | codebase-content-ideas | `npx @its-thepoe/skills@latest install codebase-content-ideas` |
+| root-cause-analysis | `npx @its-thepoe/skills@latest install root-cause-analysis` |
 | write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
 
 Install several at once:
@@ -109,6 +112,7 @@ npx @its-thepoe/skills@latest remove --all
 | `@its-thepoe/family-taste` | Family Values UI philosophy |
 | `@its-thepoe/canva-app-builder` | Build Canva Apps against SDK docs, UI kit, and review constraints |
 | `@its-thepoe/codebase-content-ideas` | Blog and social content ideas from real repo work and notes |
+| `@its-thepoe/root-cause-analysis` | RCA: mechanism + invariant; optional Fishbone / 5 Whys / CAPA; diagnosis before fixes |
 | `@its-thepoe/write-a-skill` | How to author and ship Agent Skills |
 
 Skills follow the [Agent Skills](https://agentskills.io) idea: each folder is self-contained with `SKILL.md` at the root.
@@ -178,6 +182,7 @@ design-and-refine/
 design-engineering/
 design-motion-principles/
 family-taste/
+root-cause-analysis/
 write-a-skill/
 ```
 

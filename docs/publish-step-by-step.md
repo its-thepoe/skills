@@ -96,12 +96,23 @@ Every line should be `OK @its-thepoe/...`. If something fails, fix `package.json
 
 ## Step 6 — Two-factor authentication (2FA)
 
-If your npm account requires a **one-time password** to publish, npm will error with **EOTP** unless you pass `--otp`.
+You may have 2FA enabled in either of these forms:
+
+### A) Browser-based publish auth (common)
+
+When you run `npm publish`, npm may print:
+
+- "Authenticate your account at: …"
+- "Press ENTER to open in the browser…"
+
+Do the browser verification, then **rerun the same `npm publish` command**.
+
+### B) One-time password (OTP)
+
+If `npm publish` errors with **EOTP**, you need to pass `--otp` (or use `NPM_OTP` with the scripts).
 
 1. Open your authenticator app.
 2. Generate a **new** 6-digit code (they expire quickly).
-
-You will use it in the next step **immediately** after generating it.
 
 ---
 
@@ -109,11 +120,15 @@ You will use it in the next step **immediately** after generating it.
 
 From the **repo root**:
 
+If you use **OTP-based 2FA**, run:
+
 ```bash
 NPM_OTP=123456 ./scripts/publish-all.sh
 ```
 
 Replace `123456` with your **current** code.
+
+If your npm account uses **browser-based publish auth**, run the script without `NPM_OTP`. If npm prompts for browser verification, complete it and rerun the script:
 
 The script:
 

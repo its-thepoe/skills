@@ -27,6 +27,7 @@ run_publish @its-thepoe/design-motion-principles
 run_publish @its-thepoe/family-taste
 run_publish @its-thepoe/canva-app-builder
 run_publish @its-thepoe/codebase-content-ideas
+run_publish @its-thepoe/root-cause-analysis
 run_publish @its-thepoe/write-a-skill
 run_publish @its-thepoe/skills
 

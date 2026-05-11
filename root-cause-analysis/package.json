@@ -1,0 +1,20 @@
+{
+  "name": "@its-thepoe/root-cause-analysis",
+  "version": "1.0.1",
+  "description": "Agent Skill: RCA with mechanism/invariant/evidence; optional Fishbone, 5 Whys, combined, CAPA.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "debugging",
+    "rca",
+    "postmortem",
+    "incident",
+    "cursor"
+  ],
+  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./reference.md": "./reference.md"
+  }
+}
