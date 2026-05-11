@@ -1,11 +1,13 @@
 ---
 name: write-a-skill
 description: >-
-  Authors or improves an Agent Skill (SKILL.md + optional reference/examples/scripts)
-  with correct structure, frontmatter, and trigger phrases. Use when the user asks to
-  create, write, add, refine, or scaffold a skill, slash command, or prompt pack; or
-  to decide skill vs always-on rules (.cursor/rules, CLAUDE.md, AGENTS.md).
-argument-hint: "[topic or skill name]"
+  Use when creating, editing, or verifying a portable Agent Skill (SKILL.md), choosing
+  skill vs always-on project rules, or scaffolding a slash command or prompt pack. Typical
+  asks: new skill, refine description/frontmatter, leaf vs orchestrator, install paths.
+  Prefer extending an existing in-repo skill before adding a near-duplicate. Not for
+  disposable one-liners with no durable SKILL structure, or for checks better enforced
+  by lint/CI than prose.
+argument-hint: "<skill-folder-name> [audience or goal]"
 ---
 
 # Write a skill
@@ -32,42 +34,22 @@ Put each skill in its **own folder at the repo root** (kebab-case; **`name` in f
     SKILL.md
 ```
 
-**Use a skill locally:** copy or symlink `<repo>/<skill-name>/` into that product’s skills directory (see table below). Example — install `write-a-skill` for your user account on every tool you use:
+**Install paths, symlink commands, npm copy:** [reference.md](reference.md#install-paths-and-symlink-commands). Reload or restart each agent after adding a skill.
 
-```bash
-SKILL_SRC="/path/to/this/repo/write-a-skill"
-ln -sf "$SKILL_SRC" ~/.cursor/skills/write-a-skill
-ln -sf "$SKILL_SRC" ~/.claude/skills/write-a-skill
-mkdir -p ~/.config/opencode/skills
-ln -sf "$SKILL_SRC" ~/.config/opencode/skills/write-a-skill
-ln -sf "$SKILL_SRC" ~/.codeium/windsurf/skills/write-a-skill
-# Gemini / Antigravity: confirm current path in product docs, then same pattern, e.g.
-# ln -sf "$SKILL_SRC" ~/.gemini/skills/write-a-skill
-```
+**Standards:** [Agent Skills](https://agentskills.io). Claude-only options (subagents, `allowed-tools`, `context: fork`, `$ARGUMENTS`): [Claude Code skills](https://code.claude.com/docs/en/skills). For **many agents**, prefer portable frontmatter (`name`, `description`, optional `argument-hint`) and add tool-specific keys only where needed.
 
-Reload or restart each agent after adding a skill.
+**Patterns from community practice:** “description = discovery, body = workflow” and optional **pressure scenarios** before shipping come from [obra/superpowers `writing-skills`](https://github.com/obra/superpowers/tree/main/skills/writing-skills). This repo keeps them **optional** and product-agnostic — see [reference.md](reference.md#description-and-discovery-cso) and [reference.md](reference.md#optional-verification-pressure-scenarios).
 
 ---
 
-## Install this skill (copy the folder)
+## Agent workflow (do this in order)
 
-Same folder works for any agent that loads **Agent Skills** (`SKILL.md` + frontmatter). Typical paths:
+1. **Discover** — Search the repo for existing `**/SKILL.md`. Prefer **extend or link** a skill over a near-duplicate. If the user is mining chats into durable guidance, a dedicated “preferences → skill” workflow may apply; do not overload this skill with that entire pipeline unless asked.
+2. **Classify** — Leaf vs orchestrator, audience (engineer vs prompt-pack), and **skill vs rule**. See [When to create vs skip](reference.md#when-to-create-a-skill-vs-skip) and [Skill types](reference.md#skill-types-technique-pattern-reference).
+3. **Draft** — Create `skill-name/SKILL.md` (+ optional siblings). Before finalizing **`description`**, read [Description and discovery (CSO)](reference.md#description-and-discovery-cso).
+4. **Review** — Run **Step 4** below. For high-stakes or discipline-heavy skills, add [optional pressure scenarios](reference.md#optional-verification-pressure-scenarios).
 
-| Product | Personal (all projects) | Project-only |
-|--------|-------------------------|--------------|
-| **Cursor** | `~/.cursor/skills/write-a-skill/` | `<repo>/.cursor/skills/write-a-skill/` |
-| **Claude Code** | `~/.claude/skills/write-a-skill/` | `<repo>/.claude/skills/write-a-skill/` |
-| **OpenCode** | `~/.config/opencode/skills/write-a-skill/` | `<repo>/.opencode/skills/write-a-skill/` |
-| **Windsurf** | `~/.codeium/windsurf/skills/write-a-skill/` | `<repo>/.windsurf/skills/write-a-skill/` |
-| **Antigravity / Gemini** | Often under `~/.gemini/skills/` or `~/.gemini/antigravity/skills/` — confirm in current docs | `<repo>/.agent/skills/write-a-skill/` (common) |
-
-Each location must contain this directory with `SKILL.md` inside. Restart or reload the agent if it does not pick up a new skill immediately.
-
-**From npm:** after `npm install write-a-skill`, copy or symlink `node_modules/write-a-skill/` to one of the paths above (folder must contain `SKILL.md`).
-
-**Lovable:** does not use agent skill folders. This skill is for authoring **Agent Skills**; no `LOVABLE.md` is expected here. UI skills that support Lovable add **`LOVABLE.md`** next to `SKILL.md` (examples elsewhere: accessibility-review, design-engineering, family-taste).
-
-For the open standard, see [Agent Skills](https://agentskills.io). For Claude Code–only options (subagents, `allowed-tools`, `context: fork`, `$ARGUMENTS`), see [Claude Code skills](https://code.claude.com/docs/en/skills). When authoring for **many agents**, prefer portable frontmatter (`name`, `description`, optional `argument-hint`) and add tool-specific keys only where needed.
+**Deliverable:** `skill-name/SKILL.md` under this monorepo’s skill folders, plus optional `reference.md`, `examples.md`, `references/`, `scripts/`.
 
 ---
 
@@ -107,12 +89,12 @@ Before drafting:
 2. **Required file**: `SKILL.md` with YAML frontmatter (`name`, `description`) and concise body.
 3. **Optional siblings**: `reference.md`, `examples.md`, `scripts/`, **`references/`** (schemas, templates, catalogs — link from `SKILL.md` in one hop). See [reference.md](reference.md#supporting-files-beyond-referencemd).
 
-**Router-quality `description` (most important)**
+**`description` (router / discovery)**
 
-- Concrete **what** + **when**: real phrases users say.
-- **Guards and handoffs:** when the model should **prefer another skill or step first** (“if ambiguous, use brainstorm first”), or **not** invoke this skill (“side-effect deploys: manual only” via docs + frontmatter on Claude Code).
-- Avoid fluff: not “helps with”, “handles”, “manages”.
-- Aim under ~500 characters if possible; hard max **1024** where enforced. See [reference.md](reference.md#description-with-guards-and-handoffs).
+- Lead with **when** this skill applies (symptoms, user phrases, situations). Put **workflow and process in the body**, not a long process summary inside `description` — otherwise models may follow the blurb and skip the rest. See [reference.md](reference.md#description-and-discovery-cso).
+- Add **guards and handoffs** in a short clause where mis-routing is costly (without duplicating the full workflow). Examples: [reference.md](reference.md#description-with-guards-and-handoffs).
+- Third person where products inject the line; avoid fluff (“helps with”, “handles”).
+- Aim under ~500 characters if possible; hard max **1024** where enforced.
 
 **Leaf vs orchestrator**
 
@@ -121,9 +103,9 @@ Before drafting:
 
 **Arguments and modes (when slash args matter)**
 
-- Use **`argument-hint`** for autocomplete. In Claude Code, **`$ARGUMENTS`**, **`$0` / `$1`**, and optional **mode tokens** (e.g. `mode:report-only`) in the body can steer one command with multiple behaviors. Full pattern: [reference.md](reference.md#arguments-modes-and-claude-code-placeholders).
+- Use **`argument-hint`** for autocomplete. In Claude Code, **`$ARGUMENTS`**, **`$0` / `$1`**, and optional **mode tokens** (e.g. `mode:report-only`) in the body can steer one slash command with multiple behaviors. Full pattern: [reference.md](reference.md#arguments-modes-and-claude-code-placeholders).
 
-Full template, good/bad examples, invariants, and review checklist: [reference.md](reference.md).
+Full template, token-efficiency notes, and extended checklist: [reference.md](reference.md).
 
 ---
 
@@ -137,9 +119,8 @@ Full template, good/bad examples, invariants, and review checklist: [reference.m
 
 **Description**
 
-- [ ] States capability in the first sentence
-- [ ] Includes “Use when …” **or equivalent** trigger coverage
-- [ ] Adds **handoffs or guards** when mis-routing would waste time (see reference)
+- [ ] Leads with **when** to load (triggers/symptoms); workflow lives in the body, not a shortcut in `description` (see [CSO](reference.md#description-and-discovery-cso))
+- [ ] Guards or handoffs where mis-routing is costly
 - [ ] No vague-only wording
 
 **Content**
@@ -151,9 +132,13 @@ Full template, good/bad examples, invariants, and review checklist: [reference.m
 
 **Distribution**
 
-- [ ] User knows whether to install under personal vs project path (table above)
+- [ ] Install paths documented ([reference.md](reference.md#install-paths-and-symlink-commands))
 - [ ] If non-repo users need it, prompt pack exists (see reference)
 - [ ] If the skill should work on **Lovable**, add or update **`LOVABLE.md`** in the skill folder (condensed if Knowledge **10k** limit applies); most skills do not need this
+
+**Optional (high-stakes or discipline-heavy skills)**
+
+- [ ] Ran a **pressure scenario** without the skill, then with it ([reference.md](reference.md#optional-verification-pressure-scenarios))
 
 **Multi-product (optional)**
 

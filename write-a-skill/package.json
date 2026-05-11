@@ -1,6 +1,6 @@
 {
   "name": "@its-thepoe/write-a-skill",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Agent Skill (SKILL.md + reference) for authoring and improving portable Agent Skills across Cursor, Claude Code, OpenCode, Windsurf, and similar tools.",
   "license": "MIT",
   "keywords": [

@@ -13,9 +13,42 @@ skill-name/
 └── scripts/              # Validation or scaffolding only (optional)
 ```
 
-**This repo:** each skill is a **top-level folder** next to `README.md` (e.g. `write-a-skill/`, `another-skill/`). Copy or symlink that folder into each agent’s global skills path (Cursor, Claude Code, Windsurf, Gemini / Antigravity — see `SKILL.md` table).
+**This repo:** each skill is a **top-level folder** next to `README.md` (e.g. `write-a-skill/`, `another-skill/`). Copy or symlink that folder into each agent’s global skills path (Cursor, Claude Code, Windsurf, Gemini / Antigravity — see below).
 
 Keep `SKILL.md` short; move bulk here.
+
+---
+
+## Install paths and symlink commands
+
+Same folder works for any agent that loads **Agent Skills** (`SKILL.md` + frontmatter). Typical paths:
+
+| Product | Personal (all projects) | Project-only |
+|--------|-------------------------|--------------|
+| **Cursor** | `~/.cursor/skills/<skill-name>/` | `<repo>/.cursor/skills/<skill-name>/` |
+| **Claude Code** | `~/.claude/skills/<skill-name>/` | `<repo>/.claude/skills/<skill-name>/` |
+| **OpenCode** | `~/.config/opencode/skills/<skill-name>/` | `<repo>/.opencode/skills/<skill-name>/` |
+| **Windsurf** | `~/.codeium/windsurf/skills/<skill-name>/` | `<repo>/.windsurf/skills/<skill-name>/` |
+| **Antigravity / Gemini** | Often under `~/.gemini/skills/` or `~/.gemini/antigravity/skills/` — confirm in current docs | `<repo>/.agent/skills/<skill-name>/` (common) |
+
+Each location must contain this directory with `SKILL.md` inside. Restart or reload the agent if it does not pick up a new skill immediately.
+
+**Symlink example** (install `write-a-skill` for your user account on several tools):
+
+```bash
+SKILL_SRC="/path/to/this/repo/write-a-skill"
+ln -sf "$SKILL_SRC" ~/.cursor/skills/write-a-skill
+ln -sf "$SKILL_SRC" ~/.claude/skills/write-a-skill
+mkdir -p ~/.config/opencode/skills
+ln -sf "$SKILL_SRC" ~/.config/opencode/skills/write-a-skill
+ln -sf "$SKILL_SRC" ~/.codeium/windsurf/skills/write-a-skill
+# Gemini / Antigravity: confirm current path in product docs, e.g.
+# ln -sf "$SKILL_SRC" ~/.gemini/skills/write-a-skill
+```
+
+**From npm:** after `npm install @its-thepoe/write-a-skill`, copy or symlink `node_modules/@its-thepoe/write-a-skill/` to one of the paths above (folder must contain `SKILL.md`).
+
+**Lovable:** does not use agent skill folders. Skills that target Lovable add **`LOVABLE.md`** beside `SKILL.md` where needed (see [Lovable (optional)](#lovable-optional-not-every-skill)).
 
 ---
 
@@ -35,6 +68,33 @@ plugins/<plugin-id>/
 ```
 
 The **one-folder-per-skill** rule is unchanged: each `skills/<skill-name>/` directory is a single skill. Names may be **namespaced** by the product (e.g. `plugin-id:skill-name` in menus).
+
+---
+
+## When to create a skill vs skip
+
+**Create** when the technique is reusable across projects, not obvious on first read, and you expect to invoke it again. Prefer skills for **judgment-call** workflows; prefer tooling for purely mechanical checks.
+
+**Skip** (use **`CLAUDE.md` / `AGENTS.md` / `.cursor/rules`**, lint, or a one-shot user message instead) when:
+
+- The write-up is a **one-off** story or fix for a single session.
+- The practice is **standard** and well-documented elsewhere — link out.
+- The constraint is **fully mechanical** — enforce with validators or CI.
+- The content is **project-only** convention — belongs in project memory/rules.
+
+Framed in spirit after [obra/superpowers **writing-skills**](https://github.com/obra/superpowers/tree/main/skills/writing-skills); wording here stays product-agnostic.
+
+---
+
+## Skill types (technique, pattern, reference)
+
+| Type | What it is | Typical `SKILL.md` body |
+|------|------------|-------------------------|
+| **Technique** | Concrete method with steps | Short ordered checklist + one solid example |
+| **Pattern** | Mental model / framing | When it applies, when it does *not* |
+| **Reference** | API, CLI, syntax, long tables | Overview in `SKILL.md`; depth in sibling files |
+
+**Split to sibling files** when material is **~100+ lines**, when you ship **reusable scripts/templates**, or when a **JSON schema** backs orchestration. Keep principles and short patterns in `SKILL.md`.
 
 ---
 
@@ -65,18 +125,57 @@ Avoid dumping 2k+ lines into `SKILL.md` without navigation; mature orchestration
 
 - Phases (research → decide → write → handoff), **parallel** sub-tasks, or fan-out to **subagents**.
 - Body states **which steps run when**, what can run in **parallel**, and **stop conditions**.
-- Risk: one giant skill with vague `description` → wrong invocations. Mitigation: **split phases into separate skills** when each phase is useful alone, or tighten `description` with **guards** (see below).
+- Risk: one giant skill with vague `description` → wrong invocations. Mitigation: **split phases into separate skills** when each phase is useful alone, or tighten `description` with **guards** (see [Description with guards and handoffs](#description-with-guards-and-handoffs)).
 
 Orchestrators still benefit from **invariants** and **structured outputs** (e.g. JSON schema) when merging subagent results.
 
 ---
 
+## Description and discovery (CSO)
+
+The `description` field is how agents **decide whether to load** this skill. **Discovery beats abstract branding:** use concrete triggers (user phrases, symptoms, situations). Sprinkle **keywords** you would search for: error strings, tools, filenames.
+
+### “When to use” belongs here; full workflow belongs in the body
+
+If `description` **summarizes the process** (“do X, then Y, then Z”), models may **follow the blurb and skip** the rest of `SKILL.md`. Keep `description` to **when** the skill applies, plus **short** guards/handoffs; put step-by-step work **below** the fold in the body.
+
+This pattern is emphasized in [obra/superpowers **writing-skills**](https://github.com/obra/superpowers/tree/main/skills/writing-skills) (community testing + “Claude search optimization” framing).
+
+```yaml
+# ❌ BAD: full process in description (shortcut replaces reading the skill)
+description: Use when shipping features — write tests first, implement, then refactor
+
+# ✅ GOOD: triggers + boundaries; steps live in SKILL.md
+description: Use when implementing a feature or bugfix where tests must land before or with code changes, or the user asks for TDD-style workflow
+```
+
+Write in **third person** where the product injects the line into the system prompt. Prefer leading with **“Use when …”** when it fits. Stay within **~1024 characters** total where enforced; shorter is better.
+
+### Cross-references between skills
+
+- Use **plain skill names** with explicit markers: `**REQUIRED:** use skill "xyz" when …`
+- Avoid **`@path/to/SKILL.md`**-style force-includes in composed stacks — they can pull huge context before it is needed.
+
+### Token efficiency
+
+- Keep `SKILL.md` lean; push long tables and templates here or under `references/`.
+- For CLIs, link to **`--help`** instead of copying every flag.
+- **One excellent example** beats many mediocre ones; avoid the same pattern in five languages.
+
+### Optional body sections
+
+For skills users skim before acting: **Quick reference** (table), **Common mistakes** (what goes wrong + fix), **Implementation** (numbered steps). Use **tiny flowcharts** only when a branch is genuinely confusing; otherwise use lists (obra’s flowchart guidance, same link as above).
+
+---
+
 ## Description with guards and handoffs
 
-The `description` is the **router**. Besides “use when …”, strong skills add:
+The `description` is still the **router**. Besides triggers (“use when …”), strong skills add:
 
 1. **Handoff:** “Prefer **\<other skill>** when …” (ambiguous scope, missing inputs, wrong phase).
 2. **Guard:** “Do not use for …” or “Requires … before running” (only when it prevents real failures).
+
+Keep guards **short**; do not move the whole playbook into `description` — see [CSO](#description-and-discovery-cso).
 
 **Example (pattern only)**
 
@@ -146,8 +245,9 @@ Use this as a starting point. Most agents accept `name` + `description` (see [Ag
 ---
 name: skill-name
 description: >
-  One sentence: what capability this adds. When to use: user phrases and tasks.
-  Prefer skill "other-skill" when [guard condition]. Not for [anti-pattern].
+  Use when [triggers: symptoms, user phrases, situations]. Prefer skill "other-skill"
+  when [guard / handoff]. Not for [anti-pattern]. Keep process out of this field — put
+  steps in the body ([CSO](#description-and-discovery-cso)).
 argument-hint: "[optional-args]"
 ---
 
@@ -184,20 +284,6 @@ Before starting, read if they exist in this repo:
 - [reference.md](reference.md) — …
 - [references/schema.json](references/schema.json) — …
 ```
-
----
-
-## Description rules
-
-The **description** is what the model uses to decide whether to load the skill. Make it unambiguous.
-
-**Good**
-
-> Sets up a new frontend repo with shared tokens, folder layout, and UI primitives. Use when starting a greenfield frontend, scaffolding an app, or when the user says: new project, bootstrap, design tokens, component library, or init frontend.
-
-**Bad**
-
-> Helps with frontend setup and the design system.
 
 ---
 
@@ -243,9 +329,29 @@ Skills that support Lovable add **`LOVABLE.md`** beside `SKILL.md`. Keep each `L
 
 **Distribution**
 
-- [ ] Documented install paths for target agents (global vs project; see repo `README.md` for a path table)
+- [ ] Documented install paths for target agents (global vs project; [Install paths](#install-paths-and-symlink-commands))
 - [ ] Prompt pack created if non-repo or non-engineering tools need the same behavior
 - [ ] If Lovable matters for this skill: `LOVABLE.md` added in the skill folder
+
+**Optional verification (discipline-heavy skills)**
+
+- [ ] Pressure scenario **without** the skill: record wrong behavior or rationalizations
+- [ ] Same scenario **with** the skill: behavior improves or routing is correct
+- [ ] New loophole → explicit never-rule or invariant → re-check ([details](#optional-verification-pressure-scenarios))
+
+---
+
+## Optional verification (pressure scenarios)
+
+**Recommended** for discipline-heavy skills (merge rules, safety gates, “always do X first”) and whenever wrong routing is expensive. **Optional** for tiny leaf skills.
+
+Adapted from RED → GREEN → REFACTOR as applied to process docs in [obra/superpowers **writing-skills**](https://github.com/obra/superpowers/tree/main/skills/writing-skills):
+
+1. **Baseline** — Run a compact task **without** the skill in context. Note what the model skipped, invented, or rationalized.
+2. **Draft** — Make the smallest `SKILL.md` edits that address those failures. Re-run **with** the skill and compare.
+3. **Tighten** — If new excuses appear, add **never-rules**, **red flags**, or **invariants**; repeat until stable.
+
+This does **not** replace code review or product QA; it catches weak triggers and missing guardrails early.
 
 ---
 
@@ -274,6 +380,8 @@ Other agents typically ignore keys they do not support; keep portable skills to 
 ---
 
 ## Further reading (examples)
+
+- [obra/superpowers — `writing-skills`](https://github.com/obra/superpowers/tree/main/skills/writing-skills) — TDD-for-docs mindset, pressure scenarios, CSO-style descriptions (MIT; ideas summarized here with attribution).
 
 Mature open-source plugin layouts with phased skills, persona catalogs, and structured review pipelines — useful for **orchestration inspiration**, not mandatory conventions:
 
