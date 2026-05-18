@@ -1,6 +1,6 @@
 # @its-thepoe/skills
 
-**Orchestrator CLI** — installs, updates, checks, and removes [@its-thepoe](https://www.npmjs.com/search?q=scope%3Aits-thepoe) **Agent Skills** (`SKILL.md` trees) into the folders that **Cursor**, **Claude Code**, **OpenCode**, and **Windsurf** read from.
+**Orchestrator CLI** — installs, updates, checks, and removes [@its-thepoe](https://www.npmjs.com/search?q=scope%3Aits-thepoe) **Agent Skills** (`SKILL.md` trees) into the folders that **Codex**, **Cursor**, **Claude Code**, **OpenCode**, and **Windsurf** read from.
 
 ## What it does
 
@@ -31,7 +31,7 @@ One skill:
 npx @its-thepoe/skills@latest install alt-text
 ```
 
-Options: `--dry-run`, `--only=cursor,claude`, `--strategy copy` (if symlinks fail), `remove <name>` / `remove --all`.
+Options: `--dry-run`, `--only=codex,cursor,claude`, `--strategy copy` (if symlinks fail), `remove <name>` / `remove --all`.
 
 ## Docs
 

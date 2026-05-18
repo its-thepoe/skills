@@ -1,7 +1,5 @@
 ---
-
-## name: canva-app-builder
-
+name: canva-app-builder
 description: >-
   Builds Canva Apps that follow Canva Apps SDK docs, App UI Kit, and submission
   expectations with a spec-first workflow. Use when the user asks to build, fix,
@@ -10,12 +8,11 @@ description: >-
   design editing only, Figma plugin development, or generic React apps outside
   Canva's iframe app model.
 argument-hint: "[feature or app goal] [mode:build|audit|submission]"
+---
 
 # Canva app builder
 
 Build Canva apps against the official Apps SDK contracts, not memory.
-
----
 
 ## Scope and guardrails
 

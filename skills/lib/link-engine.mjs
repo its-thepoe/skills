@@ -7,6 +7,7 @@ const INSTALL_MARKER = ".its-thepoe-skills-install.json";
 
 /** @type {Record<string, { env?: string, segments: string[] }>} */
 export const AGENT_TARGETS = {
+  codex: { segments: [".agents", "skills"] },
   cursor: { segments: [".cursor", "skills"] },
   claude: { segments: [".claude", "skills"] },
   opencode: { segments: [".config", "opencode", "skills"] },
@@ -28,7 +29,7 @@ export function agentBaseDir(key) {
  * @param {string[]} onlyKeys
  */
 export function normalizeOnly(onlyKeys) {
-  const allowed = new Set(["cursor", "claude", "opencode", "windsurf"]);
+  const allowed = new Set(Object.keys(AGENT_TARGETS));
   if (onlyKeys.length === 0 || onlyKeys.includes("all")) {
     return [...allowed];
   }

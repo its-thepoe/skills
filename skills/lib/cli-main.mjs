@@ -78,7 +78,7 @@ Commands:
 
 Options:
   --dry-run                     Print actions without writing
-  --only=<a>[,<b>...]          Limit targets: cursor, claude, opencode, windsurf, all
+  --only=<a>[,<b>...]          Limit targets: codex, cursor, claude, opencode, windsurf, all
   --strategy symlink|copy       Default symlink; use copy if symlinks fail (e.g. Windows)
   --online                      With check: compare to npm registry (requires network)
 
@@ -215,7 +215,7 @@ export function run(argv) {
           log,
         });
       }
-      logLine(`\nDone. Reload your agents (Cursor, Claude Code, OpenCode, Windsurf).`);
+      logLine(`\nDone. Reload your agents (Codex, Cursor, Claude Code, OpenCode, Windsurf).`);
       return 0;
     }
 

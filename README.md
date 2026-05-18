@@ -81,10 +81,10 @@ Preview actions (no files changed):
 npx @its-thepoe/skills@latest install --all --dry-run
 ```
 
-Only some agents (comma-separated: `cursor`, `claude`, `opencode`, `windsurf`):
+Only some agents (comma-separated: `codex`, `cursor`, `claude`, `opencode`, `windsurf`):
 
 ```bash
-npx @its-thepoe/skills@latest install --all --only=cursor,claude
+npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 ```
 
 If **symlinks fail** (often on Windows without dev mode), use **copy** mode:
@@ -150,7 +150,8 @@ npm run skills -- install --all
 ```bash
 SKILLS_ROOT="$HOME/src/skills"
 SKILL_NAME=alt-text
-mkdir -p ~/.cursor/skills ~/.claude/skills ~/.config/opencode/skills ~/.codeium/windsurf/skills
+mkdir -p ~/.agents/skills ~/.cursor/skills ~/.claude/skills ~/.config/opencode/skills ~/.codeium/windsurf/skills
+ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.agents/skills/"$SKILL_NAME"
 ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.cursor/skills/"$SKILL_NAME"
 ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.claude/skills/"$SKILL_NAME"
 ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.config/opencode/skills/"$SKILL_NAME"
