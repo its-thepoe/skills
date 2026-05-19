@@ -126,7 +126,7 @@ Skills follow the [Agent Skills](https://agentskills.io) idea: each folder is se
 | Problem | What to do |
 |---------|------------|
 | **`npx …` → 404 Not Found** | The package is not on npm yet, or the name is wrong. Use **From source** below, or ask the maintainer to publish. |
-| **EOTP / one-time password** | Publish-time only: npm wants an authenticator code — pass `--otp` or `NPM_OTP=...` (**[publish doc](docs/publish-step-by-step.md)**). If you use **browser** publish auth instead, complete the browser step and rerun `npm publish`. End users do not see this when **installing**. |
+| **EOTP / one-time password** | Publish-time only. If you use **browser** publish auth, rerun `npm publish --access public` in an interactive TTY/shell so npm can print/open the browser verification URL. Use `--otp` / `NPM_OTP` only for authenticator-code 2FA. End users do not see this when **installing**. |
 | **`check` reports MISSING** | Run `install` or `sync` again; confirm paths like `~/.cursor/skills/<name>` exist. |
 | **Symlink errors (Windows)** | Use `--strategy copy`. |
 | **Skills don’t appear** | Fully restart the app or reload the window after `install`. |
@@ -196,10 +196,10 @@ write-a-skill/
 ./scripts/publish-codebase-content-ideas-and-cli.sh
 ```
 
-Maintainer one-liner (after `npm login`; **browser 2FA:** no `NPM_OTP` — finish browser auth and rerun if npm asks):
+Maintainer one-liner (after `npm login`; **browser 2FA:** use an interactive TTY/shell, no `NPM_OTP`):
 
 ```bash
 npm install && npm run validate && ./scripts/publish-all.sh
 ```
 
-If npm returns **EOTP**, use a fresh code: `NPM_OTP=123456 ./scripts/publish-all.sh` (see [docs/publish-step-by-step.md](docs/publish-step-by-step.md)).
+If npm returns **EOTP** but you use browser verification, run the remaining `npm publish --access public -w <workspace>` commands manually in an interactive terminal. Use `NPM_OTP=123456 ./scripts/publish-all.sh` only for authenticator-code 2FA (see [docs/publish-step-by-step.md](docs/publish-step-by-step.md)).

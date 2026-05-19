@@ -52,7 +52,7 @@ Publishing a **scoped** package requires you to be allowed to publish under that
 
 If `npm publish` returns **404** on `PUT` for `@its-thepoe/...`, fix scope ownership first; if **401**, run `npm login`.
 
-If publish fails with **EOTP** / “one-time password”, your account has **OTP-style** 2FA. Use a fresh code from your authenticator, or see [docs/publish-step-by-step.md](../docs/publish-step-by-step.md) for **browser-based** publish auth.
+If publish fails with **EOTP** / “one-time password” but your account uses **browser-based** publish auth, rerun the remaining `npm publish --access public -w <pkg>` commands in an interactive TTY/shell. Non-interactive publishes can fall back to `EOTP` instead of showing the browser verification URL. Use a fresh authenticator code only if your account uses OTP-style 2FA.
 
 If the OTP **expires** partway through publishes, run the remaining `npm publish --access public -w <pkg>` lines from this doc with a new code.
 

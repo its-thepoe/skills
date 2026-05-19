@@ -18,7 +18,7 @@ npm publish --access public -w @its-thepoe/codebase-content-ideas
 npm publish --access public -w @its-thepoe/skills
 ```
 
-**2FA — browser (typical for this repo):** run the commands above as-is. If npm opens or prints a **browser** auth URL, complete it, then **rerun** the same `npm publish` line if npm tells you to.
+**2FA — browser (typical for this repo):** run `npm publish --access public` from an interactive TTY/shell. Non-interactive publishes can fall back to `EOTP`, even when browser verification is enabled. If npm prints a browser auth URL, complete it; the interactive publish should continue and finish.
 
 **2FA — OTP (only if npm returns `EOTP`):** use a fresh code per publish:
 
@@ -102,16 +102,22 @@ You may have 2FA enabled in either of these forms:
 
 ### A) Browser-based publish auth (common)
 
-When you run `npm publish`, npm may print:
+Run publish from an interactive TTY/shell, for example a normal terminal tab:
+
+```bash
+npm publish --access public -w @its-thepoe/write-a-skill
+```
+
+When browser verification is available, npm may print:
 
 - "Authenticate your account at: …"
 - "Press ENTER to open in the browser…"
 
-Do the browser verification, then **rerun the same `npm publish` command**.
+Press Enter, complete the browser verification, and let the same publish command continue. Avoid non-interactive publish wrappers for browser 2FA; they can return `EOTP` instead of opening browser verification.
 
 ### B) One-time password (OTP)
 
-If `npm publish` errors with **EOTP**, you need to pass `--otp` (or use `NPM_OTP` with the scripts).
+If `npm publish` errors with **EOTP** and your account uses authenticator-code 2FA, pass `--otp` or use `NPM_OTP` with the scripts. If your account uses browser verification, rerun the publish from an interactive TTY instead.
 
 1. Open your authenticator app.
 2. Generate a **new** 6-digit code (they expire quickly).
@@ -122,7 +128,7 @@ If `npm publish` errors with **EOTP**, you need to pass `--otp` (or use `NPM_OTP
 
 From the **repo root:**
 
-**Default for this repo:** use **browser-based** publish auth — run **`./scripts/publish-all.sh`** with **no** `NPM_OTP`. Complete any browser prompt npm shows; rerun the script (or the single failed `npm publish`) if npm asks you to.
+**Default for this repo:** use **browser-based** publish auth from an interactive TTY. For a small release, prefer the manual `npm publish --access public -w <workspace>` lines so each browser verification can complete in the same command. Use **`./scripts/publish-all.sh`** only when you are publishing without 2FA friction or you know your shell preserves npm's interactive browser prompt.
 
 If you use **OTP-based 2FA** instead, run:
 
@@ -132,7 +138,7 @@ NPM_OTP=123456 ./scripts/publish-all.sh
 
 Replace `123456` with your **current** code.
 
-If your npm account uses **browser-based publish auth**, run the script without `NPM_OTP`. If npm prompts for browser verification, complete it and rerun the script:
+If your npm account uses **browser-based publish auth** and the script returns **EOTP**, run the remaining publish lines manually in an interactive terminal:
 
 The script:
 
@@ -186,7 +192,7 @@ npx --yes @its-thepoe/skills@latest check
 
 1. Bump **`version`** in every `package.json` you changed (keep orchestrator and skill versions aligned unless you have a reason not to).
 2. Commit.
-3. Repeat **Step 5** → **Step 7**. Use a fresh **`NPM_OTP`** only if npm requires OTP (`EOTP`); with **browser** publish auth, rerun publishes after completing the browser step.
+3. Repeat **Step 5** → **Step 7**. Use a fresh **`NPM_OTP`** only if npm requires OTP (`EOTP`) and you actually use authenticator-code 2FA. With **browser** publish auth, run publishes from an interactive TTY.
 
 You **cannot** republish the same version twice; npm will reject it.
 
@@ -198,7 +204,7 @@ You **cannot** republish the same version twice; npm will reject it.
 | Error                                                                           | Meaning                                                                                                                                                            |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **401** / `npm whoami` fails                                                    | Not logged in — run **Step 2**.                                                                                                                                    |
-| **EOTP**                                                                        | Need `--otp` — **Step 6–7** (`NPM_OTP=...`).                                                                                                                       |
+| **EOTP**                                                                        | If using browser 2FA, rerun the publish in an interactive TTY. If using authenticator-code 2FA, use `--otp` / `NPM_OTP`.                                          |
 | **404** on `PUT` for `@its-thepoe/...`                                          | No permission for that scope — **Step 1**.                                                                                                                         |
 | **404** on `GET` for `@its-thepoe/...` when **installing** `@its-thepoe/skills` | A skill package in the orchestrator’s `dependencies` is **not on the registry yet**. Publish that skill package (`npm publish -w @its-thepoe/<name>`), then retry. |
 | **403** “cannot publish over the previously published versions”                 | You are trying to ship a **version number that already exists** on npm. Bump to a **new** semver in `package.json`, then publish again.                            |
@@ -209,7 +215,7 @@ You **cannot** republish the same version twice; npm will reject it.
 
 ## Manual publish (no script)
 
-Same order as [scripts/publish-all.sh](../scripts/publish-all.sh). Use **`--access public`** on every line. Add **`--otp=CODE`** (or set **`NPM_OTP`**) **only** if npm returns **`EOTP`**; with browser-based publish, omit `--otp` and rerun after browser auth if needed.
+Same order as [scripts/publish-all.sh](../scripts/publish-all.sh). Use **`--access public`** on every line. For browser-based publish auth, run these in an interactive TTY and omit `--otp`. Add **`--otp=CODE`** (or set **`NPM_OTP`**) only if your npm account uses authenticator-code 2FA.
 
 ```bash
 npm publish --access public -w @its-thepoe/alt-text
