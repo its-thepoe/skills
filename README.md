@@ -47,6 +47,7 @@ npx @its-thepoe/skills@latest check --online
 | design-engineering | `npx @its-thepoe/skills@latest install design-engineering` |
 | design-motion-principles | `npx @its-thepoe/skills@latest install design-motion-principles` |
 | family-taste | `npx @its-thepoe/skills@latest install family-taste` |
+| hugeicons | `npx @its-thepoe/skills@latest install hugeicons` |
 | canva-app-builder | `npx @its-thepoe/skills@latest install canva-app-builder` |
 | codebase-content-ideas | `npx @its-thepoe/skills@latest install codebase-content-ideas` |
 | market-command-matrix | `npx @its-thepoe/skills@latest install market-command-matrix` |
@@ -111,6 +112,7 @@ npx @its-thepoe/skills@latest remove --all
 | `@its-thepoe/design-engineering` | UI craft: motion, easing, component polish |
 | `@its-thepoe/design-motion-principles` | Motion audit (multi-file references) |
 | `@its-thepoe/family-taste` | Family Values UI philosophy |
+| `@its-thepoe/hugeicons` | Hugeicons Free setup: correct packages, exact icon names, React wrapper usage |
 | `@its-thepoe/canva-app-builder` | Build Canva Apps against SDK docs, UI kit, and review constraints |
 | `@its-thepoe/codebase-content-ideas` | Blog and social content ideas from real repo work and notes |
 | `@its-thepoe/market-command-matrix` | Competitor matrix: mindshare vs resources → attack/monitor/harvest/ignore/partner |
@@ -185,6 +187,7 @@ design-and-refine/
 design-engineering/
 design-motion-principles/
 family-taste/
+hugeicons/
 market-command-matrix/
 root-cause-analysis/
 write-a-skill/
