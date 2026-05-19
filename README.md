@@ -1,55 +1,67 @@
-# @its-thepoe Agent Skills
+# Agent skills from my own workflow
 
-**Agent Skills** are portable instruction packs (`SKILL.md` + optional references) for AI coding assistants. This collection installs into **Cursor**, **Claude Code**, **OpenCode**, and **Windsurf** skill directories on your machine.
+This repo is a collection of Agent Skills I actually use in my own workflow with tools like **Codex**, **Cursor**, **Claude Code**, **OpenCode**, **Windsurf**, and whatever else I am trying at the moment.
 
-**Registry:** packages are published on [npm](https://www.npmjs.com/) under the **`@its-thepoe`** scope ([search](https://www.npmjs.com/search?q=scope%3Aits-thepoe)).
+Over time I noticed there are certain things I always do, and I kept doing them manually, step by step, even though the pattern was the same across tools. In a bid to be a bit more agentic about it, I started condensing those multi-step routines into reusable skills instead of prompting around them from scratch every time.
 
-**A note from me:** A bunch of these skills are ones I scaffolded for my own day-to-day use — workflows I actually run, not generic filler. I packaged them so I (and anyone else) can install them cleanly across Cursor, Claude Code, and the other agents below. Treat the collection as “here’s what I reach for,” with npm as the shareable layer on top.
+I care a lot about reusability when I am designing and building, so this is basically me treating my own habits as components and packaging them in a way that feels clean enough to reuse. If a skill is here, it probably means it bothered me at some point and I tried to solve for it properly instead of letting it keep annoying me in ten different places.
+
+As with a lot of things I make, this is a constant work in progress, so you can expect the skills to shift and improve over time. If you want to pull any of this into your own setup, you can install the skills directly from npm and wire them into your agent of choice.
+
+Packages are published on [npm](https://www.npmjs.com/) under the **`@its-thepoe`** scope.
 
 ---
 
-## Quick start
+## Quick Start
 
-Install **all** skills (recommended):
+Install all skills:
 
 ```bash
 npx @its-thepoe/skills@latest install --all
 ```
 
-Restart or reload your editor / agent so new skills are picked up.
+Restart or reload your agent/editor after installing so it can pick up the new skill folders.
 
-**Update** installs (safe to run anytime):
+Update installed skills:
 
 ```bash
 npx @its-thepoe/skills@latest sync --all
 ```
 
-**Check** that skills are linked and `SKILL.md` is present:
+Check installed skills:
 
 ```bash
 npx @its-thepoe/skills@latest check
 ```
 
-(Optional, needs network — compare local versions to the registry:)
+## Supported Agents
+
+The installer can write skills into the local folders used by:
+
+- Codex
+- Cursor
+- Claude Code
+- OpenCode
+- Windsurf
+
+You can limit installs to specific agents:
 
 ```bash
-npx @its-thepoe/skills@latest check --online
+npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 ```
 
----
-
-## Install one skill
+## Install One Skill
 
 | Skill | Command |
-|--------|---------|
+| --- | --- |
 | alt-text | `npx @its-thepoe/skills@latest install alt-text` |
+| canva-app-builder | `npx @its-thepoe/skills@latest install canva-app-builder` |
+| codebase-content-ideas | `npx @its-thepoe/skills@latest install codebase-content-ideas` |
 | design-and-refine | `npx @its-thepoe/skills@latest install design-and-refine` |
 | design-engineering | `npx @its-thepoe/skills@latest install design-engineering` |
 | design-motion-principles | `npx @its-thepoe/skills@latest install design-motion-principles` |
 | family-taste | `npx @its-thepoe/skills@latest install family-taste` |
 | hugeicons | `npx @its-thepoe/skills@latest install hugeicons` |
-| canva-app-builder | `npx @its-thepoe/skills@latest install canva-app-builder` |
-| codebase-content-ideas | `npx @its-thepoe/skills@latest install codebase-content-ideas` |
 | market-command-matrix | `npx @its-thepoe/skills@latest install market-command-matrix` |
 | root-cause-analysis | `npx @its-thepoe/skills@latest install root-cause-analysis` |
 | write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
@@ -57,152 +69,57 @@ npx @its-thepoe/skills@latest check --online
 Install several at once:
 
 ```bash
-npx @its-thepoe/skills@latest install alt-text design-engineering
+npx @its-thepoe/skills@latest install alt-text design-engineering hugeicons
 ```
 
-Re-link one skill after an update:
+## Skills
 
-```bash
-npx @its-thepoe/skills@latest sync alt-text
-```
+| Package | What it does |
+| --- | --- |
+| `@its-thepoe/skills` | CLI for installing, syncing, checking, and removing skills |
+| `@its-thepoe/alt-text` | Scans image usage and drafts better alt text for review |
+| `@its-thepoe/canva-app-builder` | Builds Canva Apps against SDK docs, UI kit, and review constraints |
+| `@its-thepoe/codebase-content-ideas` | Turns real repo work into blog, social, and writing ideas |
+| `@its-thepoe/design-and-refine` | Runs a Design Lab style workflow for UI variations and synthesis |
+| `@its-thepoe/design-engineering` | Reviews and improves UI craft, motion, easing, and component feel |
+| `@its-thepoe/design-motion-principles` | Audits motion and interaction design through multiple design lenses |
+| `@its-thepoe/family-taste` | Applies Family Values UI philosophy: simplicity, fluidity, and delight |
+| `@its-thepoe/hugeicons` | Sets up Hugeicons Free correctly and resolves exact icon names |
+| `@its-thepoe/market-command-matrix` | Maps competitors by mindshare/resources and chooses a clear market motion |
+| `@its-thepoe/root-cause-analysis` | Diagnoses engineering problems through mechanism chains and violated invariants |
+| `@its-thepoe/write-a-skill` | Helps author and package new Agent Skills |
 
-Remove one skill from agent directories:
+Each skill folder is self-contained and has a `SKILL.md` at the root. Most skills also include their own `README.md` and optional references.
 
-```bash
-npx @its-thepoe/skills@latest remove alt-text
-```
+## From Source
 
----
-
-## CLI options
-
-Preview actions (no files changed):
-
-```bash
-npx @its-thepoe/skills@latest install --all --dry-run
-```
-
-Only some agents (comma-separated: `codex`, `cursor`, `claude`, `opencode`, `windsurf`):
-
-```bash
-npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
-```
-
-If **symlinks fail** (often on Windows without dev mode), use **copy** mode:
-
-```bash
-npx @its-thepoe/skills@latest install --all --strategy copy
-```
-
-Remove all skills installed by this tool:
-
-```bash
-npx @its-thepoe/skills@latest remove --all
-```
-
----
-
-## What each package is
-
-| npm package | What it does |
-|-------------|----------------|
-| `@its-thepoe/skills` | **CLI** — `install`, `sync`, `check`, `remove` |
-| `@its-thepoe/alt-text` | Image alt text: scan, draft, review table, then apply (Next.js, React, Astro, Vue, CMS-shaped content) |
-| `@its-thepoe/design-and-refine` | Design & Refine / Design Lab style workflow |
-| `@its-thepoe/design-engineering` | UI craft: motion, easing, component polish |
-| `@its-thepoe/design-motion-principles` | Motion audit (multi-file references) |
-| `@its-thepoe/family-taste` | Family Values UI philosophy |
-| `@its-thepoe/hugeicons` | Hugeicons Free setup: correct packages, exact icon names, React wrapper usage |
-| `@its-thepoe/canva-app-builder` | Build Canva Apps against SDK docs, UI kit, and review constraints |
-| `@its-thepoe/codebase-content-ideas` | Blog and social content ideas from real repo work and notes |
-| `@its-thepoe/market-command-matrix` | Competitor matrix: mindshare vs resources → attack/monitor/harvest/ignore/partner |
-| `@its-thepoe/root-cause-analysis` | RCA: mechanism + invariant; optional Fishbone / 5 Whys / CAPA; diagnosis before fixes |
-| `@its-thepoe/write-a-skill` | How to author and ship Agent Skills |
-
-Skills follow the [Agent Skills](https://agentskills.io) idea: each folder is self-contained with `SKILL.md` at the root.
-
----
-
-## Troubleshooting
-
-| Problem | What to do |
-|---------|------------|
-| **`npx …` → 404 Not Found** | The package is not on npm yet, or the name is wrong. Use **From source** below, or ask the maintainer to publish. |
-| **EOTP / one-time password** | Publish-time only. If you use **browser** publish auth, rerun `npm publish --access public` in an interactive TTY/shell so npm can print/open the browser verification URL. Use `--otp` / `NPM_OTP` only for authenticator-code 2FA. End users do not see this when **installing**. |
-| **`check` reports MISSING** | Run `install` or `sync` again; confirm paths like `~/.cursor/skills/<name>` exist. |
-| **Symlink errors (Windows)** | Use `--strategy copy`. |
-| **Skills don’t appear** | Fully restart the app or reload the window after `install`. |
-
----
-
-## From source (GitHub, no npm)
-
-If `npx @its-thepoe/skills@latest` is not available yet, clone and run the same CLI locally:
+If you want to run the repo locally instead of using npm:
 
 ```bash
 git clone https://github.com/its-thepoe/skills.git
 cd skills
 npm install
 npm run skills -- install --all
-# or one skill: npm run skills -- install alt-text
 ```
 
-**Manual symlinks** — set `SKILLS_ROOT` to your clone and `SKILL_NAME` to the folder name:
+Install one local skill:
 
 ```bash
-SKILLS_ROOT="$HOME/src/skills"
-SKILL_NAME=alt-text
-mkdir -p ~/.agents/skills ~/.cursor/skills ~/.claude/skills ~/.config/opencode/skills ~/.codeium/windsurf/skills
-ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.agents/skills/"$SKILL_NAME"
-ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.cursor/skills/"$SKILL_NAME"
-ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.claude/skills/"$SKILL_NAME"
-ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.config/opencode/skills/"$SKILL_NAME"
-ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.codeium/windsurf/skills/"$SKILL_NAME"
+npm run skills -- install hugeicons
 ```
 
----
-
-## Other agents (e.g. Gemini / Antigravity)
-
-Official paths vary. After you have a skill folder, symlink or copy it into the directory your product documents (often under `~/.gemini/skills/` or a project `.agent/skills/` path).
-
----
-
-## More documentation
-
-- [docs/publishing-jargon.md](docs/publishing-jargon.md) — npm terms explained (`npx`, `semver`, `files`, etc.) and **what install feels like** per method.
-- [docs/publish-step-by-step.md](docs/publish-step-by-step.md) — **maintainers:** canonical publish flow (browser vs OTP 2FA, order, new packages before CLI, errors).
-
----
-
-## Repository layout (contributors)
-
-This repo is an npm **workspace**: one folder per skill plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. To add a skill, ship `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), a short **`README.md`** (npmjs.com shows this per package), list `README.md` in `package.json` **`files`**, register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`. Publishing order and scripts: [`scripts/PUBLISH_ORDER.md`](scripts/PUBLISH_ORDER.md).
-
-```text
-skills/          → @its-thepoe/skills (CLI)
-alt-text/        → @its-thepoe/alt-text
-codebase-content-ideas/
-design-and-refine/
-design-engineering/
-design-motion-principles/
-family-taste/
-hugeicons/
-market-command-matrix/
-root-cause-analysis/
-write-a-skill/
-```
-
-**Republish only `codebase-content-ideas` + CLI** (order fixed): see [docs/publish-step-by-step.md](docs/publish-step-by-step.md) TL;DR, or after `chmod +x`:
+Preview what the installer would do without writing files:
 
 ```bash
-./scripts/publish-codebase-content-ideas-and-cli.sh
+npm run skills -- install --all --dry-run
 ```
 
-Maintainer one-liner (after `npm login`; **browser 2FA:** use an interactive TTY/shell, no `NPM_OTP`):
+## Docs
 
-```bash
-npm install && npm run validate && ./scripts/publish-all.sh
-```
+- [Publishing guide](docs/publish-step-by-step.md)
+- [Publishing jargon](docs/publishing-jargon.md)
+- [Troubleshooting](docs/troubleshooting.md)
 
-If npm returns **EOTP** but you use browser verification, run the remaining `npm publish --access public -w <workspace>` commands manually in an interactive terminal. Use `NPM_OTP=123456 ./scripts/publish-all.sh` only for authenticator-code 2FA (see [docs/publish-step-by-step.md](docs/publish-step-by-step.md)).
+## License
+
+MIT

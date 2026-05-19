@@ -4,30 +4,44 @@ Follow these steps **in order** on the machine where you want to publish (your l
 
 ---
 
-## TL;DR — `codebase-content-ideas` + CLI (the flow that works)
+## TL;DR — changed skill + CLI
 
-Use this when you changed **`codebase-content-ideas/`** and/or bumped its version in **`skills/package.json`**.
+Use this when you changed any skill package and want that version to be installable through **`@its-thepoe/skills`**.
 
-1. Bump **`codebase-content-ideas/package.json`** `version` (never republish an existing version).
-2. Set **`skills/package.json`** `"@its-thepoe/codebase-content-ideas"` to that same version and bump **`@its-thepoe/skills`** `version`.
-3. From **repo root**: `npm install && npm run validate`
-4. Publish **in this order only** (skill first, orchestrator second):
+1. Bump the changed skill's **`package.json`** `version` (never republish an existing version).
+2. Set **`skills/package.json`** to depend on that same skill version.
+3. Bump **`@its-thepoe/skills`** in **`skills/package.json`**.
+4. If this is a new skill, add it to **`skills/skills.manifest.json`** and the root workspace list in **`package.json`**.
+5. From **repo root**: `npm install && npm run validate`
+6. Publish **in this order only**: skill package(s) first, CLI second.
+
+Example for **`hugeicons`**:
 
 ```bash
-npm publish --access public -w @its-thepoe/codebase-content-ideas
+npm publish --access public -w @its-thepoe/hugeicons
 npm publish --access public -w @its-thepoe/skills
 ```
+
+Example for several changed skills:
+
+```bash
+npm publish --access public -w @its-thepoe/alt-text
+npm publish --access public -w @its-thepoe/hugeicons
+npm publish --access public -w @its-thepoe/skills
+```
+
+The rule is simple: anything listed in **`skills/package.json`** `dependencies` must already exist on npm before the CLI version that depends on it is published.
 
 **2FA — browser (typical for this repo):** run `npm publish --access public` from an interactive TTY/shell. Non-interactive publishes can fall back to `EOTP`, even when browser verification is enabled. If npm prints a browser auth URL, complete it; the interactive publish should continue and finish.
 
 **2FA — OTP (only if npm returns `EOTP`):** use a fresh code per publish:
 
 ```bash
-NPM_OTP=123456 npm publish --access public -w @its-thepoe/codebase-content-ideas
+NPM_OTP=123456 npm publish --access public -w @its-thepoe/hugeicons
 NPM_OTP=789012 npm publish --access public -w @its-thepoe/skills
 ```
 
-One script (same order): `chmod +x scripts/publish-codebase-content-ideas-and-cli.sh` then `./scripts/publish-codebase-content-ideas-and-cli.sh` (add `NPM_OTP=...` only if your npm account requires OTP for publish).
+For full monorepo publishing, use `chmod +x scripts/publish-all.sh` then `./scripts/publish-all.sh` (add `NPM_OTP=...` only if your npm account requires OTP for publish).
 
 **`@its-thepoe/skills` `bin` field:** keep **`"skills": "./bin/cli.mjs"`** (leading `./`). Do **not** run **`npm pkg fix`** inside **`skills/`** — it rewrites the path to `bin/cli.mjs`, and `npm publish` can strip `bin` from the published package (broken `npx`).
 
@@ -68,10 +82,10 @@ You should see **`its-thepoe`** (or the account that owns the `@its-thepoe` scop
 cd "/path/to/skills"   # your clone of this repo
 ```
 
-Use the real path on your machine (example):
+Use the real path on your machine. For example:
 
 ```bash
-cd "$HOME/Desktop/Desktop - Poe's MacBook Pro/Engineering/Builds/skills"
+cd "$HOME/src/skills"
 ```
 
 ---
