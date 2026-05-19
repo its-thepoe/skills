@@ -1,6 +1,6 @@
 {
   "name": "@its-thepoe/hugeicons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Agent Skill: install and use Hugeicons Free correctly in React, Next.js, Vite, and TypeScript projects.",
   "license": "MIT",
   "keywords": [
@@ -11,7 +11,7 @@
     "nextjs",
     "typescript"
   ],
-  "files": ["SKILL.md", "scripts/find-free-icons.mjs", "package.json"],
+  "files": ["README.md", "SKILL.md", "scripts/find-free-icons.mjs", "package.json"],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",
