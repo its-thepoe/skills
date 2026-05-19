@@ -110,11 +110,12 @@ function npmViewVersion(pkg) {
 }
 
 /**
- * @param {{ online: boolean }} opts
+ * @param {{ online: boolean, only: string[] }} opts
  */
 function runCheck(opts) {
   const manifest = loadManifest();
-  const { online } = opts;
+  const { online, only } = opts;
+  const agents = only.includes("all") ? Object.keys(AGENT_TARGETS) : only;
   let exit = 0;
   for (const row of manifest.skills) {
     let root = null;
@@ -132,7 +133,7 @@ function runCheck(opts) {
     }
     logLine(`\n${row.name} (${row.package}) bundled@${bundledVer}${latest ? ` registry_latest@${latest}` : ""}`);
 
-    for (const agent of Object.keys(AGENT_TARGETS)) {
+    for (const agent of agents) {
       const dest = path.join(agentBaseDir(agent), row.name);
       if (!fs.existsSync(dest)) {
         logLine(`  [${agent}] MISSING ${dest}`);
@@ -183,7 +184,7 @@ export function run(argv) {
 
   try {
     if (cmd === "check") {
-      return runCheck({ online: flags.online });
+      return runCheck({ online: flags.online, only });
     }
 
     if (cmd === "install" || cmd === "sync") {

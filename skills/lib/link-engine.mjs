@@ -97,6 +97,9 @@ function linkOneDest(opts) {
         if (exists(marker)) {
           log(`${dryRun ? "DRY-RUN " : ""}REPLACE ${dest} (prior copy install)`);
           if (!dryRun) fs.rmSync(dest, { recursive: true, force: true });
+        } else if (exists(path.join(dest, "SKILL.md"))) {
+          log(`SKIP   ${dest} (existing unmanaged skill directory)`);
+          return;
         } else {
           throw new Error(
             `Refusing to replace ${dest}: exists and is not a symlink managed by this tool`

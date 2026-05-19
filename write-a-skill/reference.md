@@ -5,17 +5,44 @@
 ```text
 skill-name/
 ├── SKILL.md              # Entry point — required
-├── reference.md          # Long tables, templates, extra checklists (optional)
-├── examples.md           # Before/after samples (optional)
-├── references/           # Optional: schemas, templates, catalogs (see below)
+├── scripts/              # Optional deterministic helpers
+├── references/           # Optional docs: schemas, templates, catalogs
 │   ├── findings-schema.json
 │   └── ...
-└── scripts/              # Validation or scaffolding only (optional)
+├── assets/               # Optional templates, images, boilerplate
+└── agents/
+    └── openai.yaml       # Optional Codex app metadata/policy/dependencies
 ```
 
 **This repo:** each skill is a **top-level folder** next to `README.md` (e.g. `write-a-skill/`, `another-skill/`). Copy or symlink that folder into each agent’s global skills path (Cursor, Claude Code, Windsurf, Gemini / Antigravity — see below).
 
 Keep `SKILL.md` short; move bulk here.
+
+---
+
+## Codex skill discovery and distribution
+
+Codex reads skills from several scopes:
+
+| Scope | Location | Use |
+|------|----------|-----|
+| **Repo** | `$CWD/.agents/skills`, parent `.agents/skills` folders up to repo root, and `$REPO_ROOT/.agents/skills` | Team/project workflows checked into the repo |
+| **User** | `$HOME/.agents/skills` | Personal skills available across repositories |
+| **Admin** | `/etc/codex/skills` | Machine/container defaults |
+| **System** | Bundled with Codex | OpenAI-provided skills such as `skill-creator` |
+
+Codex supports symlinked skill folders and follows the target. Each skill directory must contain `SKILL.md` with `name` and `description` in YAML frontmatter.
+
+Skills are the authoring format. Plugins are the distribution unit when sharing reusable Codex skills with other developers, bundling multiple skills, or shipping skills alongside app mappings, MCP server config, or presentation assets.
+
+Codex starts with only skill metadata (`name`, `description`, path) and loads the full `SKILL.md` after a skill triggers. The initial skill list has a context budget, so if many skills are installed, descriptions may be shortened or some skills may be omitted from the initial list. Front-load trigger words in `description`, and use `agents/openai.yaml` with `policy.allow_implicit_invocation: false` only when a skill should require explicit `$skill` invocation.
+
+If a new skill does not appear:
+
+1. Confirm the folder is under a scanned location, usually `$HOME/.agents/skills/<skill-name>/SKILL.md`.
+2. Confirm frontmatter has valid `name` and `description`.
+3. Confirm the skill is not disabled in `~/.codex/config.toml` with `[[skills.config]] enabled = false`.
+4. Restart Codex if automatic detection does not pick it up.
 
 ---
 
@@ -25,6 +52,7 @@ Same folder works for any agent that loads **Agent Skills** (`SKILL.md` + frontm
 
 | Product | Personal (all projects) | Project-only |
 |--------|-------------------------|--------------|
+| **Codex** | `~/.agents/skills/<skill-name>/` | `<repo>/.agents/skills/<skill-name>/` |
 | **Cursor** | `~/.cursor/skills/<skill-name>/` | `<repo>/.cursor/skills/<skill-name>/` |
 | **Claude Code** | `~/.claude/skills/<skill-name>/` | `<repo>/.claude/skills/<skill-name>/` |
 | **OpenCode** | `~/.config/opencode/skills/<skill-name>/` | `<repo>/.opencode/skills/<skill-name>/` |
@@ -37,6 +65,8 @@ Each location must contain this directory with `SKILL.md` inside. Restart or rel
 
 ```bash
 SKILL_SRC="/path/to/this/repo/write-a-skill"
+mkdir -p ~/.agents/skills
+ln -sf "$SKILL_SRC" ~/.agents/skills/write-a-skill
 ln -sf "$SKILL_SRC" ~/.cursor/skills/write-a-skill
 ln -sf "$SKILL_SRC" ~/.claude/skills/write-a-skill
 mkdir -p ~/.config/opencode/skills

@@ -16,11 +16,11 @@ argument-hint: "<skill-folder-name> [audience or goal]"
 
 **Yes — exactly one directory per skill.** That folder is the whole skill: put **`SKILL.md` in the root of that folder**, plus optional siblings (`reference.md`, `examples.md`, `scripts/`, `package.json`, `LOVABLE.md`, etc.). Do not scatter one skill across multiple folders.
 
-**Plugin bundles (optional):** some teams ship many skills inside a single installable plugin (e.g. `plugins/<plugin-id>/skills/<skill-name>/`). Same rule applies: **one folder per skill**, with `SKILL.md` inside. See [reference.md](reference.md#plugin-or-monorepo-layout).
+**Plugin bundles (Codex distribution):** skills are the reusable workflow format; plugins are the installable distribution unit when sharing skills with other Codex users or bundling skills with apps/MCP config. Same rule applies: **one folder per skill**, with `SKILL.md` inside. See [reference.md](reference.md#codex-skill-discovery-and-distribution) and [reference.md](reference.md#plugin-or-monorepo-layout).
 
 ## This repo (many skills)
 
-Put each skill in its **own folder at the repo root** (kebab-case; **`name` in frontmatter** should match the folder where products require it — some allow `ce:plan`-style `name` with a different folder name; follow your target product docs). Same folder copies or symlinks into Cursor, Claude Code, Windsurf, Gemini / Antigravity, etc.
+Put each skill in its **own folder at the repo root** (kebab-case; **`name` in frontmatter** should match the folder where products require it). Same folder copies or symlinks into Codex (`~/.agents/skills` for user skills, repo `.agents/skills` for project skills), Cursor, Claude Code, Windsurf, Gemini / Antigravity, etc.
 
 ```text
 <this repo>/
@@ -34,7 +34,7 @@ Put each skill in its **own folder at the repo root** (kebab-case; **`name` in f
     SKILL.md
 ```
 
-**Install paths, symlink commands, npm copy:** [reference.md](reference.md#install-paths-and-symlink-commands). Reload or restart each agent after adding a skill.
+**Codex paths, plugin distribution, symlink commands, npm copy:** [reference.md](reference.md#codex-skill-discovery-and-distribution) and [reference.md](reference.md#install-paths-and-symlink-commands). Restart Codex if a newly added skill does not appear.
 
 **Standards:** [Agent Skills](https://agentskills.io). Claude-only options (subagents, `allowed-tools`, `context: fork`, `$ARGUMENTS`): [Claude Code skills](https://code.claude.com/docs/en/skills). For **many agents**, prefer portable frontmatter (`name`, `description`, optional `argument-hint`) and add tool-specific keys only where needed.
 
@@ -87,7 +87,7 @@ Before drafting:
 
 1. **Folder**: `skill-name/` in kebab-case; `name` in frontmatter matches product rules (often same as folder; max **64** chars, lowercase and hyphens where required).
 2. **Required file**: `SKILL.md` with YAML frontmatter (`name`, `description`) and concise body.
-3. **Optional siblings**: `reference.md`, `examples.md`, `scripts/`, **`references/`** (schemas, templates, catalogs — link from `SKILL.md` in one hop). See [reference.md](reference.md#supporting-files-beyond-referencemd).
+3. **Optional siblings**: `scripts/`, **`references/`**, `assets/`, and `agents/openai.yaml` for Codex app UI metadata, invocation policy, or tool dependencies. Use `reference.md` / `examples.md` only when this repo’s publishing style needs them. See [reference.md](reference.md#supporting-files-beyond-referencemd).
 
 **`description` (router / discovery)**
 
