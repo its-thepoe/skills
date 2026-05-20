@@ -62,6 +62,7 @@ npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 | design-motion-principles | `npx @its-thepoe/skills@latest install design-motion-principles` |
 | family-taste | `npx @its-thepoe/skills@latest install family-taste` |
 | hugeicons | `npx @its-thepoe/skills@latest install hugeicons` |
+| iconsax | `npx @its-thepoe/skills@latest install iconsax` |
 | market-command-matrix | `npx @its-thepoe/skills@latest install market-command-matrix` |
 | root-cause-analysis | `npx @its-thepoe/skills@latest install root-cause-analysis` |
 | write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
@@ -85,6 +86,7 @@ npx @its-thepoe/skills@latest install alt-text design-engineering hugeicons
 | `@its-thepoe/design-motion-principles` | Audits motion and interaction design through multiple design lenses |
 | `@its-thepoe/family-taste` | Applies Family Values UI philosophy: simplicity, fluidity, and delight |
 | `@its-thepoe/hugeicons` | Sets up Hugeicons Free correctly and resolves exact icon names |
+| `@its-thepoe/iconsax` | Sets up Iconsax correctly and resolves exact icon component names |
 | `@its-thepoe/market-command-matrix` | Maps competitors by mindshare/resources and chooses a clear market motion |
 | `@its-thepoe/root-cause-analysis` | Diagnoses engineering problems through mechanism chains and violated invariants |
 | `@its-thepoe/write-a-skill` | Helps author and package new Agent Skills |

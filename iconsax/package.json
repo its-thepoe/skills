@@ -1,0 +1,20 @@
+{
+  "name": "@its-thepoe/iconsax",
+  "version": "1.0.0",
+  "description": "Agent Skill: install and use Iconsax correctly in React, React Native, and TypeScript projects.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "iconsax",
+    "icons",
+    "react",
+    "react-native",
+    "typescript"
+  ],
+  "files": ["README.md", "SKILL.md", "scripts/find-iconsax-icons.mjs", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./scripts/find-iconsax-icons.mjs": "./scripts/find-iconsax-icons.mjs"
+  }
+}
