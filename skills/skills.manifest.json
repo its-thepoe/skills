@@ -10,6 +10,7 @@
     { "name": "canva-app-builder", "package": "@its-thepoe/canva-app-builder" },
     { "name": "codebase-content-ideas", "package": "@its-thepoe/codebase-content-ideas" },
     { "name": "market-command-matrix", "package": "@its-thepoe/market-command-matrix" },
+    { "name": "pr-tldr", "package": "@its-thepoe/pr-tldr" },
     { "name": "root-cause-analysis", "package": "@its-thepoe/root-cause-analysis" },
     { "name": "write-a-skill", "package": "@its-thepoe/write-a-skill" }
   ]

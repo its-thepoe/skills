@@ -64,6 +64,7 @@ npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 | hugeicons | `npx @its-thepoe/skills@latest install hugeicons` |
 | iconsax | `npx @its-thepoe/skills@latest install iconsax` |
 | market-command-matrix | `npx @its-thepoe/skills@latest install market-command-matrix` |
+| pr-tldr | `npx @its-thepoe/skills@latest install pr-tldr` |
 | root-cause-analysis | `npx @its-thepoe/skills@latest install root-cause-analysis` |
 | write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
 
@@ -88,6 +89,7 @@ npx @its-thepoe/skills@latest install alt-text design-engineering hugeicons
 | `@its-thepoe/hugeicons` | Sets up Hugeicons Free correctly and resolves exact icon names |
 | `@its-thepoe/iconsax` | Sets up Iconsax correctly and resolves exact icon component names |
 | `@its-thepoe/market-command-matrix` | Maps competitors by mindshare/resources and chooses a clear market motion |
+| `@its-thepoe/pr-tldr` | Writes concise PR summaries with grouped changes, risks, open items, and test plans |
 | `@its-thepoe/root-cause-analysis` | Diagnoses engineering problems through mechanism chains and violated invariants |
 | `@its-thepoe/write-a-skill` | Helps author and package new Agent Skills |
 

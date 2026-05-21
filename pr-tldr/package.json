@@ -1,0 +1,21 @@
+{
+  "name": "@its-thepoe/pr-tldr",
+  "version": "1.0.0",
+  "description": "Agent Skill: write concise, high-signal PR TLDRs with grouped changes, risks, open items, and test plans.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "pull-request",
+    "pr-summary",
+    "code-review",
+    "changelog",
+    "tldr"
+  ],
+  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./reference": "./reference.md",
+    "./reference.md": "./reference.md"
+  }
+}
