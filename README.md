@@ -66,6 +66,7 @@ npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 | market-command-matrix | `npx @its-thepoe/skills@latest install market-command-matrix` |
 | pr-tldr | `npx @its-thepoe/skills@latest install pr-tldr` |
 | root-cause-analysis | `npx @its-thepoe/skills@latest install root-cause-analysis` |
+| tailwindcss | `npx @its-thepoe/skills@latest install tailwindcss` |
 | write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
 
 Install several at once:
@@ -91,6 +92,7 @@ npx @its-thepoe/skills@latest install alt-text design-engineering hugeicons
 | `@its-thepoe/market-command-matrix` | Maps competitors by mindshare/resources and chooses a clear market motion |
 | `@its-thepoe/pr-tldr` | Writes concise PR summaries with grouped changes, risks, open items, and test plans |
 | `@its-thepoe/root-cause-analysis` | Diagnoses engineering problems through mechanism chains and violated invariants |
+| `@its-thepoe/tailwindcss` | Implements Tailwind CSS (v3/v4) and debugs setup/version issues |
 | `@its-thepoe/write-a-skill` | Helps author and package new Agent Skills |
 
 Each skill folder is self-contained and has a `SKILL.md` at the root. Most skills also include their own `README.md` and optional references.

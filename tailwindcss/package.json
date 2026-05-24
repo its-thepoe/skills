@@ -1,0 +1,21 @@
+{
+  "name": "@its-thepoe/tailwindcss",
+  "version": "1.0.1",
+  "description": "Agent Skill: implement Tailwind CSS (v3/v4), debug setup issues, and apply consistent utility-first patterns.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "tailwindcss",
+    "tailwind",
+    "css",
+    "frontend",
+    "design-system"
+  ],
+  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./reference": "./reference.md",
+    "./reference.md": "./reference.md"
+  }
+}
