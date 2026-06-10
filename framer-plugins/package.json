@@ -1,0 +1,22 @@
+{
+  "name": "@its-thepoe/framer-plugins",
+  "version": "1.0.0",
+  "description": "Agent Skill: Framer Plugin SDK (framer-plugin) - ManagedCollection, CMS sync, UI, and permission handling.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "framer",
+    "framer-plugin-sdk",
+    "cursor"
+  ],
+  "files": [
+    "SKILL.md",
+    "references",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./references/*": "./references/*"
+  }
+}

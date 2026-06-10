@@ -1,0 +1,23 @@
+{
+  "name": "@its-thepoe/figma-plugin-builder",
+  "version": "1.0.0",
+  "description": "Agent Skill: build Figma plugins (TypeScript, manifest, UI, Dev Mode/codegen, publish) and use the Figma Plugin API correctly.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "figma",
+    "plugin",
+    "figma-plugin-api",
+    "cursor"
+  ],
+  "files": [
+    "SKILL.md",
+    "references",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./references/*": "./references/*"
+  }
+}

@@ -97,6 +97,44 @@ npx @its-thepoe/skills@latest install alt-text design-engineering hugeicons
 
 Each skill folder is self-contained and has a `SKILL.md` at the root. Most skills also include their own `README.md` and optional references.
 
+## CLI Options
+
+Install several at once:
+
+```bash
+npx @its-thepoe/skills@latest install alt-text design-engineering hugeicons
+```
+
+Only target specific agents (comma-separated: `codex`, `cursor`, `claude`, `opencode`, `windsurf`):
+
+```bash
+npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
+```
+
+Preview actions without changing files:
+
+```bash
+npx @its-thepoe/skills@latest install --all --dry-run
+```
+
+If **symlinks fail** (often on Windows without dev mode), use **copy** strategy:
+
+```bash
+npx @its-thepoe/skills@latest install --all --strategy copy
+```
+
+Remove one skill from agent directories:
+
+```bash
+npx @its-thepoe/skills@latest remove alt-text
+```
+
+Remove all installed skills:
+
+```bash
+npx @its-thepoe/skills@latest remove --all
+```
+
 ## From Source
 
 If you want to run the repo locally instead of using npm:
@@ -108,16 +146,47 @@ npm install
 npm run skills -- install --all
 ```
 
-Install one local skill:
-
-```bash
-npm run skills -- install hugeicons
-```
-
-Preview what the installer would do without writing files:
+Preview local run:
 
 ```bash
 npm run skills -- install --all --dry-run
+```
+
+Manual symlinks — set `SKILLS_ROOT` to your clone and `SKILL_NAME` to the folder name:
+
+```bash
+SKILLS_ROOT="$HOME/src/skills"
+SKILL_NAME=alt-text
+mkdir -p ~/.agents/skills ~/.cursor/skills ~/.claude/skills ~/.config/opencode/skills ~/.codeium/windsurf/skills
+ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.agents/skills/"$SKILL_NAME"
+ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.cursor/skills/"$SKILL_NAME"
+ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.claude/skills/"$SKILL_NAME"
+ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.config/opencode/skills/"$SKILL_NAME"
+ln -sfn "$SKILLS_ROOT/$SKILL_NAME" ~/.codeium/windsurf/skills/"$SKILL_NAME"
+```
+
+## Other Agents (e.g. Gemini / Antigravity)
+
+Official paths vary. After you have a skill folder, symlink or copy it into the directory your product documents (often under `~/.gemini/skills/` or a project `.agent/skills/` path).
+
+## Troubleshooting
+
+| Problem | What to do |
+| --- | --- |
+| **`npx …` → 404 Not Found** | The package is not on npm yet, or the name is wrong. Use **From source** above, or ask the maintainer to publish. |
+| **EOTP / one-time password** | Publish-time only. If you use **browser** publish auth, rerun `npm publish --access public` in an interactive TTY/shell so npm can print/open the browser verification URL. Use `--otp` / `NPM_OTP` only for authenticator-code 2FA. End users do not see this when **installing**. |
+| **`check` reports MISSING** | Run `install` or `sync` again; confirm paths like `~/.cursor/skills/<name>` exist. |
+| **Symlink errors (Windows)** | Use `--strategy copy`. |
+| **Skills don’t appear** | Fully restart the app or reload the window after `install`. |
+
+## Repository Layout (Contributors)
+
+This repo is an npm **workspace**: one folder per skill plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. To add a skill, ship `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), a short **`README.md`** (npmjs.com shows this per package), list `README.md` in `package.json` **`files`**, register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`. Publishing order and scripts: [`scripts/PUBLISH_ORDER.md`](scripts/PUBLISH_ORDER.md).
+
+Maintainer one-liner (after `npm login`; **browser 2FA:** use an interactive TTY/shell, no `NPM_OTP`):
+
+```bash
+npm install && npm run validate && ./scripts/publish-all.sh
 ```
 
 ## Docs
