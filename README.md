@@ -61,6 +61,9 @@ npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 | design-engineering | `npx @its-thepoe/skills@latest install design-engineering` |
 | design-motion-principles | `npx @its-thepoe/skills@latest install design-motion-principles` |
 | family-taste | `npx @its-thepoe/skills@latest install family-taste` |
+| figma-plugin-builder | `npx @its-thepoe/skills@latest install figma-plugin-builder` |
+| framer-code-components-overrides | `npx @its-thepoe/skills@latest install framer-code-components-overrides` |
+| framer-plugins | `npx @its-thepoe/skills@latest install framer-plugins` |
 | hugeicons | `npx @its-thepoe/skills@latest install hugeicons` |
 | iconsax | `npx @its-thepoe/skills@latest install iconsax` |
 | market-command-matrix | `npx @its-thepoe/skills@latest install market-command-matrix` |
@@ -87,6 +90,9 @@ npx @its-thepoe/skills@latest install alt-text design-engineering hugeicons
 | `@its-thepoe/design-engineering` | Reviews and improves UI craft, motion, easing, and component feel |
 | `@its-thepoe/design-motion-principles` | Audits motion and interaction design through multiple design lenses |
 | `@its-thepoe/family-taste` | Applies Family Values UI philosophy: simplicity, fluidity, and delight |
+| `@its-thepoe/figma-plugin-builder` | Builds Figma plugins (TypeScript, manifest, UI, Dev Mode/codegen, publish) and uses the Figma Plugin API |
+| `@its-thepoe/framer-code-components-overrides` | Builds Framer canvas Code Components and Code Overrides (React on canvas) with property controls |
+| `@its-thepoe/framer-plugins` | Builds Framer plugins using the Plugin SDK, covering ManagedCollection, CMS sync, and permissions |
 | `@its-thepoe/hugeicons` | Sets up Hugeicons Free correctly and resolves exact icon names |
 | `@its-thepoe/iconsax` | Sets up Iconsax correctly and resolves exact icon component names |
 | `@its-thepoe/market-command-matrix` | Maps competitors by mindshare/resources and chooses a clear market motion |
