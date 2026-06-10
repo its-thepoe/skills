@@ -44,6 +44,9 @@ run_publish @its-thepoe/design-and-refine
 run_publish @its-thepoe/design-engineering
 run_publish @its-thepoe/design-motion-principles
 run_publish @its-thepoe/family-taste
+run_publish @its-thepoe/figma-plugin-builder
+run_publish @its-thepoe/framer-code-components-overrides
+run_publish @its-thepoe/framer-plugins
 run_publish @its-thepoe/canva-app-builder
 run_publish @its-thepoe/codebase-content-ideas
 run_publish @its-thepoe/market-command-matrix

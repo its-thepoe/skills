@@ -9,12 +9,15 @@ Order matches [`publish-all.sh`](publish-all.sh):
 3. `design-engineering`
 4. `design-motion-principles`
 5. `family-taste`
-6. `canva-app-builder`
-7. `codebase-content-ideas`
-8. `market-command-matrix`
-9. `root-cause-analysis`
-10. `write-a-skill`
-11. `skills` (package name `@its-thepoe/skills`)
+6. `figma-plugin-builder`
+7. `framer-code-components-overrides`
+8. `framer-plugins`
+9. `canva-app-builder`
+10. `codebase-content-ideas`
+11. `market-command-matrix`
+12. `root-cause-analysis`
+13. `write-a-skill`
+14. `skills` (package name `@its-thepoe/skills`)
 
 From repo root after `npm login`:
 
@@ -33,6 +36,9 @@ npm publish --access public -w @its-thepoe/design-and-refine
 npm publish --access public -w @its-thepoe/design-engineering
 npm publish --access public -w @its-thepoe/design-motion-principles
 npm publish --access public -w @its-thepoe/family-taste
+npm publish --access public -w @its-thepoe/figma-plugin-builder
+npm publish --access public -w @its-thepoe/framer-code-components-overrides
+npm publish --access public -w @its-thepoe/framer-plugins
 npm publish --access public -w @its-thepoe/canva-app-builder
 npm publish --access public -w @its-thepoe/codebase-content-ideas
 npm publish --access public -w @its-thepoe/market-command-matrix
