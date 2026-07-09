@@ -1,0 +1,1094 @@
+{
+  "skills": [
+    {
+      "name": "agency-grid-layout-minimal",
+      "package": "@its-thepoe/agency-grid-layout-minimal",
+      "path": "web-design/agency-grid-layout-minimal",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "alt-text",
+      "package": "@its-thepoe/alt-text",
+      "path": "media/alt-text",
+      "tags": [
+        "media",
+        "assets"
+      ]
+    },
+    {
+      "name": "animation-on-scroll",
+      "package": "@its-thepoe/animation-on-scroll",
+      "path": "web-design/animation-on-scroll",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "animation-systems",
+      "package": "@its-thepoe/animation-systems",
+      "path": "web-design/animation-systems",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "atmosphere-background",
+      "package": "@its-thepoe/atmosphere-background",
+      "path": "web-design/atmosphere-background",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "audit-verify-explain-grade-5",
+      "package": "@its-thepoe/audit-verify-explain-grade-5",
+      "path": "agent/audit-verify-explain-grade-5",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "aura-asset-images",
+      "package": "@its-thepoe/aura-asset-images",
+      "path": "media/aura-asset-images",
+      "tags": [
+        "media",
+        "assets"
+      ]
+    },
+    {
+      "name": "background-grid-webgl",
+      "package": "@its-thepoe/background-grid-webgl",
+      "path": "web-design/background-grid-webgl",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "beautiful-shadows",
+      "package": "@its-thepoe/beautiful-shadows",
+      "path": "web-design/beautiful-shadows",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "blue-cloudy-clean-modern",
+      "package": "@its-thepoe/blue-cloudy-clean-modern",
+      "path": "web-design/blue-cloudy-clean-modern",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "blue-laser-clean-glass-layout",
+      "package": "@its-thepoe/blue-laser-clean-glass-layout",
+      "path": "web-design/blue-laser-clean-glass-layout",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "book-serif-index",
+      "package": "@its-thepoe/book-serif-index",
+      "path": "web-design/book-serif-index",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "bright-green-tech-system-webgl",
+      "package": "@its-thepoe/bright-green-tech-system-webgl",
+      "path": "web-design/bright-green-tech-system-webgl",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "canva-app-builder",
+      "package": "@its-thepoe/canva-app-builder",
+      "path": "tools/canva-app-builder",
+      "tags": [
+        "tool",
+        "canva"
+      ]
+    },
+    {
+      "name": "cinematic-gsap-lenis-motion-system",
+      "package": "@its-thepoe/cinematic-gsap-lenis-motion-system",
+      "path": "web-design/cinematic-gsap-lenis-motion-system",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "cinematic-scroll-storytelling",
+      "package": "@its-thepoe/cinematic-scroll-storytelling",
+      "path": "web-design/cinematic-scroll-storytelling",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "clean-minimal-beige-light-mode",
+      "package": "@its-thepoe/clean-minimal-beige-light-mode",
+      "path": "web-design/clean-minimal-beige-light-mode",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "cobejs",
+      "package": "@its-thepoe/cobejs",
+      "path": "web-design/cobejs",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "codebase-content-ideas",
+      "package": "@its-thepoe/codebase-content-ideas",
+      "path": "writing/codebase-content-ideas",
+      "tags": [
+        "writing",
+        "content"
+      ]
+    },
+    {
+      "name": "company-logos",
+      "package": "@its-thepoe/company-logos",
+      "path": "web-design/company-logos",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "container-lines",
+      "package": "@its-thepoe/container-lines",
+      "path": "web-design/container-lines",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "copywriting",
+      "package": "@its-thepoe/copywriting",
+      "path": "writing/copywriting",
+      "tags": [
+        "writing",
+        "content"
+      ]
+    },
+    {
+      "name": "corner-diagonals",
+      "package": "@its-thepoe/corner-diagonals",
+      "path": "web-design/corner-diagonals",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "corner-lasers",
+      "package": "@its-thepoe/corner-lasers",
+      "path": "web-design/corner-lasers",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "css-alpha-masking",
+      "package": "@its-thepoe/css-alpha-masking",
+      "path": "web-design/css-alpha-masking",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "css-border-gradient",
+      "package": "@its-thepoe/css-border-gradient",
+      "path": "web-design/css-border-gradient",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "customer-email-draft-threads",
+      "package": "@its-thepoe/customer-email-draft-threads",
+      "path": "writing/customer-email-draft-threads",
+      "tags": [
+        "writing",
+        "content"
+      ]
+    },
+    {
+      "name": "customer-support-verification",
+      "package": "@its-thepoe/customer-support-verification",
+      "path": "agent/customer-support-verification",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "daily-ui-inspiration-capture",
+      "package": "@its-thepoe/daily-ui-inspiration-capture",
+      "path": "agent/daily-ui-inspiration-capture",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "dark-blue-contrasting-clean",
+      "package": "@its-thepoe/dark-blue-contrasting-clean",
+      "path": "web-design/dark-blue-contrasting-clean",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "dark-glass-clean-layout",
+      "package": "@its-thepoe/dark-glass-clean-layout",
+      "path": "web-design/dark-glass-clean-layout",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "design-and-refine",
+      "package": "@its-thepoe/design-and-refine",
+      "path": "design/design-and-refine",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "design-engineering",
+      "package": "@its-thepoe/design-engineering",
+      "path": "design/design-engineering",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "design-first-ui-prompting",
+      "package": "@its-thepoe/design-first-ui-prompting",
+      "path": "design/design-first-ui-prompting",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "design-motion-principles",
+      "package": "@its-thepoe/design-motion-principles",
+      "path": "design/design-motion-principles",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "design-taste-frontend",
+      "package": "@its-thepoe/design-taste-frontend",
+      "path": "design/design-taste-frontend",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "dither-background",
+      "package": "@its-thepoe/dither-background",
+      "path": "web-design/dither-background",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "dither-laser-dark-mode",
+      "package": "@its-thepoe/dither-laser-dark-mode",
+      "path": "web-design/dither-laser-dark-mode",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "editorial-tech",
+      "package": "@its-thepoe/editorial-tech",
+      "path": "web-design/editorial-tech",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "elevenlabs-tts",
+      "package": "@its-thepoe/elevenlabs-tts",
+      "path": "agent/elevenlabs-tts",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "family-taste",
+      "package": "@its-thepoe/family-taste",
+      "path": "design/family-taste",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "figma-plugin-builder",
+      "package": "@its-thepoe/figma-plugin-builder",
+      "path": "tools/figma-plugin-builder",
+      "tags": [
+        "tool",
+        "figma"
+      ]
+    },
+    {
+      "name": "framed-grid-layout",
+      "package": "@its-thepoe/framed-grid-layout",
+      "path": "web-design/framed-grid-layout",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "framed-tech-dark-border-gradient",
+      "package": "@its-thepoe/framed-tech-dark-border-gradient",
+      "path": "web-design/framed-tech-dark-border-gradient",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "framer-code-components-overrides",
+      "package": "@its-thepoe/framer-code-components-overrides",
+      "path": "tools/framer-code-components-overrides",
+      "tags": [
+        "tool",
+        "framer"
+      ]
+    },
+    {
+      "name": "framer-plugins",
+      "package": "@its-thepoe/framer-plugins",
+      "path": "tools/framer-plugins",
+      "tags": [
+        "tool",
+        "framer"
+      ]
+    },
+    {
+      "name": "frontend-design",
+      "package": "@its-thepoe/frontend-design",
+      "path": "design/frontend-design",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "full-output-enforcement",
+      "package": "@its-thepoe/full-output-enforcement",
+      "path": "design/full-output-enforcement",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "funky-purple-container-tech",
+      "package": "@its-thepoe/funky-purple-container-tech",
+      "path": "web-design/funky-purple-container-tech",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "glass-dark-mode-clock",
+      "package": "@its-thepoe/glass-dark-mode-clock",
+      "path": "web-design/glass-dark-mode-clock",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "glass-dark-ui",
+      "package": "@its-thepoe/glass-dark-ui",
+      "path": "web-design/glass-dark-ui",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "globe-gl",
+      "package": "@its-thepoe/globe-gl",
+      "path": "web-design/globe-gl",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "globe-particles",
+      "package": "@its-thepoe/globe-particles",
+      "path": "web-design/globe-particles",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "gooey-blob-system",
+      "package": "@its-thepoe/gooey-blob-system",
+      "path": "web-design/gooey-blob-system",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "gpt-taste",
+      "package": "@its-thepoe/gpt-taste",
+      "path": "design/gpt-taste",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "gsap",
+      "package": "@its-thepoe/gsap",
+      "path": "web-design/gsap",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "gsap-scrolltrigger-storytelling",
+      "package": "@its-thepoe/gsap-scrolltrigger-storytelling",
+      "path": "web-design/gsap-scrolltrigger-storytelling",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "high-contrast-skeuomorphic-clean",
+      "package": "@its-thepoe/high-contrast-skeuomorphic-clean",
+      "path": "web-design/high-contrast-skeuomorphic-clean",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "high-end-visual-design",
+      "package": "@its-thepoe/high-end-visual-design",
+      "path": "design/high-end-visual-design",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "html-to-interaction-prompts",
+      "package": "@its-thepoe/html-to-interaction-prompts",
+      "path": "agent/html-to-interaction-prompts",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "hugeicons",
+      "package": "@its-thepoe/hugeicons",
+      "path": "design/hugeicons",
+      "tags": [
+        "design",
+        "ui",
+        "icons"
+      ]
+    },
+    {
+      "name": "iconsax",
+      "package": "@its-thepoe/iconsax",
+      "path": "design/iconsax",
+      "tags": [
+        "design",
+        "ui",
+        "icons"
+      ]
+    },
+    {
+      "name": "image-first-grid-layout",
+      "package": "@its-thepoe/image-first-grid-layout",
+      "path": "web-design/image-first-grid-layout",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "image-to-code",
+      "package": "@its-thepoe/image-to-code",
+      "path": "design/image-to-code",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "industrial-brutalist-ui",
+      "package": "@its-thepoe/industrial-brutalist-ui",
+      "path": "design/industrial-brutalist-ui",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "landing-page",
+      "package": "@its-thepoe/landing-page",
+      "path": "web-design/landing-page",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "light-mode-paper-technical",
+      "package": "@its-thepoe/light-mode-paper-technical",
+      "path": "web-design/light-mode-paper-technical",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "market-command-matrix",
+      "package": "@its-thepoe/market-command-matrix",
+      "path": "design/market-command-matrix",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "marquee-loop",
+      "package": "@its-thepoe/marquee-loop",
+      "path": "web-design/marquee-loop",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "masked-reveal",
+      "package": "@its-thepoe/masked-reveal",
+      "path": "web-design/masked-reveal",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "matterjs",
+      "package": "@its-thepoe/matterjs",
+      "path": "web-design/matterjs",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "mesh-gradient-dark-blue-clean",
+      "package": "@its-thepoe/mesh-gradient-dark-blue-clean",
+      "path": "web-design/mesh-gradient-dark-blue-clean",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "minimalist-ui",
+      "package": "@its-thepoe/minimalist-ui",
+      "path": "design/minimalist-ui",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "nested-container-clean-agency",
+      "package": "@its-thepoe/nested-container-clean-agency",
+      "path": "web-design/nested-container-clean-agency",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "nested-container-frames",
+      "package": "@its-thepoe/nested-container-frames",
+      "path": "web-design/nested-container-frames",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "netlify-deploy",
+      "package": "@its-thepoe/netlify-deploy",
+      "path": "agent/netlify-deploy",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "number-details",
+      "package": "@its-thepoe/number-details",
+      "path": "web-design/number-details",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "optimize-web-animations",
+      "package": "@its-thepoe/optimize-web-animations",
+      "path": "agent/optimize-web-animations",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "orange-clean-paper-saas",
+      "package": "@its-thepoe/orange-clean-paper-saas",
+      "path": "web-design/orange-clean-paper-saas",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "pdf",
+      "package": "@its-thepoe/pdf",
+      "path": "agent/pdf",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "performance-profiling",
+      "package": "@its-thepoe/performance-profiling",
+      "path": "agent/performance-profiling",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "playwright",
+      "package": "@its-thepoe/playwright",
+      "path": "agent/playwright",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "playwright-interactive",
+      "package": "@its-thepoe/playwright-interactive",
+      "path": "agent/playwright-interactive",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "pr-tldr",
+      "package": "@its-thepoe/pr-tldr",
+      "path": "writing/pr-tldr",
+      "tags": [
+        "writing",
+        "content"
+      ]
+    },
+    {
+      "name": "pricing-page",
+      "package": "@its-thepoe/pricing-page",
+      "path": "web-design/pricing-page",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "progressive-blur",
+      "package": "@its-thepoe/progressive-blur",
+      "path": "web-design/progressive-blur",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "redesign-existing-projects",
+      "package": "@its-thepoe/redesign-existing-projects",
+      "path": "design/redesign-existing-projects",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "root-cause-analysis",
+      "package": "@its-thepoe/root-cause-analysis",
+      "path": "meta/root-cause-analysis",
+      "tags": [
+        "meta",
+        "workflow"
+      ]
+    },
+    {
+      "name": "screenshot",
+      "package": "@its-thepoe/screenshot",
+      "path": "agent/screenshot",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "seo-audit",
+      "package": "@its-thepoe/seo-audit",
+      "path": "design/seo-audit",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "skeuomorphic-ui",
+      "package": "@its-thepoe/skeuomorphic-ui",
+      "path": "web-design/skeuomorphic-ui",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "solar-duotone-bold",
+      "package": "@its-thepoe/solar-duotone-bold",
+      "path": "web-design/solar-duotone-bold",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "split-layout-technical",
+      "package": "@its-thepoe/split-layout-technical",
+      "path": "web-design/split-layout-technical",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "staggered-word-reveal",
+      "package": "@its-thepoe/staggered-word-reveal",
+      "path": "web-design/staggered-word-reveal",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "stitch-design-taste",
+      "package": "@its-thepoe/stitch-design-taste",
+      "path": "design/stitch-design-taste",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "stitched-full-page-capture",
+      "package": "@its-thepoe/stitched-full-page-capture",
+      "path": "agent/stitched-full-page-capture",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "swiftui-debugging",
+      "package": "@its-thepoe/swiftui-debugging",
+      "path": "tools/swiftui-debugging",
+      "tags": [
+        "tool",
+        "swiftui"
+      ]
+    },
+    {
+      "name": "swiftui-pro",
+      "package": "@its-thepoe/swiftui-pro",
+      "path": "tools/swiftui-pro",
+      "tags": [
+        "tool",
+        "swiftui"
+      ]
+    },
+    {
+      "name": "tailwindcss",
+      "package": "@its-thepoe/tailwindcss",
+      "path": "tools/tailwindcss",
+      "tags": [
+        "tool",
+        "tailwind"
+      ]
+    },
+    {
+      "name": "tech-green-dark-mode-modern",
+      "package": "@its-thepoe/tech-green-dark-mode-modern",
+      "path": "web-design/tech-green-dark-mode-modern",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "technical-wireframe-info-layout",
+      "package": "@its-thepoe/technical-wireframe-info-layout",
+      "path": "web-design/technical-wireframe-info-layout",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "threejs",
+      "package": "@its-thepoe/threejs",
+      "path": "web-design/threejs",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "unicorn-studio",
+      "package": "@its-thepoe/unicorn-studio",
+      "path": "web-design/unicorn-studio",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "unsplash-asset-images",
+      "package": "@its-thepoe/unsplash-asset-images",
+      "path": "media/unsplash-asset-images",
+      "tags": [
+        "media",
+        "assets"
+      ]
+    },
+    {
+      "name": "vantajs",
+      "package": "@its-thepoe/vantajs",
+      "path": "web-design/vantajs",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "video-to-superprompt",
+      "package": "@its-thepoe/video-to-superprompt",
+      "path": "agent/video-to-superprompt",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing"
+      ]
+    },
+    {
+      "name": "webgl-3d-object",
+      "package": "@its-thepoe/webgl-3d-object",
+      "path": "web-design/webgl-3d-object",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "webgl-landing-steering",
+      "package": "@its-thepoe/webgl-landing-steering",
+      "path": "web-design/webgl-landing-steering",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "webgl-laser",
+      "package": "@its-thepoe/webgl-laser",
+      "path": "web-design/webgl-laser",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "name": "write-a-skill",
+      "package": "@its-thepoe/write-a-skill",
+      "path": "meta/write-a-skill",
+      "tags": [
+        "meta",
+        "workflow"
+      ]
+    },
+    {
+      "name": "x-bookmark-quote-posts",
+      "package": "@its-thepoe/x-bookmark-quote-posts",
+      "path": "writing/x-bookmark-quote-posts",
+      "tags": [
+        "writing",
+        "content"
+      ]
+    }
+  ]
+}

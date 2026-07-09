@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/glass-dark-mode-clock",
+  "version": "1.0.0",
+  "description": "Agent Skill: glass-dark-mode-clock.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "glass-dark-mode-clock"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

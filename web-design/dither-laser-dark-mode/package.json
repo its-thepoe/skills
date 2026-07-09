@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/dither-laser-dark-mode",
+  "version": "1.0.0",
+  "description": "Agent Skill: dither-laser-dark-mode.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "dither-laser-dark-mode"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

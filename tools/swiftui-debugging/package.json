@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/swiftui-debugging",
+  "version": "1.0.0",
+  "description": "Agent Skill: swiftui-debugging.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "swiftui-debugging"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

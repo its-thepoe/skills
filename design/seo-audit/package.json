@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/seo-audit",
+  "version": "1.0.0",
+  "description": "Agent Skill: seo-audit.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "seo-audit"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

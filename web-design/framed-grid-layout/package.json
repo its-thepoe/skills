@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/framed-grid-layout",
+  "version": "1.0.0",
+  "description": "Agent Skill: framed-grid-layout.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "framed-grid-layout"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

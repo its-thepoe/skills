@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/full-output-enforcement",
+  "version": "1.0.0",
+  "description": "Agent Skill: full-output-enforcement.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "full-output-enforcement"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

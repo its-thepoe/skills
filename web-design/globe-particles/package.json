@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/globe-particles",
+  "version": "1.0.0",
+  "description": "Agent Skill: globe-particles.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "globe-particles"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

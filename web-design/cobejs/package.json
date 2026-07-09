@@ -1,0 +1,13 @@
+{
+  "name": "@its-thepoe/cobejs",
+  "version": "1.0.0",
+  "description": "Agent Skill: lightweight interactive globe patterns using cobe.",
+  "license": "MIT",
+  "keywords": ["agent-skills", "cobe", "globe", "canvas", "animation"],
+  "files": ["SKILL.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}
+

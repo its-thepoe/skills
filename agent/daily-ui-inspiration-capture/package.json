@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/daily-ui-inspiration-capture",
+  "version": "1.0.0",
+  "description": "Agent Skill: daily-ui-inspiration-capture.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "daily-ui-inspiration-capture"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

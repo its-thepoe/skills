@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/webgl-3d-object",
+  "version": "1.0.0",
+  "description": "Agent Skill: webgl-3d-object.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "webgl-3d-object"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

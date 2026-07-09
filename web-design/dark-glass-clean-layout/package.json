@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/dark-glass-clean-layout",
+  "version": "1.0.0",
+  "description": "Agent Skill: dark-glass-clean-layout.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "dark-glass-clean-layout"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

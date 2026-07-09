@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/landing-page",
+  "version": "1.0.0",
+  "description": "Agent Skill: landing-page.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "landing-page"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

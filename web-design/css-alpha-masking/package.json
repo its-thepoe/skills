@@ -1,0 +1,13 @@
+{
+  "name": "@its-thepoe/css-alpha-masking",
+  "version": "1.0.0",
+  "description": "Agent Skill: horizontal and vertical edge fades with CSS mask-image gradients.",
+  "license": "MIT",
+  "keywords": ["agent-skills", "css", "mask-image", "fade", "ui"],
+  "files": ["SKILL.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}
+

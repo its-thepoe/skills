@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/aura-asset-images",
+  "version": "1.0.0",
+  "description": "Agent Skill: aura-asset-images.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "aura-asset-images"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

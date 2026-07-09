@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/dark-blue-contrasting-clean",
+  "version": "1.0.0",
+  "description": "Agent Skill: dark-blue-contrasting-clean.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "dark-blue-contrasting-clean"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

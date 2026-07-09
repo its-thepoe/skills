@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/webgl-landing-steering",
+  "version": "1.0.0",
+  "description": "Agent Skill: webgl-landing-steering.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "webgl-landing-steering"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

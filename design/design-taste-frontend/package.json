@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/design-taste-frontend",
+  "version": "1.0.0",
+  "description": "Agent Skill: design-taste-frontend.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "design-taste-frontend"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

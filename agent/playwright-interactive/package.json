@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/playwright-interactive",
+  "version": "1.0.0",
+  "description": "Agent Skill: playwright-interactive.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "playwright-interactive"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

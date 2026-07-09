@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/gooey-blob-system",
+  "version": "1.0.0",
+  "description": "Agent Skill: gooey-blob-system.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "gooey-blob-system"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

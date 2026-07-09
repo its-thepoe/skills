@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/blue-laser-clean-glass-layout",
+  "version": "1.0.0",
+  "description": "Agent Skill: blue-laser-clean-glass-layout.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "blue-laser-clean-glass-layout"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

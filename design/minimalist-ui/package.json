@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/minimalist-ui",
+  "version": "1.0.0",
+  "description": "Agent Skill: minimalist-ui.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "minimalist-ui"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

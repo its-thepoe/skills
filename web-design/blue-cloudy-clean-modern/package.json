@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/blue-cloudy-clean-modern",
+  "version": "1.0.0",
+  "description": "Agent Skill: blue-cloudy-clean-modern.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "blue-cloudy-clean-modern"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/masked-reveal",
+  "version": "1.0.0",
+  "description": "Agent Skill: masked-reveal.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "masked-reveal"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

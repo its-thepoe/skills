@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/split-layout-technical",
+  "version": "1.0.0",
+  "description": "Agent Skill: split-layout-technical.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "split-layout-technical"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

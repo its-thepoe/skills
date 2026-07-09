@@ -1,0 +1,13 @@
+{
+  "name": "@its-thepoe/unicorn-studio",
+  "version": "1.0.0",
+  "description": "Agent Skill: Unicorn Studio embed patterns and performance checks.",
+  "license": "MIT",
+  "keywords": ["agent-skills", "embed", "webgl", "animation", "ui"],
+  "files": ["SKILL.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}
+

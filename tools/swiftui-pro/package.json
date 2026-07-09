@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/swiftui-pro",
+  "version": "1.0.0",
+  "description": "Agent Skill: swiftui-pro.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "swiftui-pro"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

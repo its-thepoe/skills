@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/mesh-gradient-dark-blue-clean",
+  "version": "1.0.0",
+  "description": "Agent Skill: mesh-gradient-dark-blue-clean.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "mesh-gradient-dark-blue-clean"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

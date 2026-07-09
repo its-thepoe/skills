@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/tech-green-dark-mode-modern",
+  "version": "1.0.0",
+  "description": "Agent Skill: tech-green-dark-mode-modern.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "tech-green-dark-mode-modern"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

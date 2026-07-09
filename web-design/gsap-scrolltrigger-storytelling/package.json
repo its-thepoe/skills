@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/gsap-scrolltrigger-storytelling",
+  "version": "1.0.0",
+  "description": "Agent Skill: gsap-scrolltrigger-storytelling.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "gsap-scrolltrigger-storytelling"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

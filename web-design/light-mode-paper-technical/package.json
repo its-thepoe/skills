@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/light-mode-paper-technical",
+  "version": "1.0.0",
+  "description": "Agent Skill: light-mode-paper-technical.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "light-mode-paper-technical"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

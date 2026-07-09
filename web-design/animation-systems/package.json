@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/animation-systems",
+  "version": "1.0.0",
+  "description": "Agent Skill: animation-systems.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "animation-systems"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

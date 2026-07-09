@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/image-to-code",
+  "version": "1.0.0",
+  "description": "Agent Skill: image-to-code.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "image-to-code"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

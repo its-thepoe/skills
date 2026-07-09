@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/optimize-web-animations",
+  "version": "1.0.0",
+  "description": "Agent Skill: optimize-web-animations.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "optimize-web-animations"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

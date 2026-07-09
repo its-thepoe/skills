@@ -1,0 +1,13 @@
+{
+  "name": "@its-thepoe/progressive-blur",
+  "version": "1.0.0",
+  "description": "Agent Skill: layered blur gradients and progressive backdrop-blur treatments.",
+  "license": "MIT",
+  "keywords": ["agent-skills", "blur", "backdrop-filter", "ui", "motion"],
+  "files": ["SKILL.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}
+

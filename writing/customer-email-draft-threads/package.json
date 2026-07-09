@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/customer-email-draft-threads",
+  "version": "1.0.0",
+  "description": "Agent Skill: customer-email-draft-threads.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "customer-email-draft-threads"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

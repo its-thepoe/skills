@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/nested-container-frames",
+  "version": "1.0.0",
+  "description": "Agent Skill: nested-container-frames.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "nested-container-frames"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@its-thepoe/animation-on-scroll",
+  "version": "1.0.0",
+  "description": "Agent Skill: IntersectionObserver-based scroll reveal animations.",
+  "license": "MIT",
+  "keywords": ["agent-skills", "scroll", "animation", "intersectionobserver", "ui"],
+  "files": ["SKILL.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}
+

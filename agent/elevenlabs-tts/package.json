@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/elevenlabs-tts",
+  "version": "1.0.0",
+  "description": "Agent Skill: elevenlabs-tts.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "elevenlabs-tts"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

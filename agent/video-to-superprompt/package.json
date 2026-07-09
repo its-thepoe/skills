@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/video-to-superprompt",
+  "version": "1.0.0",
+  "description": "Agent Skill: video-to-superprompt.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "video-to-superprompt"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

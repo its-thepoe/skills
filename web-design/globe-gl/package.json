@@ -1,0 +1,13 @@
+{
+  "name": "@its-thepoe/globe-gl",
+  "version": "1.0.0",
+  "description": "Agent Skill: globe.gl 3D globe visualization patterns.",
+  "license": "MIT",
+  "keywords": ["agent-skills", "globe", "3d", "visualization", "webgl"],
+  "files": ["SKILL.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}
+

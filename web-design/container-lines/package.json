@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/container-lines",
+  "version": "1.0.0",
+  "description": "Agent Skill: container-lines.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "container-lines"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

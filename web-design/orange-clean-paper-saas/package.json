@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/orange-clean-paper-saas",
+  "version": "1.0.0",
+  "description": "Agent Skill: orange-clean-paper-saas.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "orange-clean-paper-saas"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

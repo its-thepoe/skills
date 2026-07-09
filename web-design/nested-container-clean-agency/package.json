@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/nested-container-clean-agency",
+  "version": "1.0.0",
+  "description": "Agent Skill: nested-container-clean-agency.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "nested-container-clean-agency"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

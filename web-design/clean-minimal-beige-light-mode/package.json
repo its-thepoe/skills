@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/clean-minimal-beige-light-mode",
+  "version": "1.0.0",
+  "description": "Agent Skill: clean-minimal-beige-light-mode.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "clean-minimal-beige-light-mode"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@its-thepoe/threejs",
+  "version": "1.0.0",
+  "description": "Agent Skill: three.js scene setup, rendering, loaders, performance, and disposal.",
+  "license": "MIT",
+  "keywords": ["agent-skills", "threejs", "webgl", "3d", "animation"],
+  "files": ["SKILL.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}
+

@@ -55,21 +55,32 @@ npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 | Skill | Command |
 | --- | --- |
 | alt-text | `npx @its-thepoe/skills@latest install alt-text` |
+| animation-on-scroll | `npx @its-thepoe/skills@latest install animation-on-scroll` |
 | canva-app-builder | `npx @its-thepoe/skills@latest install canva-app-builder` |
+| cobejs | `npx @its-thepoe/skills@latest install cobejs` |
+| css-alpha-masking | `npx @its-thepoe/skills@latest install css-alpha-masking` |
+| css-border-gradient | `npx @its-thepoe/skills@latest install css-border-gradient` |
 | codebase-content-ideas | `npx @its-thepoe/skills@latest install codebase-content-ideas` |
 | design-and-refine | `npx @its-thepoe/skills@latest install design-and-refine` |
 | design-engineering | `npx @its-thepoe/skills@latest install design-engineering` |
 | design-motion-principles | `npx @its-thepoe/skills@latest install design-motion-principles` |
 | family-taste | `npx @its-thepoe/skills@latest install family-taste` |
 | figma-plugin-builder | `npx @its-thepoe/skills@latest install figma-plugin-builder` |
+| globe-gl | `npx @its-thepoe/skills@latest install globe-gl` |
 | framer-code-components-overrides | `npx @its-thepoe/skills@latest install framer-code-components-overrides` |
 | framer-plugins | `npx @its-thepoe/skills@latest install framer-plugins` |
+| gsap | `npx @its-thepoe/skills@latest install gsap` |
 | hugeicons | `npx @its-thepoe/skills@latest install hugeicons` |
 | iconsax | `npx @its-thepoe/skills@latest install iconsax` |
 | market-command-matrix | `npx @its-thepoe/skills@latest install market-command-matrix` |
+| matterjs | `npx @its-thepoe/skills@latest install matterjs` |
 | pr-tldr | `npx @its-thepoe/skills@latest install pr-tldr` |
+| progressive-blur | `npx @its-thepoe/skills@latest install progressive-blur` |
 | root-cause-analysis | `npx @its-thepoe/skills@latest install root-cause-analysis` |
 | tailwindcss | `npx @its-thepoe/skills@latest install tailwindcss` |
+| threejs | `npx @its-thepoe/skills@latest install threejs` |
+| unicorn-studio | `npx @its-thepoe/skills@latest install unicorn-studio` |
+| vantajs | `npx @its-thepoe/skills@latest install vantajs` |
 | write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
 
 Install several at once:
@@ -187,7 +198,7 @@ Official paths vary. After you have a skill folder, symlink or copy it into the 
 
 ## Repository Layout (Contributors)
 
-This repo is an npm **workspace**: one folder per skill plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. To add a skill, ship `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), a short **`README.md`** (npmjs.com shows this per package), list `README.md` in `package.json` **`files`**, register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`. Publishing order and scripts: [`scripts/PUBLISH_ORDER.md`](scripts/PUBLISH_ORDER.md).
+This repo is an npm **workspace** with bucketed skill folders plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. The buckets are `agent/`, `design/`, `media/`, `meta/`, `tools/`, `web-design/`, and `writing/`. To add a skill, ship `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), a short **`README.md`** (npmjs.com shows this per package), list `README.md` in `package.json` **`files`**, register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`. Publishing order and scripts: [`scripts/PUBLISH_ORDER.md`](scripts/PUBLISH_ORDER.md).
 
 Maintainer one-liner (after `npm login`; **browser 2FA:** use an interactive TTY/shell, no `NPM_OTP`):
 

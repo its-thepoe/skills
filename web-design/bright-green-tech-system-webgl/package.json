@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/bright-green-tech-system-webgl",
+  "version": "1.0.0",
+  "description": "Agent Skill: bright-green-tech-system-webgl.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "bright-green-tech-system-webgl"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

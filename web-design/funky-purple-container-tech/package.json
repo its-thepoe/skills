@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/funky-purple-container-tech",
+  "version": "1.0.0",
+  "description": "Agent Skill: funky-purple-container-tech.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "funky-purple-container-tech"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

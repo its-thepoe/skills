@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/netlify-deploy",
+  "version": "1.0.0",
+  "description": "Agent Skill: netlify-deploy.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "netlify-deploy"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

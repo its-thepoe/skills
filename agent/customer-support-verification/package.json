@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/customer-support-verification",
+  "version": "1.0.0",
+  "description": "Agent Skill: customer-support-verification.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "customer-support-verification"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}

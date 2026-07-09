@@ -1,0 +1,19 @@
+{
+  "name": "@its-thepoe/agency-grid-layout-minimal",
+  "version": "1.0.0",
+  "description": "Agent Skill: agency-grid-layout-minimal.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "agency-grid-layout-minimal"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  }
+}
