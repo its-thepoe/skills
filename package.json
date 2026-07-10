@@ -5,6 +5,7 @@
   "license": "MIT",
   "workspaces": [
     "skills",
+    "web-design/aave-glass",
     "web-design/agency-grid-layout-minimal",
     "media/alt-text",
     "web-design/animation-on-scroll",

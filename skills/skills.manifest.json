@@ -1,6 +1,11 @@
 {
   "skills": [
     {
+      "name": "aave-glass",
+      "package": "@its-thepoe/aave-glass",
+      "path": "web-design/aave-glass"
+    },
+    {
       "name": "agency-grid-layout-minimal",
       "package": "@its-thepoe/agency-grid-layout-minimal",
       "path": "web-design/agency-grid-layout-minimal"

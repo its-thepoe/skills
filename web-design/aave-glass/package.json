@@ -1,0 +1,13 @@
+{
+  "name": "@its-thepoe/aave-glass",
+  "version": "1.0.0",
+  "description": "Agent Skill: Aave-style refractive glass for DOM, canvas, and Safari-safe video surfaces.",
+  "license": "MIT",
+  "keywords": ["agent-skills", "glass", "svg", "webgl", "refraction"],
+  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./reference.md": "./reference.md"
+  }
+}
