@@ -3,7 +3,13 @@
   "version": "1.0.1",
   "description": "Agent Skill: motion and interaction design audit (Emil Kowalski, Jakub Krehel, Jhey Tompkins lenses).",
   "license": "MIT",
-  "keywords": ["agent-skills", "motion", "animation", "accessibility", "cursor"],
+  "keywords": [
+    "agent-skills",
+    "motion",
+    "animation",
+    "accessibility",
+    "cursor"
+  ],
   "files": [
     "README.md",
     "SKILL.md",
@@ -15,5 +21,10 @@
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",
     "./audit-checklist.md": "./audit-checklist.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "design/design-motion-principles"
   }
 }

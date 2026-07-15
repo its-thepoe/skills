@@ -18,5 +18,10 @@
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",
     "./references/*": "./references/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "tools/framer-plugins"
   }
 }

@@ -136,5 +136,10 @@
     "@its-thepoe/webgl-laser": "1.0.0",
     "@its-thepoe/write-a-skill": "1.0.3",
     "@its-thepoe/x-bookmark-quote-posts": "1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "skills"
   }
 }

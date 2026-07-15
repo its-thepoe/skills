@@ -33,6 +33,4 @@ npx --cache /tmp/its-thepoe-skills-cache @its-thepoe/skills@latest check
 
 ## Maintainer Notes
 
-**Publishing has exactly one script and one doc — [`scripts/publish-all.sh`](../scripts/publish-all.sh) and [publish-step-by-step.md](publish-step-by-step.md).** Don't write ad-hoc publish commands or new publish scripts; the script reads the package list from `package.json` automatically and safely skips anything already published.
-
-Always run `npm login` then `npm whoami` (must show `its-thepoe`) in **Terminal.app** first. This repo uses **browser** 2FA — never `NPM_OTP`.
+**Publishing: Terminal.app + [`scripts/publish-all.sh`](../scripts/publish-all.sh) — see [publish-step-by-step.md](publish-step-by-step.md).** Always `npm login` then `npm whoami` (must show `its-thepoe`) first. Browser 2FA only — never `NPM_OTP`. Do not publish from Cursor's agent shell.

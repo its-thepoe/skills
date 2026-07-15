@@ -3,11 +3,26 @@
   "version": "1.0.1",
   "description": "Agent Skill: Design & Refine / 0x Designer workflow (manual playbook + Design Lab guidance).",
   "license": "MIT",
-  "keywords": ["agent-skills", "design", "ui", "cursor"],
-  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
+  "keywords": [
+    "agent-skills",
+    "design",
+    "ui",
+    "cursor"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "reference.md",
+    "package.json"
+  ],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",
     "./reference.md": "./reference.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "design/design-and-refine"
   }
 }

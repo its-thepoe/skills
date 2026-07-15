@@ -3,11 +3,26 @@
   "version": "1.0.1",
   "description": "Agent Skill: Family Values UI philosophy (simplicity, fluidity, delight).",
   "license": "MIT",
-  "keywords": ["agent-skills", "ui", "product-design", "cursor"],
-  "files": ["README.md", "SKILL.md", "LOVABLE.md", "package.json"],
+  "keywords": [
+    "agent-skills",
+    "ui",
+    "product-design",
+    "cursor"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "LOVABLE.md",
+    "package.json"
+  ],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",
     "./LOVABLE.md": "./LOVABLE.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "design/family-taste"
   }
 }

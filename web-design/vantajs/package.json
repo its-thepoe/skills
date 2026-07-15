@@ -3,11 +3,24 @@
   "version": "1.0.0",
   "description": "Agent Skill: animated WebGL background patterns using Vanta.js.",
   "license": "MIT",
-  "keywords": ["agent-skills", "vanta", "webgl", "background", "animation"],
-  "files": ["SKILL.md", "package.json"],
+  "keywords": [
+    "agent-skills",
+    "vanta",
+    "webgl",
+    "background",
+    "animation"
+  ],
+  "files": [
+    "SKILL.md",
+    "package.json"
+  ],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "web-design/vantajs"
   }
 }
-

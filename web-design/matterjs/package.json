@@ -3,11 +3,24 @@
   "version": "1.0.0",
   "description": "Agent Skill: Matter.js 2D physics setup, interactions, and cleanup.",
   "license": "MIT",
-  "keywords": ["agent-skills", "matterjs", "physics", "animation", "ui"],
-  "files": ["SKILL.md", "package.json"],
+  "keywords": [
+    "agent-skills",
+    "matterjs",
+    "physics",
+    "animation",
+    "ui"
+  ],
+  "files": [
+    "SKILL.md",
+    "package.json"
+  ],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "web-design/matterjs"
   }
 }
-

@@ -11,10 +11,20 @@
     "react-native",
     "typescript"
   ],
-  "files": ["README.md", "SKILL.md", "scripts/find-iconsax-icons.mjs", "package.json"],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "scripts/find-iconsax-icons.mjs",
+    "package.json"
+  ],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",
     "./scripts/find-iconsax-icons.mjs": "./scripts/find-iconsax-icons.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "design/iconsax"
   }
 }

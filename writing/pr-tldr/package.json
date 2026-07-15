@@ -11,11 +11,21 @@
     "changelog",
     "tldr"
   ],
-  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "reference.md",
+    "package.json"
+  ],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",
     "./reference": "./reference.md",
     "./reference.md": "./reference.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "writing/pr-tldr"
   }
 }

@@ -10,10 +10,20 @@
     "ui-kit",
     "cursor"
   ],
-  "files": ["README.md", "SKILL.md", "reference.md", "package.json"],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "reference.md",
+    "package.json"
+  ],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",
     "./reference.md": "./reference.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "tools/canva-app-builder"
   }
 }

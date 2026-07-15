@@ -196,7 +196,7 @@ Official paths vary. After you have a skill folder, symlink or copy it into the 
 | Problem | What to do |
 | --- | --- |
 | **`npx …` → 404 Not Found** | The package is not on npm yet, or the name is wrong. Use **From source** above, or ask the maintainer to publish. |
-| **EOTP** | Publish-time only. This account uses **browser** verification — if npm also prints a URL, that's still browser auth (open it, approve, rerun). If no URL and it hangs, you're in a non-interactive shell — rerun `./scripts/publish-all.sh` in **Terminal.app**. Never use `NPM_OTP`. End users do not see this when **installing**. |
+| **EOTP** | Publish-time only. Run `./scripts/publish-all.sh` in **Terminal.app** — it opens the auth URL, you approve with your security key, press Enter, it continues. Never use `NPM_OTP`. End users never see this when installing. |
 | **`check` reports MISSING** | Run `install` or `sync` again; confirm paths like `~/.cursor/skills/<name>` exist. |
 | **Symlink errors (Windows)** | Use `--strategy copy`. |
 | **Skills don’t appear** | Fully restart the app or reload the window after `install`. |
@@ -205,13 +205,13 @@ Official paths vary. After you have a skill folder, symlink or copy it into the 
 
 This repo is an npm **workspace** with bucketed skill folders plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. The buckets are `agent/`, `design/`, `media/`, `meta/`, `tools/`, `web-design/`, and `writing/`. To add a skill, ship `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), a short **`README.md`** (npmjs.com shows this per package), list `README.md` in `package.json` **`files`**, add the folder to root **`package.json`** → **`workspaces`**, register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`.
 
-**Publishing: there is exactly one script and one doc.** [`scripts/publish-all.sh`](scripts/publish-all.sh) reads the package list straight from `package.json` `workspaces`, skips anything already on the registry, and publishes skills before the orchestrator. Full walkthrough: [docs/publish-step-by-step.md](docs/publish-step-by-step.md).
-
-Maintainer one-liner (run in **Terminal.app** — always `npm login` + `npm whoami` first; browser 2FA, no `NPM_OTP`):
+**Publishing (sustained path): Terminal.app + browser 2FA — no tokens.** [`scripts/publish-all.sh`](scripts/publish-all.sh) is the only day-to-day publish command. Full walkthrough: [docs/publish-step-by-step.md](docs/publish-step-by-step.md).
 
 ```bash
-npm login && npm whoami && npm install && npm run validate && ./scripts/publish-all.sh
+npm login && npm whoami && ./scripts/publish-all.sh
 ```
+
+(Or `npm run publish:all` after login.) CI / Trusted Publishing is optional later — see the same doc.
 
 ## Docs
 

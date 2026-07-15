@@ -123,6 +123,7 @@
   "scripts": {
     "skills": "node skills/bin/cli.mjs",
     "validate": "node scripts/validate-packs.mjs",
-    "rebuild-manifest": "node scripts/rebuild-manifest.mjs"
+    "rebuild-manifest": "node scripts/rebuild-manifest.mjs",
+    "publish:all": "./scripts/publish-all.sh"
   }
 }

@@ -3,11 +3,27 @@
   "version": "1.0.1",
   "description": "Agent Skill: UI craft — motion, easing, component feel, polish (design engineering).",
   "license": "MIT",
-  "keywords": ["agent-skills", "design-engineering", "motion", "ui", "cursor"],
-  "files": ["README.md", "SKILL.md", "LOVABLE.md", "package.json"],
+  "keywords": [
+    "agent-skills",
+    "design-engineering",
+    "motion",
+    "ui",
+    "cursor"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "LOVABLE.md",
+    "package.json"
+  ],
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md",
     "./LOVABLE.md": "./LOVABLE.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "design/design-engineering"
   }
 }

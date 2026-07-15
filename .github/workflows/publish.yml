@@ -1,0 +1,31 @@
+name: Publish to npm
+
+# OPTIONAL / later path — not the daily publish process.
+# Daily publishes use Terminal.app + ./scripts/publish-all.sh (browser 2FA).
+# See docs/publish-step-by-step.md.
+#
+# This workflow is for packages that already have a Trusted Publisher on
+# npmjs.com (org "its-thepoe", repo "skills", workflow "publish.yml").
+# Brand-new packages cannot use OIDC until they exist on the registry —
+# first publish them locally with publish-all.sh.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - run: npm ci
+
+      - run: ./scripts/publish-ci.sh

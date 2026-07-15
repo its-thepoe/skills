@@ -15,5 +15,10 @@
   "exports": {
     ".": "./SKILL.md",
     "./SKILL.md": "./SKILL.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/its-thepoe/skills.git",
+    "directory": "web-design/animation-systems"
   }
 }
