@@ -11,11 +11,28 @@ npm run validate
 
 run_publish() {
   local workspace="$1"
+  local tmp
+  tmp=$(mktemp)
+  set +e
   if [ -n "${NPM_OTP:-}" ]; then
-    npm publish --access public --otp="$NPM_OTP" -w "$workspace"
+    npm publish --access public --otp="$NPM_OTP" -w "$workspace" >"$tmp" 2>&1
   else
-    npm publish --access public -w "$workspace"
+    npm publish --access public -w "$workspace" >"$tmp" 2>&1
   fi
+  local code=$?
+  set -e
+  cat "$tmp"
+  if [ "$code" -eq 0 ]; then
+    rm -f "$tmp"
+    return 0
+  fi
+  if grep -Eqi 'cannot publish over the previously published|previously published versions' "$tmp"; then
+    rm -f "$tmp"
+    echo "SKIP $workspace (this version is already on the registry)"
+    return 0
+  fi
+  rm -f "$tmp"
+  return "$code"
 }
 
 run_publish @its-thepoe/prototype

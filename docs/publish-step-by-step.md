@@ -11,7 +11,11 @@ Use this when you changed any skill package and want that version to be installa
 1. Bump the changed skill's **`package.json`** `version` (never republish an existing version).
 2. Set **`skills/package.json`** to depend on that same skill version.
 3. Bump **`@its-thepoe/skills`** in **`skills/package.json`**.
-4. If this is a new skill, add it to **`skills/skills.manifest.json`** and the root workspace list in **`package.json`**.
+4. If this is a **new skill**, also:
+   - Add the skill folder under a bucket (`design/`, `tools/`, etc.) with `SKILL.md` + `package.json`
+   - Add the path to the root **`package.json`** `workspaces` array
+   - Run **`npm run rebuild-manifest`** (updates **`manifest.json`** and **`skills/skills.manifest.json`**)
+   - Update **`README.md`** install tables (optional but recommended)
 5. From **repo root**: `npm install && npm run validate`
 6. Publish **in this order only**: skill package(s) first, CLI second.
 
@@ -22,11 +26,28 @@ npm publish --access public -w @its-thepoe/hugeicons
 npm publish --access public -w @its-thepoe/skills
 ```
 
-Example for several changed skills:
+Example for **several changed skills**:
 
 ```bash
 npm publish --access public -w @its-thepoe/alt-text
 npm publish --access public -w @its-thepoe/hugeicons
+npm publish --access public -w @its-thepoe/skills
+```
+
+Example for **new skills** (`prototype`, `tauri-best-practices`, etc.) — use the bundled script:
+
+```bash
+chmod +x scripts/publish-prototype-and-cli.sh
+./scripts/publish-prototype-and-cli.sh
+```
+
+That script validates, publishes each skill package, then publishes **`@its-thepoe/skills`**. It **skips** packages whose version is already on the registry (prints `SKIP …`) instead of stopping — safe to re-run after a partial publish.
+
+Manual equivalent:
+
+```bash
+npm publish --access public -w @its-thepoe/prototype
+npm publish --access public -w @its-thepoe/tauri-best-practices
 npm publish --access public -w @its-thepoe/skills
 ```
 
@@ -138,11 +159,26 @@ If `npm publish` errors with **EOTP** and your account uses authenticator-code 2
 
 ---
 
-## Step 7 — Publish all packages (script)
+## Step 7 — Publish packages (script)
 
 From the **repo root:**
 
-**Default for this repo:** use **browser-based** publish auth from an interactive TTY. For a small release, prefer the manual `npm publish --access public -w <workspace>` lines so each browser verification can complete in the same command. Use **`./scripts/publish-all.sh`** only when you are publishing without 2FA friction or you know your shell preserves npm's interactive browser prompt.
+**Default for this repo:** use **browser-based** publish auth from an interactive TTY. For a small release, prefer the manual `npm publish --access public -w <workspace>` lines so each browser verification can complete in the same command.
+
+### A) One or two new/changed skills + CLI
+
+For releases like **`prototype`** + **`tauri-best-practices`**:
+
+```bash
+chmod +x scripts/publish-prototype-and-cli.sh
+./scripts/publish-prototype-and-cli.sh
+```
+
+The script runs `npm run validate`, publishes skill packages, then **`@its-thepoe/skills`**. If a skill version is **already on npm**, it prints **`SKIP @its-thepoe/…`** and continues — re-run after a partial failure without bumping versions.
+
+### B) Full monorepo (subset of skills)
+
+Use **`./scripts/publish-all.sh`** only when you are publishing without 2FA friction or you know your shell preserves npm's interactive browser prompt. It also skips already-published versions.
 
 If you use **OTP-based 2FA** instead, run:
 
@@ -152,20 +188,22 @@ NPM_OTP=123456 ./scripts/publish-all.sh
 
 Replace `123456` with your **current** code.
 
-If your npm account uses **browser-based publish auth** and the script returns **EOTP**, run the remaining publish lines manually in an interactive terminal:
+If your npm account uses **browser-based publish auth** and the script returns **EOTP**, run the remaining publish lines manually in an interactive terminal.
 
-The script:
+Both scripts:
 
-1. Runs `npm run validate` again.
-2. Publishes **every skill package** listed in the script, then **`@its-thepoe/skills`**, in the correct order.
+1. Run `npm run validate` again.
+2. Publish **skill packages first**, then **`@its-thepoe/skills`**, in the correct order.
 
 **If OTP expires** before the script finishes, note which package failed, generate a **new** code, and run the remaining publishes by hand (see [scripts/PUBLISH_ORDER.md](../scripts/PUBLISH_ORDER.md) for the exact `npm publish` lines).
 
-**Critical:** Any **new** `@its-thepoe/<skill>` must be **`npm publish`’d** (or included in an earlier successful `publish-all.sh` step) **before** a **`@its-thepoe/skills`** release that lists it in **`dependencies`** ships to users. Otherwise `npx @its-thepoe/skills` installs will **404** on the missing skill package. If that happens, publish the missing skill package first; you usually **do not** need to republish the orchestrator.
+**Critical:** Any **new** `@its-thepoe/<skill>` must be **`npm publish`’d** (or included in an earlier successful script step) **before** a **`@its-thepoe/skills`** release that lists it in **`dependencies`** ships to users. Otherwise `npx @its-thepoe/skills` installs will **404** on the missing skill package. If that happens, publish the missing skill package first; you usually **do not** need to republish the orchestrator.
 
 **If you do not use 2FA** for publish (or use an automation token that bypasses it), you can run without `NPM_OTP`:
 
 ```bash
+./scripts/publish-prototype-and-cli.sh
+# or
 ./scripts/publish-all.sh
 ```
 
@@ -192,6 +230,13 @@ Open in a browser (examples):
 ```bash
 npx @its-thepoe/skills@latest install --all --dry-run
 npx @its-thepoe/skills@latest check
+```
+
+Install a specific new skill:
+
+```bash
+npx --yes @its-thepoe/skills@latest install tauri-best-practices --dry-run
+npx --yes @its-thepoe/skills@latest install prototype --dry-run
 ```
 
 If `npx` still hits an old cache, try:
@@ -221,7 +266,7 @@ You **cannot** republish the same version twice; npm will reject it.
 | **EOTP**                                                                        | If using browser 2FA, rerun the publish in an interactive TTY. If using authenticator-code 2FA, use `--otp` / `NPM_OTP`.                                          |
 | **404** on `PUT` for `@its-thepoe/...`                                          | No permission for that scope — **Step 1**.                                                                                                                         |
 | **404** on `GET` for `@its-thepoe/...` when **installing** `@its-thepoe/skills` | A skill package in the orchestrator’s `dependencies` is **not on the registry yet**. Publish that skill package (`npm publish -w @its-thepoe/<name>`), then retry. |
-| **403** “cannot publish over the previously published versions”                 | You are trying to ship a **version number that already exists** on npm. Bump to a **new** semver in `package.json`, then publish again.                            |
+| **403** “cannot publish over the previously published versions”                 | That **version already exists** on npm. **Bump** semver in the skill's `package.json` (and matching entry in `skills/package.json` `dependencies`) if content changed, then publish again. If unchanged, **skip** it — re-run `./scripts/publish-prototype-and-cli.sh` (it skips automatically) or publish the remaining packages manually. |
 | **403** forbidden                                                               | Token/user cannot publish this package.                                                                                                                            |
 
 
@@ -229,7 +274,17 @@ You **cannot** republish the same version twice; npm will reject it.
 
 ## Manual publish (no script)
 
-Same order as [scripts/publish-all.sh](../scripts/publish-all.sh). Use **`--access public`** on every line. For browser-based publish auth, run these in an interactive TTY and omit `--otp`. Add **`--otp=CODE`** (or set **`NPM_OTP`**) only if your npm account uses authenticator-code 2FA.
+Same order as [scripts/PUBLISH_ORDER.md](../scripts/PUBLISH_ORDER.md). Use **`--access public`** on every line. For browser-based publish auth, run these in an interactive TTY and omit `--otp`. Add **`--otp=CODE`** (or set **`NPM_OTP`**) only if your npm account uses authenticator-code 2FA.
+
+**New skills + CLI** (preferred: use `./scripts/publish-prototype-and-cli.sh` instead):
+
+```bash
+npm publish --access public -w @its-thepoe/prototype
+npm publish --access public -w @its-thepoe/tauri-best-practices
+npm publish --access public -w @its-thepoe/skills
+```
+
+**Legacy subset** (see [scripts/publish-all.sh](../scripts/publish-all.sh)):
 
 ```bash
 npm publish --access public -w @its-thepoe/alt-text
