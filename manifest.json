@@ -858,6 +858,15 @@
       ]
     },
     {
+      "name": "prototype",
+      "package": "@its-thepoe/prototype",
+      "path": "design/prototype",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
       "name": "redesign-existing-projects",
       "package": "@its-thepoe/redesign-existing-projects",
       "path": "design/redesign-existing-projects",
@@ -980,6 +989,14 @@
       "tags": [
         "tool",
         "tailwind"
+      ]
+    },
+    {
+      "name": "tauri-best-practices",
+      "package": "@its-thepoe/tauri-best-practices",
+      "path": "tools/tauri-best-practices",
+      "tags": [
+        "tool"
       ]
     },
     {

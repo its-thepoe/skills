@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings page for a music app</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #ececec;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    /* Prototype shell */
+    .shell-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #fff;
+      border-bottom: 1px solid #d8d8d8;
+      padding: 16px 20px 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+    .shell-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+    .shell-subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 14px;
+    }
+    .tab-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
+    .tab {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f7f7f7;
+      color: #444;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .tab:hover { background: #eee; color: #111; }
+    }
+    .tab.active {
+      background: #1a1a1a;
+      border-color: #1a1a1a;
+      color: #fff;
+    }
+    .tab-num {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #ddd;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      color: #333;
+    }
+    .tab.active .tab-num { background: #6c5ce7; color: #fff; }
+
+    .shell-body {
+      background: #ececec;
+    }
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .panel-meta {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid #d8d8d8;
+      background: #fff;
+    }
+    .panel-meta h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #1a1a1a;
+    }
+    .panel-meta p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.5;
+      max-width: 640px;
+    }
+
+    .mockup-wrap {
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .mockup-frame {
+      width: 100%;
+      max-width: 1100px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    /* ── Shared utility components ── */
+    .toggle {
+      position: relative;
+      width: 44px; height: 26px;
+      border-radius: 13px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      flex-shrink: 0;
+    }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.2s cubic-bezier(.215,.61,.355,1);
+    }
+    .toggle.on::after { transform: translateX(18px); }
+
+    /* ══════════════════════════════════════
+       ITERATION 1 — Dark streaming
+    ══════════════════════════════════════ */
+    .i1 { background: #121212; color: #fff; font-size: 14px; min-height: 640px; display: flex; }
+    .i1-sidebar {
+      width: 240px;
+      background: #000;
+      padding: 24px 0;
+      flex-shrink: 0;
+      border-right: 1px solid #282828;
+    }
+    .i1-logo {
+      padding: 0 24px 32px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .i1-logo span { color: #1db954; }
+    .i1-nav-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 24px;
+      color: #b3b3b3;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .i1-nav-item:hover { color: #fff; }
+    }
+    .i1-nav-item.active { color: #fff; background: #1a1a1a; }
+    .i1-main { flex: 1; padding: 32px 40px; overflow-y: auto; }
+    .i1-main h1 { font-size: 28px; font-weight: 700; margin-bottom: 32px; }
+    .i1-section { margin-bottom: 32px; }
+    .i1-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #b3b3b3;
+      margin-bottom: 12px;
+    }
+    .i1-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid #282828;
+    }
+    .i1-row:last-child { border-bottom: none; }
+    .i1-row-label { font-weight: 500; }
+    .i1-row-sub { font-size: 12px; color: #b3b3b3; margin-top: 2px; }
+    .i1-toggle.on { background: #1db954; }
+    .i1-toggle { background: #535353; }
+    .i1-select {
+      background: #282828;
+      border: none;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .i1-avatar-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px;
+      background: #181818;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    .i1-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1db954, #1ed760);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 700;
+    }
+    .i1-plan-badge {
+      display: inline-block;
+      background: #1db954;
+      color: #000;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 10px;
+      margin-top: 4px;
+    }
+    .i1-btn-outline {
+      border: 1px solid #535353;
+      background: transparent;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 500px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .i1-btn-outline:hover { border-color: #fff; transform: scale(1.02); }
+    }
+
+    /* ══════════════════════════════════════
+       ITERATION 2 — iOS grouped list
+    ══════════════════════════════════════ */
+    .i2 {
+      background: #f2f2f7;
+      color: #000;
+      font-size: 15px;
+      min-height: 640px;
+      max-width: 390px;
+      margin: 0 auto;
+    }
+    .i2-status {
+      height: 44px;
+      background: #f2f2f7;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600;
+    }
+    .i2-nav {
+      display: flex; align-items: center;
+      padding: 8px 16px 12px;
+      gap: 8px;
+    }
+    .i2-back {
+      color: #007aff;
+      font-size: 17px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .i2-nav h1 {
+      flex: 1;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 600;
+      margin-right: 60px;
+    }
+    .i2-content { padding: 0 16px 32px; }
+    .i2-group {
+      background: #fff;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .i2-group-label {
+      font-size: 13px;
+      color: #6c6c70;
+      padding: 0 16px 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .i2-cell {
+      display: flex; align-items: center;
+      padding: 12px 16px;
+      border-bottom: 0.5px solid #c6c6c8;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .i2-cell:hover { background: #f9f9f9; }
+    }
+    .i2-cell:last-child { border-bottom: none; }
+    .i2-cell-icon {
+      width: 30px; height: 30px;
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .i2-cell-body { flex: 1; }
+    .i2-cell-title { font-size: 17px; }
+    .i2-cell-value { font-size: 17px; color: #8e8e93; }
+    .i2-chevron { color: #c7c7cc; font-size: 18px; margin-left: 8px; }
+    .i2-toggle.on { background: #34c759; }
+    .i2-toggle { background: #e9e9ea; }
+    .i2-profile {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px;
+    }
+    .i2-profile-avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 24px; font-weight: 600;
+    }
+    .i2-profile-name { font-size: 20px; font-weight: 600; }
+    .i2-profile-email { font-size: 14px; color: #8e8e93; }
+
+    /* ══════════════════════════════════════
+       ITERATION 3 — Editorial calm
+    ══════════════════════════════════════ */
+    .i3 {
+      background: #faf8f5;
+      color: #1a1a1a;
+      min-height: 640px;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .i3-inner { max-width: 680px; margin: 0 auto; padding: 48px 32px 64px; }
+    .i3-eyebrow {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 12px;
+    }
+    .i3 h1 {
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .i3-intro {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 48px;
+      border-bottom: 1px solid #e8e4df;
+      padding-bottom: 32px;
+    }
+    .i3-block { margin-bottom: 40px; }
+    .i3-block h2 {
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .i3-block-desc {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      color: #888;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .i3-choice {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .i3-pill {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 10px 20px;
+      border: 1px solid #d4cfc8;
+      border-radius: 100px;
+      font-size: 14px;
+      cursor: pointer;
+      background: transparent;
+      color: #444;
+      transition: all 0.2s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .i3-pill:hover { border-color: #1a1a1a; }
+    }
+    .i3-pill.selected {
+      background: #1a1a1a;
+      color: #faf8f5;
+      border-color: #1a1a1a;
+    }
+    .i3-slider-row {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      margin-top: 16px;
+    }
+    .i3-slider-label {
+      display: flex; justify-content: space-between;
+      font-size: 13px; color: #666;
+      margin-bottom: 8px;
+    }
+    .i3-slider {
+      -webkit-appearance: none;
+      width: 100%; height: 2px;
+      background: #d4cfc8;
+      outline: none;
+      border-radius: 1px;
+    }
+    .i3-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: #1a1a1a;
+      cursor: pointer;
+    }
+    .i3-divider {
+      border: none;
+      border-top: 1px solid #e8e4df;
+      margin: 40px 0;
+    }
+    .i3-link {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      color: #1a1a1a;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .i3-link:hover { color: #666; }
+    }
+
+    /* ══════════════════════════════════════
+       ITERATION 4 — Pro audio console
+    ══════════════════════════════════════ */
+    .i4 {
+      background: #0d1117;
+      color: #c9d1d9;
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+      font-size: 12px;
+      min-height: 640px;
+    }
+    .i4-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px;
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+    }
+    .i4-topbar-title { font-size: 13px; font-weight: 600; color: #58a6ff; }
+    .i4-topbar-status {
+      display: flex; gap: 16px; align-items: center;
+      font-size: 11px; color: #8b949e;
+    }
+    .i4-dot { width: 8px; height: 8px; border-radius: 50%; background: #3fb950; display: inline-block; }
+    .i4-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr 220px;
+      min-height: 580px;
+    }
+    .i4-nav {
+      background: #161b22;
+      border-right: 1px solid #30363d;
+      padding: 12px 0;
+    }
+    .i4-nav-item {
+      padding: 8px 16px;
+      color: #8b949e;
+      cursor: pointer;
+      border-left: 2px solid transparent;
+      transition: all 0.15s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .i4-nav-item:hover { color: #c9d1d9; background: #1c2128; }
+    }
+    .i4-nav-item.active {
+      color: #58a6ff;
+      border-left-color: #58a6ff;
+      background: #1c2128;
+    }
+    .i4-center { padding: 16px; }
+    .i4-module {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .i4-module-head {
+      padding: 8px 12px;
+      background: #1c2128;
+      border-bottom: 1px solid #30363d;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .i4-module-body { padding: 12px; }
+    .i4-param {
+      display: grid;
+      grid-template-columns: 120px 1fr 48px;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 0;
+    }
+    .i4-param label { color: #8b949e; }
+    .i4-range {
+      -webkit-appearance: none;
+      width: 100%; height: 4px;
+      background: #30363d;
+      border-radius: 2px;
+    }
+    .i4-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px; height: 12px;
+      border-radius: 2px;
+      background: #58a6ff;
+      cursor: pointer;
+    }
+    .i4-val { text-align: right; color: #58a6ff; font-variant-numeric: tabular-nums; }
+    .i4-select {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      color: #c9d1d9;
+      padding: 4px 8px;
+      font-family: inherit;
+      font-size: 11px;
+      border-radius: 4px;
+      width: 100%;
+    }
+    .i4-meter-panel {
+      background: #161b22;
+      border-left: 1px solid #30363d;
+      padding: 16px 12px;
+    }
+    .i4-meter-label { font-size: 10px; color: #8b949e; margin-bottom: 8px; text-transform: uppercase; }
+    .i4-meters { display: flex; gap: 4px; align-items: flex-end; height: 120px; margin-bottom: 20px; }
+    .i4-meter-bar {
+      flex: 1;
+      background: #30363d;
+      border-radius: 2px 2px 0 0;
+      position: relative;
+    }
+    .i4-meter-fill {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, #3fb950, #d29922 70%, #f85149);
+      border-radius: 2px 2px 0 0;
+      transition: height 0.3s ease;
+    }
+    .i4-eq {
+      display: flex; gap: 6px; align-items: flex-end; height: 80px;
+    }
+    .i4-eq-band {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .i4-eq-slider {
+      -webkit-appearance: slider-vertical;
+      width: 20px; height: 60px;
+      writing-mode: vertical-lr;
+      direction: rtl;
+    }
+    .i4-eq-label { font-size: 9px; color: #8b949e; }
+
+    /* ══════════════════════════════════════
+       ITERATION 5 — Playful bubbles
+    ══════════════════════════════════════ */
+    .i5 {
+      background: linear-gradient(160deg, #fff0f6 0%, #f0f4ff 50%, #f0fff4 100%);
+      color: #2d2d2d;
+      min-height: 640px;
+      font-size: 15px;
+    }
+    .i5-header {
+      padding: 28px 24px 20px;
+      text-align: center;
+    }
+    .i5-header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff6b9d, #c56cf0, #48dbfb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+    .i5-header p { font-size: 14px; color: #888; }
+    .i5-cards { padding: 0 20px 32px; display: flex; flex-direction: column; gap: 16px; max-width: 420px; margin: 0 auto; }
+    .i5-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.2s cubic-bezier(.23,1,.32,1), box-shadow 0.2s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .i5-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.1); }
+    }
+    .i5-card-head {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 14px;
+    }
+    .i5-card-emoji {
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .i5-card-title { font-size: 17px; font-weight: 700; }
+    .i5-card-sub { font-size: 12px; color: #999; }
+    .i5-option {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px;
+      background: #f8f8fc;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .i5-option:hover { background: #f0f0f8; }
+    }
+    .i5-option:last-child { margin-bottom: 0; }
+    .i5-option-label { font-weight: 500; font-size: 14px; }
+    .i5-toggle.on { background: linear-gradient(135deg, #ff6b9d, #c56cf0); }
+    .i5-toggle { background: #e0e0e8; }
+    .i5-chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .i5-chip {
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .i5-chip.pink { background: #ffe0ec; color: #e84393; }
+    .i5-chip.purple { background: #ede0ff; color: #8e44ad; }
+    .i5-chip.blue { background: #dff0ff; color: #0984e3; }
+    .i5-chip.selected { border-color: currentColor; transform: scale(1.05); }
+    .i5-avatar-float {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff6b9d, #48dbfb);
+      margin: 0 auto 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 6px 20px rgba(255,107,157,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .i1 { flex-direction: column; }
+      .i1-sidebar { width: 100%; padding: 16px 0; display: flex; overflow-x: auto; gap: 0; }
+      .i1-logo { display: none; }
+      .i1-nav-item { padding: 8px 16px; white-space: nowrap; }
+      .i1-main { padding: 20px; }
+      .i4-grid { grid-template-columns: 1fr; }
+      .i4-nav { display: flex; overflow-x: auto; border-right: none; border-bottom: 1px solid #30363d; }
+      .i4-meter-panel { border-left: none; border-top: 1px solid #30363d; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="shell-header">
+    <h1 class="shell-title">Settings page for a music app</h1>
+    <p class="shell-subtitle">Five design directions — click a tab or press 1–5 to switch</p>
+    <nav class="tab-bar" role="tablist">
+      <button class="tab active" role="tab" data-panel="1" aria-selected="true">
+        <span class="tab-num">1</span> Dark streaming
+      </button>
+      <button class="tab" role="tab" data-panel="2">
+        <span class="tab-num">2</span> iOS grouped list
+      </button>
+      <button class="tab" role="tab" data-panel="3">
+        <span class="tab-num">3</span> Editorial calm
+      </button>
+      <button class="tab" role="tab" data-panel="4">
+        <span class="tab-num">4</span> Pro audio console
+      </button>
+      <button class="tab" role="tab" data-panel="5">
+        <span class="tab-num">5</span> Playful bubbles
+      </button>
+    </nav>
+  </header>
+
+  <main class="shell-body">
+
+    <!-- ── Panel 1 ── -->
+    <section class="panel active" id="panel-1" role="tabpanel">
+      <div class="panel-meta">
+        <h2>Dark streaming</h2>
+        <p>Familiar sidebar + content layout for desktop listeners who already use Spotify or Apple Music. Dense but scannable, with clear section grouping and toggle-heavy controls.</p>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-frame">
+          <div class="i1">
+            <aside class="i1-sidebar">
+              <div class="i1-logo">wave<span>.</span></div>
+              <div class="i1-nav-item">Home</div>
+              <div class="i1-nav-item">Search</div>
+              <div class="i1-nav-item">Your library</div>
+              <div class="i1-nav-item active">Settings</div>
+            </aside>
+            <main class="i1-main">
+              <h1>Settings</h1>
+              <div class="i1-avatar-row">
+                <div class="i1-avatar">JP</div>
+                <div>
+                  <div style="font-weight:600;font-size:16px">Jamie Park</div>
+                  <div style="color:#b3b3b3;font-size:13px">jamie@email.com</div>
+                  <span class="i1-plan-badge">Premium</span>
+                </div>
+                <button class="i1-btn-outline" style="margin-left:auto">Edit profile</button>
+              </div>
+              <div class="i1-section">
+                <div class="i1-section-title">Playback</div>
+                <div class="i1-row">
+                  <div><div class="i1-row-label">Crossfade songs</div><div class="i1-row-sub">Smooth transitions between tracks</div></div>
+                  <div class="toggle i1-toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="i1-row">
+                  <div><div class="i1-row-label">Gapless playback</div><div class="i1-row-sub">No silence between album tracks</div></div>
+                  <div class="toggle i1-toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="i1-row">
+                  <div><div class="i1-row-label">Normalize volume</div></div>
+                  <div class="toggle i1-toggle" onclick="this.classList.toggle('on')"></div>
+                </div>
+              </div>
+              <div class="i1-section">
+                <div class="i1-section-title">Audio quality</div>
+                <div class="i1-row">
+                  <div><div class="i1-row-label">Streaming quality</div></div>
+                  <select class="i1-select"><option>Very high (320 kbps)</option><option>High</option><option>Normal</option></select>
+                </div>
+                <div class="i1-row">
+                  <div><div class="i1-row-label">Download quality</div></div>
+                  <select class="i1-select"><option>Very high</option><option>High</option></select>
+                </div>
+              </div>
+              <div class="i1-section">
+                <div class="i1-section-title">Notifications</div>
+                <div class="i1-row">
+                  <div><div class="i1-row-label">New releases from artists you follow</div></div>
+                  <div class="toggle i1-toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="i1-row">
+                  <div><div class="i1-row-label">Friend activity</div></div>
+                  <div class="toggle i1-toggle" onclick="this.classList.toggle('on')"></div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Panel 2 ── -->
+    <section class="panel" id="panel-2" role="tabpanel">
+      <div class="panel-meta">
+        <h2>iOS grouped list</h2>
+        <p>Mobile-native settings patterned after iOS system preferences. For users who manage everything from their phone — chevrons, grouped cells, and minimal chrome.</p>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-frame">
+          <div class="i2">
+            <div class="i2-status">9:41</div>
+            <nav class="i2-nav">
+              <div class="i2-back">‹ Back</div>
+              <h1>Settings</h1>
+            </nav>
+            <div class="i2-content">
+              <div class="i2-group">
+                <div class="i2-profile">
+                  <div class="i2-profile-avatar">JP</div>
+                  <div>
+                    <div class="i2-profile-name">Jamie Park</div>
+                    <div class="i2-profile-email">jamie@email.com</div>
+                  </div>
+                </div>
+              </div>
+              <div class="i2-group-label">Playback</div>
+              <div class="i2-group">
+                <div class="i2-cell">
+                  <div class="i2-cell-icon" style="background:#ff9500">▶</div>
+                  <div class="i2-cell-body"><div class="i2-cell-title">Crossfade</div></div>
+                  <div class="toggle i2-toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="i2-cell">
+                  <div class="i2-cell-icon" style="background:#5856d6">♫</div>
+                  <div class="i2-cell-body"><div class="i2-cell-title">Gapless playback</div></div>
+                  <div class="toggle i2-toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="i2-cell">
+                  <div class="i2-cell-icon" style="background:#34c759">🔊</div>
+                  <div class="i2-cell-body"><div class="i2-cell-title">Audio quality</div></div>
+                  <div class="i2-cell-value">Very high</div>
+                  <span class="i2-chevron">›</span>
+                </div>
+              </div>
+              <div class="i2-group-label">Notifications</div>
+              <div class="i2-group">
+                <div class="i2-cell">
+                  <div class="i2-cell-icon" style="background:#ff3b30">🔔</div>
+                  <div class="i2-cell-body"><div class="i2-cell-title">Push notifications</div></div>
+                  <div class="toggle i2-toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="i2-cell">
+                  <div class="i2-cell-icon" style="background:#007aff">✉</div>
+                  <div class="i2-cell-body"><div class="i2-cell-title">Email updates</div></div>
+                  <span class="i2-chevron">›</span>
+                </div>
+              </div>
+              <div class="i2-group-label">Account</div>
+              <div class="i2-group">
+                <div class="i2-cell">
+                  <div class="i2-cell-icon" style="background:#af52de">★</div>
+                  <div class="i2-cell-body"><div class="i2-cell-title">Subscription</div></div>
+                  <div class="i2-cell-value">Premium</div>
+                  <span class="i2-chevron">›</span>
+                </div>
+                <div class="i2-cell">
+                  <div class="i2-cell-icon" style="background:#8e8e93">🔒</div>
+                  <div class="i2-cell-body"><div class="i2-cell-title">Privacy</div></div>
+                  <span class="i2-chevron">›</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Panel 3 ── -->
+    <section class="panel" id="panel-3" role="tabpanel">
+      <div class="panel-meta">
+        <h2>Editorial calm</h2>
+        <p>Slow, intentional settings for audiophiles who want to understand what each choice means. Serif headlines, narrative copy, and pill selectors instead of dense toggles.</p>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-frame">
+          <div class="i3">
+            <div class="i3-inner">
+              <div class="i3-eyebrow">Your listening preferences</div>
+              <h1>How should your music sound?</h1>
+              <p class="i3-intro">These settings shape every song you hear. Take your time — most people only adjust these once.</p>
+
+              <div class="i3-block">
+                <h2>Streaming quality</h2>
+                <p class="i3-block-desc">Higher quality uses more data. On Wi-Fi, we recommend the richest setting.</p>
+                <div class="i3-choice">
+                  <button class="i3-pill" onclick="selectPill(this)">Low — 96 kbps</button>
+                  <button class="i3-pill" onclick="selectPill(this)">Standard — 160 kbps</button>
+                  <button class="i3-pill selected" onclick="selectPill(this)">Lossless — 24-bit</button>
+                </div>
+              </div>
+
+              <div class="i3-block">
+                <h2>Crossfade between songs</h2>
+                <p class="i3-block-desc">Blend the end of one track into the start of the next. Works beautifully for playlists, less so for albums.</p>
+                <div class="i3-slider-row">
+                  <div class="i3-slider-label"><span>Off</span><span>12 seconds</span></div>
+                  <input type="range" class="i3-slider" min="0" max="12" value="5">
+                </div>
+              </div>
+
+              <hr class="i3-divider">
+
+              <div class="i3-block">
+                <h2>Notifications</h2>
+                <p class="i3-block-desc">We'll only write when something genuinely matters — a new album from an artist you love, or a friend sharing a playlist.</p>
+                <div class="i3-choice">
+                  <button class="i3-pill selected" onclick="selectPill(this)">New releases</button>
+                  <button class="i3-pill selected" onclick="selectPill(this)">Friend activity</button>
+                  <button class="i3-pill" onclick="selectPill(this)">Weekly digest</button>
+                  <button class="i3-pill" onclick="selectPill(this)">None</button>
+                </div>
+              </div>
+
+              <div class="i3-block">
+                <h2>Account</h2>
+                <p class="i3-block-desc">Jamie Park · Premium member since March 2024</p>
+                <a class="i3-link">Manage subscription</a> · <a class="i3-link">Download your data</a> · <a class="i3-link">Delete account</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Panel 4 ── -->
+    <section class="panel" id="panel-4" role="tabpanel">
+      <div class="panel-meta">
+        <h2>Pro audio console</h2>
+        <p>Dense, technical panel for power users and audio engineers. Sliders, meters, EQ bands, and monospace labels — settings as a mixing desk, not a consumer form.</p>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-frame">
+          <div class="i4">
+            <div class="i4-topbar">
+              <div class="i4-topbar-title">WAVE // PREFERENCES</div>
+              <div class="i4-topbar-status">
+                <span><span class="i4-dot"></span> DAC connected</span>
+                <span>SR: 96 kHz</span>
+                <span>BIT: 24</span>
+              </div>
+            </div>
+            <div class="i4-grid">
+              <nav class="i4-nav">
+                <div class="i4-nav-item active">Output</div>
+                <div class="i4-nav-item">DSP chain</div>
+                <div class="i4-nav-item">Buffer</div>
+                <div class="i4-nav-item">Network</div>
+                <div class="i4-nav-item">Cache</div>
+                <div class="i4-nav-item">Logs</div>
+              </nav>
+              <div class="i4-center">
+                <div class="i4-module">
+                  <div class="i4-module-head">Output routing</div>
+                  <div class="i4-module-body">
+                    <div class="i4-param">
+                      <label>Device</label>
+                      <select class="i4-select"><option>Audioengine HD3 (USB)</option><option>Built-in output</option></select>
+                      <span class="i4-val">ACTIVE</span>
+                    </div>
+                    <div class="i4-param">
+                      <label>Sample rate</label>
+                      <input type="range" class="i4-range" min="0" max="100" value="75">
+                      <span class="i4-val">96k</span>
+                    </div>
+                    <div class="i4-param">
+                      <label>Bit depth</label>
+                      <input type="range" class="i4-range" min="0" max="100" value="80">
+                      <span class="i4-val">24-bit</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="i4-module">
+                  <div class="i4-module-head">Playback engine</div>
+                  <div class="i4-module-body">
+                    <div class="i4-param">
+                      <label>Buffer size</label>
+                      <input type="range" class="i4-range" min="0" max="100" value="30">
+                      <span class="i4-val">512</span>
+                    </div>
+                    <div class="i4-param">
+                      <label>Crossfade</label>
+                      <input type="range" class="i4-range" min="0" max="100" value="40">
+                      <span class="i4-val">4.2s</span>
+                    </div>
+                    <div class="i4-param">
+                      <label>ReplayGain</label>
+                      <input type="range" class="i4-range" min="0" max="100" value="55">
+                      <span class="i4-val">-3.2 LUFS</span>
+                    </div>
+                    <div class="i4-param">
+                      <label>Latency</label>
+                      <input type="range" class="i4-range" min="0" max="100" value="15">
+                      <span class="i4-val">12ms</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="i4-module">
+                  <div class="i4-module-head">Streaming codec</div>
+                  <div class="i4-module-body">
+                    <div class="i4-param">
+                      <label>Format</label>
+                      <select class="i4-select"><option>FLAC (lossless)</option><option>Opus 320</option><option>AAC 256</option></select>
+                      <span class="i4-val">FLAC</span>
+                    </div>
+                    <div class="i4-param">
+                      <label>Bandwidth cap</label>
+                      <input type="range" class="i4-range" min="0" max="100" value="90">
+                      <span class="i4-val">∞</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <aside class="i4-meter-panel">
+                <div class="i4-meter-label">Output level</div>
+                <div class="i4-meters">
+                  <div class="i4-meter-bar"><div class="i4-meter-fill" style="height:72%"></div></div>
+                  <div class="i4-meter-bar"><div class="i4-meter-fill" style="height:58%"></div></div>
+                  <div class="i4-meter-bar"><div class="i4-meter-fill" style="height:85%"></div></div>
+                  <div class="i4-meter-bar"><div class="i4-meter-fill" style="height:45%"></div></div>
+                  <div class="i4-meter-bar"><div class="i4-meter-fill" style="height:63%"></div></div>
+                  <div class="i4-meter-bar"><div class="i4-meter-fill" style="height:38%"></div></div>
+                  <div class="i4-meter-bar"><div class="i4-meter-fill" style="height:70%"></div></div>
+                  <div class="i4-meter-bar"><div class="i4-meter-fill" style="height:52%"></div></div>
+                </div>
+                <div class="i4-meter-label">EQ — parametric</div>
+                <div class="i4-eq">
+                  <div class="i4-eq-band"><input type="range" class="i4-range" orient="vertical" min="0" max="100" value="50"><span class="i4-eq-label">60</span></div>
+                  <div class="i4-eq-band"><input type="range" class="i4-range" orient="vertical" min="0" max="100" value="55"><span class="i4-eq-label">250</span></div>
+                  <div class="i4-eq-band"><input type="range" class="i4-range" orient="vertical" min="0" max="100" value="48"><span class="i4-eq-label">1k</span></div>
+                  <div class="i4-eq-band"><input type="range" class="i4-range" orient="vertical" min="0" max="100" value="62"><span class="i4-eq-label">4k</span></div>
+                  <div class="i4-eq-band"><input type="range" class="i4-range" orient="vertical" min="0" max="100" value="40"><span class="i4-eq-label">16k</span></div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Panel 5 ── -->
+    <section class="panel" id="panel-5" role="tabpanel">
+      <div class="panel-meta">
+        <h2>Playful bubbles</h2>
+        <p>Bright, friendly settings for younger or casual listeners. Emoji categories, gradient accents, and card-based grouping that feels more like customizing a profile than configuring software.</p>
+      </div>
+      <div class="mockup-wrap">
+        <div class="mockup-frame">
+          <div class="i5">
+            <header class="i5-header">
+              <div class="i5-avatar-float">🎧</div>
+              <h1>Your vibe settings</h1>
+              <p>Make Wave sound and feel like you</p>
+            </header>
+            <div class="i5-cards">
+              <div class="i5-card">
+                <div class="i5-card-head">
+                  <div class="i5-card-emoji" style="background:#ffe0ec">🎵</div>
+                  <div>
+                    <div class="i5-card-title">How you listen</div>
+                    <div class="i5-card-sub">Playback &amp; sound</div>
+                  </div>
+                </div>
+                <div class="i5-option">
+                  <span class="i5-option-label">Smooth crossfade</span>
+                  <div class="toggle i5-toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="i5-option">
+                  <span class="i5-option-label">Loudness boost</span>
+                  <div class="toggle i5-toggle" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="i5-option">
+                  <span class="i5-option-label">Bass enhancer</span>
+                  <div class="toggle i5-toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+              </div>
+              <div class="i5-card">
+                <div class="i5-card-head">
+                  <div class="i5-card-emoji" style="background:#ede0ff">✨</div>
+                  <div>
+                    <div class="i5-card-title">Sound quality</div>
+                    <div class="i5-card-sub">Pick your level</div>
+                  </div>
+                </div>
+                <div class="i5-chip-row">
+                  <button class="i5-chip pink" onclick="selectChip(this)">Good</button>
+                  <button class="i5-chip purple selected" onclick="selectChip(this)">Great</button>
+                  <button class="i5-chip blue" onclick="selectChip(this)">Studio</button>
+                </div>
+              </div>
+              <div class="i5-card">
+                <div class="i5-card-head">
+                  <div class="i5-card-emoji" style="background:#dff0ff">💌</div>
+                  <div>
+                    <div class="i5-card-title">Stay in the loop</div>
+                    <div class="i5-card-sub">Notifications</div>
+                  </div>
+                </div>
+                <div class="i5-option">
+                  <span class="i5-option-label">New music from faves</span>
+                  <div class="toggle i5-toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="i5-option">
+                  <span class="i5-option-label">Friend playlists</span>
+                  <div class="toggle i5-toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="i5-option">
+                  <span class="i5-option-label">Concert alerts near you</span>
+                  <div class="toggle i5-toggle" onclick="this.classList.toggle('on')"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll('.tab');
+      var panels = document.querySelectorAll('.panel');
+
+      function showPanel(n) {
+        tabs.forEach(function (t) {
+          var active = t.dataset.panel === String(n);
+          t.classList.toggle('active', active);
+          t.setAttribute('aria-selected', active);
+        });
+        panels.forEach(function (p) {
+          p.classList.toggle('active', p.id === 'panel-' + n);
+        });
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          showPanel(tab.dataset.panel);
+        });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+        var n = parseInt(e.key, 10);
+        if (n >= 1 && n <= 5) showPanel(n);
+      });
+    })();
+
+    function selectPill(el) {
+      var parent = el.parentElement;
+      if (parent.classList.contains('i3-choice')) {
+        parent.querySelectorAll('.i3-pill').forEach(function (p) { p.classList.remove('selected'); });
+        el.classList.add('selected');
+      }
+    }
+
+    function selectChip(el) {
+      var parent = el.parentElement;
+      parent.querySelectorAll('.i5-chip').forEach(function (c) { c.classList.remove('selected'); });
+      el.classList.add('selected');
+    }
+  </script>
+</body>
+</html>

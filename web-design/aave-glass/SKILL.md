@@ -19,6 +19,7 @@ Use this skill when the glass effect needs to behave like a lens, not a frosted 
 - The target is live refraction of real rendered content.
 - Prefer SVG `feDisplacementMap` for live DOM.
 - Switch to WebGL when the surface cannot be reliably filtered with SVG, especially live video in Safari and canvas-driven pixels.
+- Do not hide weak glass under smoky AI-looking atmosphere, noise wallpaper, or soft fantasy blobs.
 
 ## What this effect actually is
 
@@ -28,6 +29,16 @@ Use this skill when the glass effect needs to behave like a lens, not a frosted 
 - The green channel controls vertical bend.
 - Pixels outside the lens stay at a neutral value so nothing moves there.
 - The lens stays interactive because the underlying DOM is still the real DOM.
+
+## What was likely wrong in the bad result
+
+- The panel was styled like premium blur glass, but it did not read like a lens.
+- The background looked like a decorative AI texture instead of structured live content being bent.
+- The strongest visual cue became haze and grain, not refraction.
+- The edge highlight was present, but the interior did not convincingly distort a real scene underneath.
+- The result drifted toward generic dark glass UI, not Aave Glass.
+
+If the output looks like a beautiful blurred card floating over a moody background, it is probably wrong.
 
 ## Implementation workflow
 
@@ -83,6 +94,8 @@ Rules:
 - Preserve pointer interaction and selection.
 - Move the filter region when the lens moves.
 - Regenerate the map only when the lens shape changes.
+- Put the lens over structured content: rails, labels, tabs, cards, grid lines, or UI chrome.
+- Avoid using fog, dust, glow clouds, or cinematic blobs as the primary thing under the lens because they hide whether refraction is actually working.
 
 ### 2) Lens over highlighted duplicate content
 
@@ -128,6 +141,16 @@ Rules:
 - Keep the filter region as tight as possible.
 - Keep Safari surfaces conservative in size and DOM complexity.
 - Treat highlight passes as expensive; restrict them to the lens area when the browser allows it without artifacts.
+
+## Visual quality gates
+
+- The lens must visibly bend hard edges, separators, labels, or UI rails beneath it.
+- The interior should look optically warped, not merely blurred.
+- The background should help verify the lens:
+  - good: lines, labels, buttons, panels, contrast edges
+  - bad: smoke, stars, fog, grain-only, abstract mush
+- Edge highlight should support the lens, not become the whole effect.
+- If the refraction is only visible because of a giant glow, start over.
 
 ## Safari rules
 
@@ -177,6 +200,8 @@ Rules:
 - Never regenerate the full map every frame just because the lens moved.
 - Never let the lens destroy text readability.
 - Never ship without Safari testing when the effect is central to the UI.
+- Never present a grainy atmospheric background as proof that the lens works.
+- Never use AI-image-like scenery as the main validation surface for this effect.
 
 ## Minimal architecture sketch
 
@@ -227,3 +252,4 @@ function Glass({
 ## Supporting file
 
 - For source notes, browser constraints, and article-specific extraction, read [reference.md](reference.md).
+- For a concrete local test bed, use [playground/index.html](playground/index.html).

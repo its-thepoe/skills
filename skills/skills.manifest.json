@@ -436,6 +436,11 @@
       "path": "web-design/progressive-blur"
     },
     {
+      "name": "prototype",
+      "package": "@its-thepoe/prototype",
+      "path": "design/prototype"
+    },
+    {
       "name": "redesign-existing-projects",
       "package": "@its-thepoe/redesign-existing-projects",
       "path": "design/redesign-existing-projects"
@@ -499,6 +504,11 @@
       "name": "tailwindcss",
       "package": "@its-thepoe/tailwindcss",
       "path": "tools/tailwindcss"
+    },
+    {
+      "name": "tauri-best-practices",
+      "package": "@its-thepoe/tauri-best-practices",
+      "path": "tools/tauri-best-practices"
     },
     {
       "name": "tech-green-dark-mode-modern",

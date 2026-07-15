@@ -152,6 +152,50 @@ This is a concrete implementation detail worth preserving in the skill.
 - Chromium-only demos presented as production-ready
 - full-map regeneration every frame during simple translation
 - giant refracted DOM regions with no Safari footprint controls
+- atmospheric art direction used to hide missing refraction
+- noisy or AI-looking backgrounds that make it impossible to verify whether the lens is bending real content
+
+## Failure pattern from the screenshot
+
+The screenshot points to a common failure mode:
+
+- rounded dark panel
+- nice rim light
+- soft blur
+- moody textured background
+- little or no convincing interior distortion
+
+That combination looks expensive, but it is not the Aave effect.
+
+The fix is not “more blur” or “better glow.”
+
+The fix is:
+
+- place the lens over structured live content
+- increase verifiable optical warp on the interior
+- reduce decorative fog/noise
+- make lines, labels, and rails visibly bend through the lens
+
+## Good validation surfaces
+
+Use these when testing whether the effect is actually working:
+
+- segmented controls
+- sliders
+- cards with dividers
+- nav bars with labels
+- side rails
+- thin horizontal rules
+- badges and chips
+
+Avoid these when validating the core effect:
+
+- smoke
+- stars
+- dust
+- grain fields
+- abstract render blobs
+- soft photographic haze
 
 ## Suggested implementation stack
 

@@ -17,7 +17,9 @@ Order matches [`publish-all.sh`](publish-all.sh):
 11. `market-command-matrix`
 12. `root-cause-analysis`
 13. `write-a-skill`
-14. `skills` (package name `@its-thepoe/skills`)
+14. `prototype` (new — publish before orchestrator when releasing `@its-thepoe/prototype`)
+15. `tauri-best-practices` (new — publish before orchestrator when releasing `@its-thepoe/tauri-best-practices`)
+16. `skills` (package name `@its-thepoe/skills`)
 
 From repo root after `npm login`:
 
@@ -44,7 +46,16 @@ npm publish --access public -w @its-thepoe/codebase-content-ideas
 npm publish --access public -w @its-thepoe/market-command-matrix
 npm publish --access public -w @its-thepoe/root-cause-analysis
 npm publish --access public -w @its-thepoe/write-a-skill
+npm publish --access public -w @its-thepoe/prototype
+npm publish --access public -w @its-thepoe/tauri-best-practices
 npm publish --access public -w @its-thepoe/skills
+```
+
+For **`prototype`** and **`tauri-best-practices`** (skills + orchestrator):
+
+```bash
+chmod +x scripts/publish-prototype-and-cli.sh
+./scripts/publish-prototype-and-cli.sh
 ```
 
 Bump versions together when releasing. Run `npm run validate` before publishing.

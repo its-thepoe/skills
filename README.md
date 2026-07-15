@@ -76,8 +76,10 @@ npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 | matterjs | `npx @its-thepoe/skills@latest install matterjs` |
 | pr-tldr | `npx @its-thepoe/skills@latest install pr-tldr` |
 | progressive-blur | `npx @its-thepoe/skills@latest install progressive-blur` |
+| prototype | `npx @its-thepoe/skills@latest install prototype` |
 | root-cause-analysis | `npx @its-thepoe/skills@latest install root-cause-analysis` |
 | tailwindcss | `npx @its-thepoe/skills@latest install tailwindcss` |
+| tauri-best-practices | `npx @its-thepoe/skills@latest install tauri-best-practices` |
 | threejs | `npx @its-thepoe/skills@latest install threejs` |
 | unicorn-studio | `npx @its-thepoe/skills@latest install unicorn-studio` |
 | vantajs | `npx @its-thepoe/skills@latest install vantajs` |
@@ -108,8 +110,11 @@ npx @its-thepoe/skills@latest install alt-text design-engineering hugeicons
 | `@its-thepoe/iconsax` | Sets up Iconsax correctly and resolves exact icon component names |
 | `@its-thepoe/market-command-matrix` | Maps competitors by mindshare/resources and chooses a clear market motion |
 | `@its-thepoe/pr-tldr` | Writes concise PR summaries with grouped changes, risks, open items, and test plans |
+| `@its-thepoe/progressive-blur` | Adds progressive blur overlays for depth and focus |
+| `@its-thepoe/prototype` | Generates five distinct UI design iterations in one self-contained HTML file |
 | `@its-thepoe/root-cause-analysis` | Diagnoses engineering problems through mechanism chains and violated invariants |
 | `@its-thepoe/tailwindcss` | Implements Tailwind CSS (v3/v4) and debugs setup/version issues |
+| `@its-thepoe/tauri-best-practices` | Tauri v2 dev/build optimization, capabilities, IPC, and macOS bundle performance |
 | `@its-thepoe/write-a-skill` | Helps author and package new Agent Skills |
 
 Each skill folder is self-contained and has a `SKILL.md` at the root. Most skills also include their own `README.md` and optional references.

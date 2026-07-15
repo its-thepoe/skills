@@ -1,0 +1,456 @@
+:root {
+  color-scheme: dark;
+  --bg-0: #090b12;
+  --bg-1: #0f1320;
+  --bg-2: #161d2b;
+  --line: rgba(255, 255, 255, 0.085);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --text: #f6f7fb;
+  --muted: #a8afc4;
+  --accent: #ff6d2d;
+  --accent-soft: rgba(255, 109, 45, 0.22);
+  --lens-x: 164px;
+  --lens-y: 116px;
+  --lens-w: 188px;
+  --lens-h: 238px;
+  --lens-radius: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: "SF Pro Display", "Inter", system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.04), transparent 28%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  color: var(--text);
+}
+
+.filters {
+  position: absolute;
+}
+
+.playground {
+  min-height: 100dvh;
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+}
+
+.controls {
+  display: grid;
+  gap: 16px;
+  max-width: 920px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.controls h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 0.96;
+}
+
+.lede {
+  margin: 10px 0 0;
+  max-width: 72ch;
+  color: var(--muted);
+}
+
+.slider {
+  display: grid;
+  gap: 8px;
+  max-width: 320px;
+  color: var(--muted);
+}
+
+.slider input {
+  width: 100%;
+}
+
+.hint {
+  margin: 0;
+  max-width: 48rem;
+  color: rgba(246, 247, 251, 0.72);
+  font-size: 14px;
+}
+
+.stage {
+  display: grid;
+  place-items: center;
+}
+
+.scene {
+  position: relative;
+  width: min(920px, calc(100vw - 48px));
+  aspect-ratio: 1.54;
+  overflow: hidden;
+  border-radius: 36px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
+    radial-gradient(circle at 82% 28%, rgba(255, 255, 255, 0.08), transparent 18%),
+    linear-gradient(180deg, #111726, #0b0f18 72%);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.scene__noise,
+.scene__grid,
+.scene__beams,
+.scene__guides {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scene__noise {
+  opacity: 0.06;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.9) 0.5px, transparent 0.8px),
+    radial-gradient(circle at 70% 36%, rgba(255, 255, 255, 0.8) 0.5px, transparent 0.8px);
+  background-size: 18px 18px, 26px 26px;
+}
+
+.scene__grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.35));
+}
+
+.scene__beams {
+  background:
+    linear-gradient(90deg, transparent 16%, rgba(255, 255, 255, 0.05) 16.2%, transparent 16.4%),
+    linear-gradient(90deg, transparent 67%, rgba(255, 255, 255, 0.04) 67.2%, transparent 67.4%);
+}
+
+.scene__guides {
+  display: grid;
+  align-content: start;
+  gap: 0;
+}
+
+.scene__guides span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+}
+
+.scene__guides span:nth-child(1) {
+  top: 138px;
+}
+
+.scene__guides span:nth-child(2) {
+  top: 250px;
+}
+
+.scene__guides span:nth-child(3) {
+  top: 358px;
+}
+
+.nav,
+.frame,
+.panel,
+.rail,
+.lens__content {
+  position: absolute;
+}
+
+.nav {
+  left: 28px;
+  right: 28px;
+  top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(10, 14, 24, 0.28);
+  backdrop-filter: blur(12px);
+}
+
+.nav__brand {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nav__pills {
+  display: flex;
+  gap: 10px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-weight: 600;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.chip--active {
+  background: linear-gradient(180deg, #ff823d, var(--accent));
+  border-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.frame {
+  inset: 96px 34px 34px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.rail {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 128px;
+  border-right: 1px solid var(--line);
+  padding: 24px 18px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.rail__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-soft);
+  margin-bottom: 8px;
+}
+
+.rail__label {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.panel {
+  left: 148px;
+  top: 24px;
+  right: 24px;
+  bottom: 24px;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.008)),
+    rgba(15, 20, 31, 0.44);
+  padding: 24px;
+}
+
+.panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kicker,
+.metric__label {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.toggle {
+  position: relative;
+  width: 64px;
+  height: 36px;
+}
+
+.toggle__track,
+.toggle__thumb {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+}
+
+.toggle__track {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+}
+
+.toggle__thumb {
+  inset: 4px 4px 4px auto;
+  width: 28px;
+  background: linear-gradient(180deg, #ff823d, var(--accent));
+}
+
+.panel h2 {
+  margin: 24px 0 20px;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.list__item {
+  display: grid;
+  gap: 10px;
+}
+
+.rule {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0.04));
+}
+
+.segmented {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 22px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.segmented__item {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--muted);
+  border: 1px solid transparent;
+}
+
+.segmented__item--active {
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.metric-row {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.metric {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.metric strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 28px;
+}
+
+.lens {
+  position: absolute;
+  left: var(--lens-x);
+  top: var(--lens-y);
+  width: var(--lens-w);
+  height: var(--lens-h);
+  border-radius: var(--lens-radius);
+  overflow: hidden;
+  cursor: grab;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    0 16px 44px rgba(0, 0, 0, 0.28);
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(4px);
+}
+
+.lens:active {
+  cursor: grabbing;
+}
+
+.lens__content,
+.lens__rim,
+.lens__specular {
+  position: absolute;
+  inset: 0;
+}
+
+.lens__content {
+  filter: url(#aave-glass-filter);
+  transform: translate(calc(var(--lens-x) * -1), calc(var(--lens-y) * -1));
+  will-change: transform;
+}
+
+.lens__rim {
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.lens__specular {
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 30% 16%, rgba(255, 255, 255, 0.4), transparent 18%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent 32%, transparent 70%, rgba(255, 255, 255, 0.04));
+  mix-blend-mode: screen;
+}
+
+@media (max-width: 800px) {
+  .scene {
+    aspect-ratio: 0.8;
+  }
+
+  .frame {
+    inset: 92px 20px 20px;
+  }
+
+  .rail {
+    width: 92px;
+    padding: 18px 12px;
+  }
+
+  .panel {
+    left: 106px;
+    padding: 18px;
+  }
+
+  .panel h2 {
+    font-size: 24px;
+  }
+}
