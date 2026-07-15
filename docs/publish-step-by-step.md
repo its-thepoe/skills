@@ -50,12 +50,41 @@ Because of step 6, **the script is always safe to re-run** — after a partial f
 
 ## 2FA — browser verification (this account, always)
 
-This npm account uses **browser-based** publish verification. It does **not** use authenticator/TOTP one-time codes.
+Confirmed via `npm profile get`: this account is **`two-factor auth: auth-and-writes`** with a security-key/WebAuthn (browser) second factor — there is **no TOTP code** for it, so never set `NPM_OTP` or pass `--otp`.
 
-- When npm prints `Press ENTER to open in the browser…`, press Enter and complete verification in the browser that opens.
-- If npm errors with **`code EOTP`** and also prints a URL like `Open this URL in your browser to authenticate: https://www.npmjs.com/auth/cli/...` — **that is still browser auth**, not a request for a 6-digit code. Open that URL, approve it, then rerun `./scripts/publish-all.sh`.
-- **Never** set `NPM_OTP` or pass `--otp` for this repo. If you see either mentioned anywhere for this project, it's stale — ignore it and use the flow above.
-- If `EOTP` appears with **no URL** and nothing happens, you are almost certainly in a **non-interactive shell** (e.g. an AI agent's background terminal). Rerun the exact same command in Terminal.app.
+### Why this looks different for a big batch vs. a single publish
+
+`auth-and-writes` means **every** write (`publish`, `unpublish`, `owner`, `access`, `deprecate`, …) needs its own fresh 2FA check — `npm publish` does not inherit anything from a prior `npm login`. Confirmed directly: running `npm login` (success) immediately followed by `npm publish` on an unpublished package still throws `EOTP` on the very first package.
+
+Unlike `npm login`/`npm adduser` (which print a URL and **poll** until you approve), `npm publish`'s OTP challenge (`otplease()` in the npm CLI) fails fast: it prints `code EOTP` plus the auth URL and exits immediately — it does not wait for you. This is current, real npm CLI behavior (npm 11.x), not a bug in this repo's scripts.
+
+What makes it *feel* like something broke: approving that URL opens a short grace window (npm and third-party reports describe roughly 5 minutes) during which further publishes succeed without a new prompt. Publishing skills one or two at a time before, you'd hit exactly one browser click per session and never notice the window. Publishing ~90+ packages in one run is what exposes it — the old script died on the very first `EOTP` instead of pausing and reusing that window for the rest of the batch.
+
+### The fix: `publish-all.sh` now pauses and retries instead of dying
+
+The script no longer aborts on `EOTP`. When a publish fails, it:
+1. Prints a reminder to open the URL npm just printed and approve it in your browser.
+2. Blocks on `Press Enter once approved…` (needs a real TTY — Terminal.app).
+3. Retries that same package (up to 3 attempts), then keeps going through the rest of the batch — reusing the grace window instead of needing a click per package.
+4. Any package that still fails after 3 attempts is skipped (listed at the end) so the rest of the run isn't blocked; rerun the script later to retry just those.
+
+So the whole flow is still just:
+
+```bash
+npm login
+npm whoami        # must print: its-thepoe
+./scripts/publish-all.sh
+```
+
+— but now when it stops and asks you to approve a URL, open it, approve, come back, hit Enter, and let it keep running. You should only need to do that once or twice for the whole batch, not once per package.
+
+### If `EOTP` appears with no URL and nothing happens
+
+You're in a **non-interactive shell** (e.g. an AI agent's background terminal) — npm can't do the browser flow at all there, and the retry prompt above has no real TTY to read from either. Run the exact same command in Terminal.app.
+
+### Granular access tokens (not used for this account)
+
+npm also offers Bypass-2FA granular access tokens for automation. We are **not** using one here — npm has announced ([GitHub Changelog, Jul 2026](https://github.blog/changelog/2026-07-08-npm-install-time-security-and-gat-bypass2fa-deprecation/)) that bypass-2FA tokens are losing the ability to publish directly (expected around Jan 2027), so it would be a dead end. If automation is ever needed, the forward-looking option is npm **Trusted Publishing (OIDC)** from CI, not a bypass token.
 
 ---
 
@@ -96,8 +125,9 @@ npx --yes --cache /tmp/its-thepoe-skills-cache @its-thepoe/skills@latest check
 | Error | What it means | Fix |
 | --- | --- | --- |
 | `npm whoami` fails or prints the wrong user | Not logged in, or logged in as the wrong account | `npm login`, then `npm whoami` again |
-| `code EOTP` **with a browser URL printed** | Browser verification step — not an OTP code | Open the URL, approve, rerun `./scripts/publish-all.sh` |
-| `code EOTP` with **no URL**, script seems to hang | Running in a non-interactive shell | Rerun the exact same command in Terminal.app |
+| `code EOTP` **with a browser URL printed**, script pauses at `Press Enter once approved…` | Expected per-write 2FA challenge (`auth-and-writes`) | Open the URL, approve in browser, come back, press Enter — the script retries and continues |
+| `code EOTP` with **no URL**, nothing prompts, script seems to hang or exit silently | Running in a non-interactive shell (no TTY for the browser flow or the retry prompt) | Rerun the exact same command in Terminal.app |
+| Script prints `Done, with failures` and lists packages | Those packages didn't get approved within 3 retries | Rerun `./scripts/publish-all.sh` — everything else is skipped, only the failed ones are retried |
 | `cannot publish over the previously published versions` | You're trying to publish a version number that's already live | Shouldn't happen with `publish-all.sh` (it skips these) — if it does, bump `version` in that package's `package.json` and rerun |
 | `404` on `PUT` for `@its-thepoe/...` | Your npm account/org doesn't have publish rights to the `@its-thepoe` scope | Confirm `npm whoami` is `its-thepoe` or a member of that org |
 | `404` on `GET` when **installing** `@its-thepoe/skills` | A skill listed in `skills/package.json` `dependencies` isn't on the registry yet | Publish that skill package, then retry the install |

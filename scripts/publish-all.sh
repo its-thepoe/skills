@@ -11,9 +11,20 @@
 #   npm login
 #   npm whoami        # must print: its-thepoe
 #
-# 2FA: browser verification only. Run from Terminal.app (interactive), not
-# Cursor's agent shell — non-interactive shells break the browser prompt.
-# Never pass NPM_OTP / --otp for this account.
+# 2FA: this account is `two-factor auth: auth-and-writes` with a browser/
+# WebAuthn second factor (no TOTP codes exist for it — never pass NPM_OTP /
+# --otp). `npm publish` requires its own fresh OTP challenge per write; it
+# does NOT inherit a session from `npm login`, and unlike `npm login` it does
+# NOT auto-poll for approval — it fails fast with `EOTP` and prints a URL.
+#
+# Per npm's own behavior, approving that URL opens a short (~5 minute) grace
+# window during which further publishes succeed without a new prompt. So
+# this script does not abort on EOTP: it pauses, tells you to approve the
+# printed URL, waits for Enter, and retries — then keeps going through the
+# rest of the batch in the same run, reusing that grace window instead of
+# needing one browser click per package.
+#
+# Run from Terminal.app (interactive) — the retry prompt needs a real TTY.
 #
 # Safe to re-run: any package whose local version already matches the
 # registry is skipped (no error, no re-publish attempt).
@@ -21,6 +32,8 @@
 set -eo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+FAILED_PACKAGES=()
+MAX_PUBLISH_ATTEMPTS=3
 
 echo "== Checking npm auth =="
 WHOAMI="$(npm whoami 2>/dev/null || true)"
@@ -65,7 +78,22 @@ publish_one() {
   fi
 
   echo "PUBLISH $pkg_name@$local_version (registry has: ${registry_version:-none})"
-  npm publish --access public -w "$ws_path"
+
+  local attempt=1
+  while [ "$attempt" -le "$MAX_PUBLISH_ATTEMPTS" ]; do
+    if npm publish --access public -w "$ws_path"; then
+      return 0
+    fi
+    echo
+    echo ">>> That failed — if you saw 'code EOTP' with a browser URL above, this is normal for"
+    echo ">>> this account's 2FA. Open the URL, approve it, then come back here."
+    read -r -p ">>> Press Enter once approved (attempt $attempt/$MAX_PUBLISH_ATTEMPTS) to retry $pkg_name: " _ < /dev/tty
+    attempt=$((attempt + 1))
+  done
+
+  echo "FAILED  $pkg_name@$local_version after $MAX_PUBLISH_ATTEMPTS attempts — continuing with the rest, rerun the script later to retry this one."
+  FAILED_PACKAGES+=("$pkg_name")
+  return 0
 }
 
 echo "== Publishing skill packages =="
@@ -88,5 +116,11 @@ else
 fi
 
 echo
-echo "Done. Smoke test:"
-echo "  npx --yes @its-thepoe/skills@latest check"
+if [ "${#FAILED_PACKAGES[@]}" -gt 0 ]; then
+  echo "Done, with failures. These packages did not publish after $MAX_PUBLISH_ATTEMPTS attempts each:"
+  printf '  - %s\n' "${FAILED_PACKAGES[@]}"
+  echo "Rerun ./scripts/publish-all.sh to retry just these (everything else will be skipped)."
+else
+  echo "Done. Smoke test:"
+  echo "  npx --yes @its-thepoe/skills@latest check"
+fi
