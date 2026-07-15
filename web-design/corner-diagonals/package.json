@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/its-thepoe/skills.git",
+    "url": "git+https://github.com/its-thepoe/skills.git",
     "directory": "web-design/corner-diagonals"
   }
 }

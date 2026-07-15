@@ -20,7 +20,7 @@ Never run this from Cursor's agent shell. Full doc: [docs/publish-step-by-step.m
 3. Validates all workspaces.
 4. Reads `package.json` → `workspaces` (skills first, orchestrator last).
 5. Skips versions already on the registry.
-6. On `EOTP`: opens the auth URL in your browser, waits for Enter, retries, continues the batch.
+6. On `EOTP`: with a real Terminal TTY, npm opens your browser and waits for approval (do not pipe publish through `tee` — that redacts the URL to `***` and skips the opener).
 
 ## Adding a new skill
 

@@ -9,15 +9,15 @@
 #   npm whoami          # must print: its-thepoe
 #   ./scripts/publish-all.sh
 #
-# What happens on EOTP (normal for this account):
-#   1. npm prints a https://www.npmjs.com/auth/cli/... URL
-#   2. this script opens it in your browser (macOS `open`)
-#   3. you approve with your WebAuthn / security key
-#   4. you press Enter back here
-#   5. the script retries and keeps publishing — the approval opens a short
-#      grace window (~5 min) so you usually only click once for a big batch
+# CRITICAL: `npm publish` must keep a real TTY on stdout/stdin. If you pipe it
+# (e.g. through `tee`), npm skips its built-in web OTP opener and only prints a
+# redacted EOTP URL (`auth/cli/***`) you cannot click. Never pipe publish.
 #
-# Never set NPM_OTP / --otp. Never use a Bypass-2FA token for this flow.
+# With a real TTY, npm's otplease() opens the browser, polls until you approve,
+# and retries the same publish. A short grace window usually covers the rest of
+# the batch so you only approve once or twice.
+#
+# Never set NPM_OTP / --otp.
 # Safe to re-run: already-published versions are skipped.
 # ============================================================================
 set -eo pipefail
@@ -29,7 +29,7 @@ FAILED_PACKAGES=()
 MAX_PUBLISH_ATTEMPTS=3
 
 require_interactive_tty() {
-  if [ ! -t 0 ] || [ ! -c /dev/tty ]; then
+  if [ ! -t 0 ] || [ ! -t 1 ] || [ ! -c /dev/tty ]; then
     echo "ERROR: This script needs a real interactive terminal (Terminal.app / iTerm)."
     echo "Cursor's agent shell cannot complete browser 2FA — open Terminal.app and run:"
     echo
@@ -38,24 +38,6 @@ require_interactive_tty() {
     echo
     exit 1
   fi
-}
-
-# Extract the auth.cli URL from npm's EOTP error text (if present) and open it.
-open_auth_url_from_log() {
-  local log_file="$1"
-  local url
-  url="$(grep -oE 'https://www\.npmjs\.com/auth/cli/[A-Za-z0-9._~-]+' "$log_file" 2>/dev/null | head -1 || true)"
-  if [ -z "$url" ]; then
-    return 1
-  fi
-  echo ">>> Opening browser for approval:"
-  echo ">>>   $url"
-  if command -v open >/dev/null 2>&1; then
-    open "$url" >/dev/null 2>&1 || true
-  elif command -v xdg-open >/dev/null 2>&1; then
-    xdg-open "$url" >/dev/null 2>&1 || true
-  fi
-  return 0
 }
 
 require_interactive_tty
@@ -79,7 +61,6 @@ publish_one() {
   local ws_path="$1"
   local pkg_name local_version registry_version
   local attempt=1
-  local tmp_log
 
   pkg_name=$(get_package_name "$ws_path")
   local_version=$(get_local_version "$ws_path")
@@ -93,26 +74,16 @@ publish_one() {
   echo "PUBLISH $pkg_name@$local_version (registry has: ${registry_version:-none})"
 
   while [ "$attempt" -le "$MAX_PUBLISH_ATTEMPTS" ]; do
-    tmp_log="$(mktemp)"
-    # Keep npm output on the terminal AND in the log so we can extract the auth URL.
-    # Use PIPESTATUS[0] — tee always exits 0, so we must read npm's real status.
-    set +e
-    npm publish --access public -w "$ws_path" 2>&1 | tee "$tmp_log"
-    local npm_status=${PIPESTATUS[0]}
-    set -e
-    if [ "$npm_status" -eq 0 ]; then
-      rm -f "$tmp_log"
+    # No pipes — npm needs a real TTY so otplease can open the browser.
+    if npm publish --access public -w "$ws_path"; then
       return 0
     fi
     echo
-    if open_auth_url_from_log "$tmp_log"; then
-      echo ">>> Approve in the browser that just opened (WebAuthn / security key)."
-    else
-      echo ">>> That failed with EOTP (or similar). If npm printed a browser URL above,"
-      echo ">>> open it, approve with your security key, then come back here."
-    fi
-    rm -f "$tmp_log"
-    read -r -p ">>> Press Enter once approved (attempt $attempt/$MAX_PUBLISH_ATTEMPTS) to retry $pkg_name: " _ < /dev/tty
+    echo ">>> Publish failed for $pkg_name (attempt $attempt/$MAX_PUBLISH_ATTEMPTS)."
+    echo ">>> If a browser opened, finish approving there, then press Enter here."
+    echo ">>> If you only saw a redacted auth/cli/*** URL, that means stdout was"
+    echo ">>> not a TTY — re-run this script from Terminal.app (not Cursor)."
+    read -r -p ">>> Press Enter to retry $pkg_name: " _ < /dev/tty
     attempt=$((attempt + 1))
   done
 
@@ -122,6 +93,8 @@ publish_one() {
 }
 
 echo "== Publishing skill packages =="
+echo "(Browser may open for the first 2FA challenge — approve, then leave this Terminal alone.)"
+echo
 load_workspaces
 for ws_path in "${SKILL_WORKSPACES[@]}"; do
   publish_one "$ws_path"

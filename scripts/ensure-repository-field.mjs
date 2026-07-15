@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 // npm trusted publishing (OIDC) validates a package's `repository.url` against
 // the GitHub repo the workflow runs in. Every published workspace needs this
 // field set correctly, or CI publishes fail even with a valid OIDC token.
-const REPO_URL = "https://github.com/its-thepoe/skills.git";
+const REPO_URL = "git+https://github.com/its-thepoe/skills.git";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pkgPath = path.join(ROOT, "package.json");

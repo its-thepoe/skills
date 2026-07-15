@@ -37,7 +37,7 @@ Safe to re-run anytime — already-published versions are skipped.
 4. **Reads `workspaces` from root `package.json`** — no hardcoded skill list.
 5. **Publishes every skill package first**, then **`@its-thepoe/skills` last**.
 6. **Skips** any package whose local version already matches the registry.
-7. On **`EOTP`**: extracts the `https://www.npmjs.com/auth/cli/...` URL, runs `open` (macOS), waits for Enter, retries (up to 3×), then continues the batch.
+7. On **`EOTP` with a real TTY**: npm itself opens your browser (`otplease` + `webAuthOpener`), polls until you approve, and retries that publish. Do **not** pipe `npm publish` through `tee` or anything else — that makes stdout non-TTY, npm skips the browser opener, and you only see a useless redacted `auth/cli/***` URL.
 
 ---
 
