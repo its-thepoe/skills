@@ -1,81 +1,56 @@
 # npm publish order (`@its-thepoe/*`)
 
-Publish **skill content packages** first, then the **orchestrator** (`@its-thepoe/skills`), because the orchestrator lists them as `dependencies`.
-
-Order matches [`publish-all.sh`](publish-all.sh):
-
-1. `alt-text`
-2. `design-and-refine`
-3. `design-engineering`
-4. `design-motion-principles`
-5. `family-taste`
-6. `figma-plugin-builder`
-7. `framer-code-components-overrides`
-8. `framer-plugins`
-9. `canva-app-builder`
-10. `codebase-content-ideas`
-11. `market-command-matrix`
-12. `root-cause-analysis`
-13. `write-a-skill`
-14. `prototype` (new — publish before orchestrator when releasing `@its-thepoe/prototype`)
-15. `tauri-best-practices` (new — publish before orchestrator when releasing `@its-thepoe/tauri-best-practices`)
-16. `skills` (package name `@its-thepoe/skills`)
-
-From repo root after `npm login`:
-
-Or run the bundled script (same order):
+**One script does this. Do not hand-write publish order or `npm publish` sequences — they go stale.**
 
 ```bash
+npm login
+npm whoami   # must print: its-thepoe
+
 chmod +x scripts/publish-all.sh
 ./scripts/publish-all.sh
 ```
 
-Individual publishes:
+Run from **Terminal.app** (interactive). Not Cursor's agent shell.
 
-```bash
-npm publish --access public -w @its-thepoe/alt-text
-npm publish --access public -w @its-thepoe/design-and-refine
-npm publish --access public -w @its-thepoe/design-engineering
-npm publish --access public -w @its-thepoe/design-motion-principles
-npm publish --access public -w @its-thepoe/family-taste
-npm publish --access public -w @its-thepoe/figma-plugin-builder
-npm publish --access public -w @its-thepoe/framer-code-components-overrides
-npm publish --access public -w @its-thepoe/framer-plugins
-npm publish --access public -w @its-thepoe/canva-app-builder
-npm publish --access public -w @its-thepoe/codebase-content-ideas
-npm publish --access public -w @its-thepoe/market-command-matrix
-npm publish --access public -w @its-thepoe/root-cause-analysis
-npm publish --access public -w @its-thepoe/write-a-skill
-npm publish --access public -w @its-thepoe/prototype
-npm publish --access public -w @its-thepoe/tauri-best-practices
-npm publish --access public -w @its-thepoe/skills
-```
+## What the script does
 
-For **`prototype`** and **`tauri-best-practices`** (skills + orchestrator):
+1. Checks `npm whoami` — exits immediately if it isn't `its-thepoe`.
+2. Runs `npm run validate`.
+3. Reads the **`workspaces`** array straight from the root `package.json` — every skill package plus `skills` (the orchestrator).
+4. Publishes every skill package **first**, in the order they appear in `package.json`.
+5. Publishes **`@its-thepoe/skills`** last (it depends on the skill packages, so they must exist on the registry first).
+6. For each package, compares the local `version` in its `package.json` to the version already on the npm registry:
+   - **Same version** → prints `SKIP <pkg>@<version> (already on registry)` and moves on. No error.
+   - **Different (or not yet published)** → publishes it.
 
-```bash
-chmod +x scripts/publish-prototype-and-cli.sh
-./scripts/publish-prototype-and-cli.sh
-```
+This means the script is **safe to re-run** any time — after a partial failure, after a browser-auth timeout, whatever. It will only publish what's actually missing or changed.
 
-Bump versions together when releasing. Run `npm run validate` before publishing.
+## Adding a new skill
 
-## Scope access (`@its-thepoe`)
+Add its folder to `package.json` → `workspaces`. That's the only place the publish order comes from — nothing else to update for this script to pick it up.
 
-Publishing a **scoped** package requires you to be allowed to publish under that scope:
+## 2FA
 
-- If your npm **username** is `its-thepoe`, `@its-thepoe/*` maps to your user scope.
-- Otherwise create or join an **organization** on [npmjs.com](https://www.npmjs.com/) named `its-thepoe`, or change every `package.json` `name` field to match **your** scope (e.g. `@youruser/alt-text`) before publishing.
+This account uses **browser verification**, not authenticator codes.
 
-If `npm publish` returns **404** on `PUT` for `@its-thepoe/...`, fix scope ownership first; if **401**, run `npm login`.
+- When npm prints `Press ENTER to open in the browser…`, press Enter and complete verification in the browser.
+- If you see `code EOTP` **with a browser URL**, that is still browser auth — open the URL, approve, then rerun `./scripts/publish-all.sh` (it will skip anything already published and continue).
+- Never set `NPM_OTP` or pass `--otp` for this repo.
 
-If publish fails with **EOTP** / “one-time password” but your account uses **browser-based** publish auth, rerun the remaining `npm publish --access public -w <pkg>` commands in an interactive TTY/shell. Non-interactive publishes can fall back to `EOTP` instead of showing the browser verification URL. Use a fresh authenticator code only if your account uses OTP-style 2FA.
+## Common errors
 
-If the OTP **expires** partway through publishes, run the remaining `npm publish --access public -w <pkg>` lines from this doc with a new code.
+| Error | Fix |
+| --- | --- |
+| `npm whoami` doesn't print `its-thepoe` | `npm login`, complete browser flow, then rerun `./scripts/publish-all.sh` |
+| `EOTP` with a browser URL | Open the URL, approve in browser, rerun the script |
+| `cannot publish over the previously published versions` | Shouldn't happen — the script skips these. If it does, bump `version` in that package's `package.json`, rerun |
+| `404` on `PUT` for `@its-thepoe/...` | Your npm account/org doesn't own the `@its-thepoe` scope |
+
+Full walkthrough: [docs/publish-step-by-step.md](../docs/publish-step-by-step.md).
 
 ## Smoke tests (after publish)
 
 ```bash
-npx @its-thepoe/skills@latest install --all --dry-run
-npx @its-thepoe/skills@latest check
+npx --yes @its-thepoe/skills@latest install --all --dry-run
+npx --yes @its-thepoe/skills@latest check
 ```

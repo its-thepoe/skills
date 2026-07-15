@@ -1,57 +1,92 @@
 #!/usr/bin/env bash
-# Publish all @its-thepoe/* packages in dependency order.
-# Requires: npm login, and permission to publish under scope @its-thepoe
-# (npm username must be "its-thepoe" OR you must belong to org "its-thepoe").
+# ============================================================================
+# THE ONE canonical publish script for this repo. Do not create another one.
 #
-# Browser-based publish: run without NPM_OTP; complete browser auth and rerun if npm asks.
-# OTP-based 2FA only: NPM_OTP=123456 ./scripts/publish-all.sh (code valid ~30s)
+# Publishes every @its-thepoe/* skill package, then the orchestrator
+# (@its-thepoe/skills) last. Reads the workspace list directly from the root
+# package.json — there is no hardcoded skill list to go stale. Add a skill to
+# package.json "workspaces" and this script picks it up automatically.
 #
-# If a workspace version is already on npm, that publish is skipped (continues to next).
+# REQUIRED before running, every session:
+#   npm login
+#   npm whoami        # must print: its-thepoe
+#
+# 2FA: browser verification only. Run from Terminal.app (interactive), not
+# Cursor's agent shell — non-interactive shells break the browser prompt.
+# Never pass NPM_OTP / --otp for this account.
+#
+# Safe to re-run: any package whose local version already matches the
+# registry is skipped (no error, no re-publish attempt).
+# ============================================================================
 set -eo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-run_publish() {
-  local workspace="$1"
-  local tmp
-  tmp=$(mktemp)
-  set +e
-  if [ -n "${NPM_OTP:-}" ]; then
-    npm publish --access public --otp="$NPM_OTP" -w "$workspace" >"$tmp" 2>&1
-  else
-    npm publish --access public -w "$workspace" >"$tmp" 2>&1
-  fi
-  local code=$?
-  set -e
-  cat "$tmp"
-  if [ "$code" -eq 0 ]; then
-    rm -f "$tmp"
-    return 0
-  fi
-  if grep -Eqi 'cannot publish over the previously published|previously published versions' "$tmp"; then
-    rm -f "$tmp"
-    echo "SKIP $workspace (this version is already on the registry)"
-    return 0
-  fi
-  rm -f "$tmp"
-  return "$code"
+echo "== Checking npm auth =="
+WHOAMI="$(npm whoami 2>/dev/null || true)"
+if [ "$WHOAMI" != "its-thepoe" ]; then
+  echo "ERROR: npm whoami must print 'its-thepoe' (got: '${WHOAMI:-<not logged in>}')."
+  echo "Run: npm login"
+  echo "Then verify: npm whoami"
+  exit 1
+fi
+echo "OK npm whoami -> $WHOAMI"
+echo
+
+echo "== Validating all packages =="
+npm run validate
+echo
+
+get_local_version() {
+  # $1 = workspace path, e.g. design/prototype or skills
+  node -p "require('./$1/package.json').version"
 }
 
-npm run validate
+get_package_name() {
+  node -p "require('./$1/package.json').name"
+}
 
-run_publish @its-thepoe/alt-text
-run_publish @its-thepoe/design-and-refine
-run_publish @its-thepoe/design-engineering
-run_publish @its-thepoe/design-motion-principles
-run_publish @its-thepoe/family-taste
-run_publish @its-thepoe/figma-plugin-builder
-run_publish @its-thepoe/framer-code-components-overrides
-run_publish @its-thepoe/framer-plugins
-run_publish @its-thepoe/canva-app-builder
-run_publish @its-thepoe/codebase-content-ideas
-run_publish @its-thepoe/market-command-matrix
-run_publish @its-thepoe/root-cause-analysis
-run_publish @its-thepoe/write-a-skill
-run_publish @its-thepoe/skills
+get_registry_version() {
+  # $1 = package name, e.g. @its-thepoe/prototype
+  npm view "$1" version 2>/dev/null || true
+}
 
-echo "Done. Smoke test: npx @its-thepoe/skills@latest check"
+publish_one() {
+  local ws_path="$1"
+  local pkg_name local_version registry_version
+
+  pkg_name=$(get_package_name "$ws_path")
+  local_version=$(get_local_version "$ws_path")
+  registry_version=$(get_registry_version "$pkg_name")
+
+  if [ -n "$registry_version" ] && [ "$local_version" = "$registry_version" ]; then
+    echo "SKIP  $pkg_name@$local_version (already on registry)"
+    return 0
+  fi
+
+  echo "PUBLISH $pkg_name@$local_version (registry has: ${registry_version:-none})"
+  npm publish --access public -w "$ws_path"
+}
+
+echo "== Publishing skill packages =="
+SKILLS_WORKSPACE=""
+while IFS= read -r ws_path; do
+  if [ "$ws_path" = "skills" ]; then
+    SKILLS_WORKSPACE="$ws_path"
+    continue
+  fi
+  publish_one "$ws_path"
+done < <(node -p "require('./package.json').workspaces.join('\n')")
+
+echo
+echo "== Publishing orchestrator (@its-thepoe/skills) =="
+if [ -n "$SKILLS_WORKSPACE" ]; then
+  publish_one "$SKILLS_WORKSPACE"
+else
+  echo "ERROR: 'skills' workspace not found in package.json workspaces array."
+  exit 1
+fi
+
+echo
+echo "Done. Smoke test:"
+echo "  npx --yes @its-thepoe/skills@latest check"

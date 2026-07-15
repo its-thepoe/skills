@@ -33,4 +33,6 @@ npx --cache /tmp/its-thepoe-skills-cache @its-thepoe/skills@latest check
 
 ## Maintainer Notes
 
-Publish-time issues such as `EOTP`, browser verification, package order, and semver bumps live in the [publishing guide](publish-step-by-step.md).
+**Publishing has exactly one script and one doc — [`scripts/publish-all.sh`](../scripts/publish-all.sh) and [publish-step-by-step.md](publish-step-by-step.md).** Don't write ad-hoc publish commands or new publish scripts; the script reads the package list from `package.json` automatically and safely skips anything already published.
+
+Always run `npm login` then `npm whoami` (must show `its-thepoe`) in **Terminal.app** first. This repo uses **browser** 2FA — never `NPM_OTP`.
