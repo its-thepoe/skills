@@ -1,6 +1,10 @@
 # npm publish order (`@its-thepoe/*`)
 
-**Canonical path (always): Terminal.app + browser 2FA. No tokens.**
+> **LOCKED path that finally works — do not replace.**
+>
+> Terminal.app only → `npm login && npm whoami && ./scripts/publish-all.sh`
+>
+> Full law: [docs/publish-step-by-step.md](../docs/publish-step-by-step.md) · Agents: [../AGENTS.md](../AGENTS.md) · Rule: [../.cursor/rules/npm-publish.mdc](../.cursor/rules/npm-publish.mdc)
 
 ```bash
 cd "/path/to/skills"
@@ -11,7 +15,7 @@ npm whoami   # must print: its-thepoe
 
 Or: `npm run publish:all`
 
-Never run this from Cursor's agent shell. Full doc: [docs/publish-step-by-step.md](../docs/publish-step-by-step.md).
+Never run from Cursor's agent shell. Never pipe `npm publish` (breaks TTY → unclickable `auth/cli/***`).
 
 ## What the script does
 
@@ -20,7 +24,7 @@ Never run this from Cursor's agent shell. Full doc: [docs/publish-step-by-step.m
 3. Validates all workspaces.
 4. Reads `package.json` → `workspaces` (skills first, orchestrator last).
 5. Skips versions already on the registry.
-6. On `EOTP`: with a real Terminal TTY, npm opens your browser and waits for approval (do not pipe publish through `tee` — that redacts the URL to `***` and skips the opener).
+6. Runs `npm publish` with a real TTY so npm opens the browser on 2FA.
 
 ## Adding a new skill
 
@@ -30,6 +34,4 @@ Add its folder to `package.json` → `workspaces`. Then Terminal publish as abov
 
 Browser / WebAuthn only. Never `NPM_OTP` / `--otp`.
 
-When the script opens a URL and asks you to press Enter: approve in the browser, come back, press Enter.
-
-Optional CI / Trusted Publishing (later, not required): see the optional section in [publish-step-by-step.md](../docs/publish-step-by-step.md).
+Optional CI / Trusted Publishing (later, not required): see [publish-step-by-step.md](../docs/publish-step-by-step.md).

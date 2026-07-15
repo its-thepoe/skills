@@ -1,0 +1,45 @@
+---
+description: npm publish — Terminal.app path only (proven working). Never invent alternatives.
+alwaysApply: true
+---
+
+# npm publish — locked path (do not regress)
+
+This is the **only** supported way to publish `@its-thepoe/*` packages from this repo. It is the path that finally worked after days of broken EOTP/redacted-URL attempts. **Do not replace it, "improve" it away, or invent parallel flows.**
+
+## The path (memorize this)
+
+Run in **Terminal.app or iTerm only** — never Cursor's agent shell:
+
+```bash
+cd "/path/to/poe-skills"
+npm login
+npm whoami                # MUST print: its-thepoe
+./scripts/publish-all.sh
+```
+
+Or: `npm run publish:all` after login.
+
+No tokens. No `NPM_OTP`. No `--otp`. No Bypass-2FA granular tokens for daily publish. Browser WebAuthn on this account.
+
+## Hard invariants (violating any of these re-breaks publish)
+
+1. **Real TTY required.** `npm publish` must have `stdin.isTTY` and `stdout.isTTY`. If either is false, npm throws `EOTP` with a **redacted** `https://www.npmjs.com/auth/cli/***` URL you cannot open.
+2. **Never pipe `npm publish`** through `tee`, `>`, process substitution wrappers, or capture that steals the TTY. That was the concrete bug that made the link unclickable.
+3. **Do not run publish from the Cursor agent.** The agent has no usable TTY. Tell the user to run the commands in Terminal.app. Refuse to invent a "run it for me from here" workaround.
+4. **`scripts/publish-all.sh` is the only local publish entry point.** Do not create per-skill publish scripts. Do not hand-write `npm publish -w …` sequences for the user as the process.
+5. **Single doc:** [`docs/publish-step-by-step.md`](docs/publish-step-by-step.md). If you change publish behavior, update that doc in the same change. If a new doc/script conflicts with it, the step-by-step doc wins — delete or fix the other.
+
+## What works when TTY is intact
+
+npm's `otplease()` + `webAuthOpener` opens the browser, polls until the user approves with their security key, retries that publish, and a short grace window usually covers the rest of the batch. That is the intended UX — restore it if broken; do not paper over it with tokens.
+
+## Optional CI (secondary, never replace Terminal path)
+
+`.github/workflows/publish.yml` + `scripts/publish-ci.sh` exist for Trusted Publishing after a package already exists on npm. They are optional. Brand-new packages still need a first Terminal publish via `publish-all.sh`. Never tell the user CI alone solves first publishes of new skills.
+
+## When the user says "publish"
+
+1. Point them at Terminal.app + the four commands above.
+2. Do not attempt `npm publish` / `./scripts/publish-all.sh` from the agent shell (script correctly exits: needs interactive terminal).
+3. If they hit `auth/cli/***`, the TTY was stolen again — check `publish-all.sh` for pipes and remove them.

@@ -33,4 +33,4 @@ npx --cache /tmp/its-thepoe-skills-cache @its-thepoe/skills@latest check
 
 ## Maintainer Notes
 
-**Publishing: Terminal.app + [`scripts/publish-all.sh`](../scripts/publish-all.sh) — see [publish-step-by-step.md](publish-step-by-step.md).** Always `npm login` then `npm whoami` (must show `its-thepoe`) first. Browser 2FA only — never `NPM_OTP`. Do not publish from Cursor's agent shell.
+**Publishing (LOCKED):** Terminal.app → `npm login && npm whoami && ./scripts/publish-all.sh`. See [publish-step-by-step.md](publish-step-by-step.md), [AGENTS.md](../AGENTS.md), [`.cursor/rules/npm-publish.mdc`](../.cursor/rules/npm-publish.mdc). Never from Cursor. Never pipe `npm publish`. Never `NPM_OTP`.

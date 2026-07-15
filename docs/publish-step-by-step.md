@@ -1,8 +1,17 @@
 # Publish to npm — the one true process
 
-This is the **only** publish doc for this repo. If another doc or script disagrees with this one, this one wins — fix the other one to match.
+> **LOCKED — the path that finally works. Do not “improve” this away.**
+>
+> ```bash
+> # Terminal.app / iTerm ONLY (not Cursor)
+> npm login && npm whoami && ./scripts/publish-all.sh
+> ```
+>
+> `npm whoami` must print `its-thepoe`. No tokens. No `NPM_OTP`. Real TTY. Never pipe `npm publish`.
+>
+> Agents: see [`.cursor/rules/npm-publish.mdc`](../.cursor/rules/npm-publish.mdc) and [`AGENTS.md`](../AGENTS.md).
 
-**Sustained path (what you use every time): Terminal.app + `npm login` + `./scripts/publish-all.sh`. No tokens. No CI required.**
+This is the **only** publish doc for this repo. If another doc or script disagrees with this one, this one wins — fix the other one to match.
 
 Official npm background: [docs.npmjs.com](https://docs.npmjs.com/), scoped public packages: [Creating and publishing scoped public packages](https://docs.npmjs.com/creating-and-publishing-scoped-public-packages).
 
@@ -23,9 +32,19 @@ npm whoami                # MUST print: its-thepoe — do not proceed otherwise
 
 Or: `npm run publish:all` (same script).
 
-That's it. When the first unpublished package hits browser 2FA, the script **opens the auth URL in your browser**, pauses, you approve with your security key, press Enter, and it keeps going. You usually only approve once for a large batch (npm opens a short grace window after approval).
+That's it. With a real TTY, npm itself opens your browser (`otplease` / `webAuthOpener`), you approve with your security key, and publish continues. A short grace window usually covers the rest of a big batch after the first approval.
 
 Safe to re-run anytime — already-published versions are skipped.
+
+### Never do these (they already broke this repo once)
+
+| Broken idea | What happens |
+| --- | --- |
+| Run publish from Cursor's agent shell | No TTY → redacted `auth/cli/***` → stuck |
+| Pipe `npm publish` through `tee` / capture stdout | Same — npm skips browser opener |
+| Bypass-2FA tokens as the “daily” fix | Not this repo's sustained path |
+| Per-skill one-off publish scripts | Drift and stale lists |
+| Inventing a second "real" process beside this doc | Confusion; agents re-break TTY |
 
 ---
 
@@ -37,7 +56,7 @@ Safe to re-run anytime — already-published versions are skipped.
 4. **Reads `workspaces` from root `package.json`** — no hardcoded skill list.
 5. **Publishes every skill package first**, then **`@its-thepoe/skills` last**.
 6. **Skips** any package whose local version already matches the registry.
-7. On **`EOTP` with a real TTY**: npm itself opens your browser (`otplease` + `webAuthOpener`), polls until you approve, and retries that publish. Do **not** pipe `npm publish` through `tee` or anything else — that makes stdout non-TTY, npm skips the browser opener, and you only see a useless redacted `auth/cli/***` URL.
+7. Runs **`npm publish` with no pipes** so stdin/stdout stay TTYs and npm can open the browser on EOTP.
 
 ---
 
@@ -57,9 +76,8 @@ Safe to re-run anytime — already-published versions are skipped.
 Confirmed via `npm profile get`: **`two-factor auth: auth-and-writes`** + WebAuthn/security key — **no TOTP codes**. Never set `NPM_OTP` or `--otp`.
 
 - `npm login` polls until you approve in the browser.
-- `npm publish` does **not** poll — it fails fast with `EOTP` and a URL. That is expected. The script handles it: open URL → approve → Enter → continue.
-- Approving opens a short grace window (~5 minutes) so the rest of a batch often needs no further clicks.
-- If you see `EOTP` with **no** URL and nothing opens, you are in a non-interactive shell — use Terminal.app.
+- `npm publish` with a **real TTY** uses the same family of browser flow via `otplease` — opens the browser and polls.
+- If you only see `EOTP` + `auth/cli/***` and no browser: **TTY was stolen** (agent shell or a pipe). Fix the environment; do not chase the redacted URL.
 
 **Do not use Bypass-2FA tokens for this repo's daily flow.** Your sustained path is interactive Terminal + browser 2FA.
 
@@ -89,7 +107,8 @@ npx --yes @its-thepoe/skills@latest check
 | --- | --- |
 | Script exits: needs a real interactive terminal | Open Terminal.app, run the same commands there |
 | `npm whoami` wrong / empty | `npm login`, then `npm whoami` |
-| Script opens browser + `Press Enter once approved…` | Approve with security key, press Enter — keep the Terminal tab open |
+| Browser opens for auth | Approve with security key — leave Terminal alone |
+| Only `auth/cli/***` visible, no browser | TTY broken — check for pipes / agent shell; pull latest `publish-all.sh` |
 | `Done, with failures` | Rerun `./scripts/publish-all.sh` — skips what already shipped |
 | `cannot publish over the previously published versions` | Bump that package's `version`, rerun |
 | `404` on PUT `@its-thepoe/...` | Wrong account — must be `its-thepoe` |

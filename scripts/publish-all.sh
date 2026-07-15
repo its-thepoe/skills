@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 # ============================================================================
-# THE one sustained publish path for this repo (no tokens, no CI required).
+# LOCKED PATH — the publish flow that finally worked. Do not regress.
+# See: docs/publish-step-by-step.md · AGENTS.md · .cursor/rules/npm-publish.mdc
 #
-# Run EVERY time from Terminal.app / iTerm — never from Cursor's agent shell.
-#
-#   cd "/path/to/poe-skills"
-#   npm login
-#   npm whoami          # must print: its-thepoe
-#   ./scripts/publish-all.sh
+#   # Terminal.app / iTerm ONLY — never Cursor agent
+#   npm login && npm whoami && ./scripts/publish-all.sh
 #
 # CRITICAL: `npm publish` must keep a real TTY on stdout/stdin. If you pipe it
 # (e.g. through `tee`), npm skips its built-in web OTP opener and only prints a
@@ -17,7 +14,7 @@
 # and retries the same publish. A short grace window usually covers the rest of
 # the batch so you only approve once or twice.
 #
-# Never set NPM_OTP / --otp.
+# Never set NPM_OTP / --otp. Never invent a parallel "better" publish script.
 # Safe to re-run: already-published versions are skipped.
 # ============================================================================
 set -eo pipefail
@@ -27,6 +24,16 @@ cd "$ROOT"
 source "$ROOT/scripts/lib/publish-common.sh"
 FAILED_PACKAGES=()
 MAX_PUBLISH_ATTEMPTS=3
+
+# Guard: if someone "improves" this script by piping publish again, fail loud.
+assert_no_publish_pipe() {
+  if grep -E 'npm publish[^
+]*\|' "$ROOT/scripts/publish-all.sh" >/dev/null 2>&1; then
+    echo "ERROR: scripts/publish-all.sh must not pipe 'npm publish' (breaks TTY / browser 2FA)."
+    echo "Remove the pipe. See .cursor/rules/npm-publish.mdc"
+    exit 1
+  fi
+}
 
 require_interactive_tty() {
   if [ ! -t 0 ] || [ ! -t 1 ] || [ ! -c /dev/tty ]; then
@@ -41,6 +48,8 @@ require_interactive_tty() {
 }
 
 require_interactive_tty
+
+assert_no_publish_pipe
 
 echo "== Checking npm auth =="
 WHOAMI="$(npm whoami 2>/dev/null || true)"

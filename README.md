@@ -205,13 +205,13 @@ Official paths vary. After you have a skill folder, symlink or copy it into the 
 
 This repo is an npm **workspace** with bucketed skill folders plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. The buckets are `agent/`, `design/`, `media/`, `meta/`, `tools/`, `web-design/`, and `writing/`. To add a skill, ship `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), a short **`README.md`** (npmjs.com shows this per package), list `README.md` in `package.json` **`files`**, add the folder to root **`package.json`** → **`workspaces`**, register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`.
 
-**Publishing (sustained path): Terminal.app + browser 2FA — no tokens.** [`scripts/publish-all.sh`](scripts/publish-all.sh) is the only day-to-day publish command. Full walkthrough: [docs/publish-step-by-step.md](docs/publish-step-by-step.md).
+**Publishing (LOCKED — the path that works):** Terminal.app only:
 
 ```bash
 npm login && npm whoami && ./scripts/publish-all.sh
 ```
 
-(Or `npm run publish:all` after login.) CI / Trusted Publishing is optional later — see the same doc.
+Never from Cursor. Never pipe `npm publish`. Law: [docs/publish-step-by-step.md](docs/publish-step-by-step.md) · [AGENTS.md](AGENTS.md) · [`.cursor/rules/npm-publish.mdc`](.cursor/rules/npm-publish.mdc).
 
 ## Docs
 
