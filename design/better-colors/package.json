@@ -1,15 +1,18 @@
 {
-  "name": "@its-thepoe/prototype",
-  "version": "1.0.1",
-  "description": "Agent Skill: prototype.",
+  "name": "@its-thepoe/better-colors",
+  "version": "1.0.0",
+  "description": "Agent Skill: better-colors.",
   "license": "MIT",
   "keywords": [
     "agent-skills",
-    "prototype"
+    "better-colors",
+    "design",
+    "ui"
   ],
   "files": [
     "README.md",
     "SKILL.md",
+    "*.md",
     "package.json"
   ],
   "exports": {
@@ -19,6 +22,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/its-thepoe/skills.git",
-    "directory": "design/prototype"
+    "directory": "design/better-colors"
   }
 }

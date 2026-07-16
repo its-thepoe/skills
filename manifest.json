@@ -100,6 +100,33 @@
       ]
     },
     {
+      "name": "better-colors",
+      "package": "@its-thepoe/better-colors",
+      "path": "design/better-colors",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "better-typography",
+      "package": "@its-thepoe/better-typography",
+      "path": "design/better-typography",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
+      "name": "better-ui",
+      "package": "@its-thepoe/better-ui",
+      "path": "design/better-ui",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
       "name": "blue-cloudy-clean-modern",
       "package": "@its-thepoe/blue-cloudy-clean-modern",
       "path": "web-design/blue-cloudy-clean-modern",
