@@ -17,6 +17,7 @@ const bucketTags = {
 
 const nameTags = {
   "figma-plugin-builder": ["figma"],
+  "framer-agents": ["framer"],
   "framer-code-components-overrides": ["framer"],
   "framer-plugins": ["framer"],
   "tailwindcss": ["tailwind"],
@@ -67,4 +68,3 @@ await writeFile(
     2,
   )}\n`,
 );
-

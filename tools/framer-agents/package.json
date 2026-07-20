@@ -1,0 +1,30 @@
+{
+  "name": "@its-thepoe/framer-agents",
+  "version": "1.0.0",
+  "description": "Agent Skill: Framer Agents, External Agents, CMS workflows, publishing review, and Server API/MCP decisions.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "framer",
+    "framer-agents",
+    "cms",
+    "cursor"
+  ],
+  "files": [
+    "SKILL.md",
+    "agents",
+    "references",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./agents/*": "./agents/*",
+    "./references/*": "./references/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/its-thepoe/skills.git",
+    "directory": "tools/framer-agents"
+  }
+}

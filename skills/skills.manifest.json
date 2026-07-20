@@ -241,6 +241,11 @@
       "path": "web-design/framed-tech-dark-border-gradient"
     },
     {
+      "name": "framer-agents",
+      "package": "@its-thepoe/framer-agents",
+      "path": "tools/framer-agents"
+    },
+    {
       "name": "framer-code-components-overrides",
       "package": "@its-thepoe/framer-code-components-overrides",
       "path": "tools/framer-code-components-overrides"

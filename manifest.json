@@ -469,6 +469,15 @@
       ]
     },
     {
+      "name": "framer-agents",
+      "package": "@its-thepoe/framer-agents",
+      "path": "tools/framer-agents",
+      "tags": [
+        "tool",
+        "framer"
+      ]
+    },
+    {
       "name": "framer-code-components-overrides",
       "package": "@its-thepoe/framer-code-components-overrides",
       "path": "tools/framer-code-components-overrides",

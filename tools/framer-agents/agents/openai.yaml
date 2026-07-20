@@ -1,0 +1,4 @@
+interface:
+  display_name: "Framer Agents"
+  short_description: "Plan and audit Framer agent workflows"
+  default_prompt: "Use $framer-agents to plan a scoped Framer project edit before changing the canvas or CMS."
