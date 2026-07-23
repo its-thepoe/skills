@@ -1,0 +1,33 @@
+{
+  "name": "@its-thepoe/lemonsqueezy",
+  "version": "1.0.0",
+  "description": "Agent Skill: Lemon Squeezy API account operations, customer support, refunds, subscriptions, checkouts, discounts, licenses, and webhooks.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "lemonsqueezy",
+    "lemon-squeezy",
+    "payments",
+    "subscriptions",
+    "ecommerce"
+  ],
+  "files": [
+    "SKILL.md",
+    "agents",
+    "references",
+    "scripts",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./agents/*": "./agents/*",
+    "./references/*": "./references/*",
+    "./scripts/*": "./scripts/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/its-thepoe/skills.git",
+    "directory": "tools/lemonsqueezy"
+  }
+}

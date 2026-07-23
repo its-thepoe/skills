@@ -94,7 +94,12 @@ Or open `https://www.npmjs.com/package/@its-thepoe/<name>`.
 
 ## Smoke test
 
+Before running `install --all`, confirm every newly added or bumped skill is
+visible on npm. If `npm view @its-thepoe/<skill-name> version` returns `404`,
+stop there — the package is not published yet, so `install --all` will fail.
+
 ```bash
+npm view @its-thepoe/lemonsqueezy version
 npx --yes @its-thepoe/skills@latest install --all --dry-run
 npx --yes @its-thepoe/skills@latest check
 ```
@@ -110,6 +115,7 @@ npx --yes @its-thepoe/skills@latest check
 | Browser opens for auth | Approve with security key — leave Terminal alone |
 | Only `auth/cli/***` visible, no browser | TTY broken — check for pipes / agent shell; pull latest `publish-all.sh` |
 | `Done, with failures` | Rerun `./scripts/publish-all.sh` — skips what already shipped |
+| `404` from `npm view @its-thepoe/<skill-name> version` | The package is not on npm yet — publish again before `install --all` |
 | `cannot publish over the previously published versions` | Bump that package's `version`, rerun |
 | `404` on PUT `@its-thepoe/...` | Wrong account — must be `its-thepoe` |
 

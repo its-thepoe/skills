@@ -1,0 +1,30 @@
+{
+  "name": "@its-thepoe/lamp-section-header",
+  "version": "1.0.0",
+  "description": "Agent Skill: Linear-style lamp section headers, glowing hero intros, and spotlight headline treatments.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "web-design",
+    "motion",
+    "section-header",
+    "lamp"
+  ],
+  "files": [
+    "SKILL.md",
+    "agents",
+    "references",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./agents/*": "./agents/*",
+    "./references/*": "./references/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/its-thepoe/skills.git",
+    "directory": "web-design/lamp-section-header"
+  }
+}

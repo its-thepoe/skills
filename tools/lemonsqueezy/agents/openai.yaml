@@ -1,0 +1,5 @@
+interface:
+  display_name: "Lemon Squeezy"
+  short_description: "Operate Lemon Squeezy accounts safely"
+  default_prompt: "Use $lemonsqueezy to inspect my Lemon Squeezy store before making any account changes."
+

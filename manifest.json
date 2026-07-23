@@ -681,6 +681,17 @@
       ]
     },
     {
+      "name": "lamp-section-header",
+      "package": "@its-thepoe/lamp-section-header",
+      "path": "web-design/lamp-section-header",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation",
+        "typography"
+      ]
+    },
+    {
       "name": "landing-page",
       "package": "@its-thepoe/landing-page",
       "path": "web-design/landing-page",
@@ -688,6 +699,16 @@
         "web-design",
         "motion",
         "animation"
+      ]
+    },
+    {
+      "name": "lemonsqueezy",
+      "package": "@its-thepoe/lemonsqueezy",
+      "path": "tools/lemonsqueezy",
+      "tags": [
+        "tool",
+        "payments",
+        "ecommerce"
       ]
     },
     {
@@ -1053,6 +1074,17 @@
         "web-design",
         "motion",
         "animation"
+      ]
+    },
+    {
+      "name": "text-shimmer",
+      "package": "@its-thepoe/text-shimmer",
+      "path": "web-design/text-shimmer",
+      "tags": [
+        "web-design",
+        "motion",
+        "animation",
+        "typography"
       ]
     },
     {

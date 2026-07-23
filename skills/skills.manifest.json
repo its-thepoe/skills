@@ -351,9 +351,19 @@
       "path": "design/industrial-brutalist-ui"
     },
     {
+      "name": "lamp-section-header",
+      "package": "@its-thepoe/lamp-section-header",
+      "path": "web-design/lamp-section-header"
+    },
+    {
       "name": "landing-page",
       "package": "@its-thepoe/landing-page",
       "path": "web-design/landing-page"
+    },
+    {
+      "name": "lemonsqueezy",
+      "package": "@its-thepoe/lemonsqueezy",
+      "path": "tools/lemonsqueezy"
     },
     {
       "name": "light-mode-paper-technical",
@@ -539,6 +549,11 @@
       "name": "technical-wireframe-info-layout",
       "package": "@its-thepoe/technical-wireframe-info-layout",
       "path": "web-design/technical-wireframe-info-layout"
+    },
+    {
+      "name": "text-shimmer",
+      "package": "@its-thepoe/text-shimmer",
+      "path": "web-design/text-shimmer"
     },
     {
       "name": "threejs",

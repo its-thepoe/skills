@@ -1,0 +1,5 @@
+interface:
+  display_name: "Lamp Section Header"
+  short_description: "Create Linear-style lamp headers"
+  default_prompt: "Use $lamp-section-header to build a Linear-style lamp section header with a dark stage, glowing beam, and a centered headline."
+

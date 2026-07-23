@@ -1,0 +1,5 @@
+interface:
+  display_name: "Text Shimmer"
+  short_description: "Create shimmering text effects"
+  default_prompt: "Use $text-shimmer to build a readable shimmering text effect with Motion and viewport-aware animation."
+

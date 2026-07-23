@@ -1,0 +1,30 @@
+{
+  "name": "@its-thepoe/text-shimmer",
+  "version": "1.0.0",
+  "description": "Agent Skill: shimmering text, gradient text, and viewport-triggered text shine effects for web UI.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "web-design",
+    "motion",
+    "typography",
+    "shimmer"
+  ],
+  "files": [
+    "SKILL.md",
+    "agents",
+    "references",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./agents/*": "./agents/*",
+    "./references/*": "./references/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/its-thepoe/skills.git",
+    "directory": "web-design/text-shimmer"
+  }
+}
