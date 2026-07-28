@@ -1,6 +1,6 @@
 {
   "name": "@its-thepoe/skills",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "Orchestrator CLI to install, check, sync, and remove @its-thepoe Agent Skills (Codex, Cursor, Claude Code, OpenCode, Windsurf).",
   "license": "MIT",
   "type": "module",
@@ -120,6 +120,7 @@
     "@its-thepoe/redesign-existing-projects": "1.0.0",
     "@its-thepoe/root-cause-analysis": "1.0.1",
     "@its-thepoe/screenshot": "1.0.0",
+    "@its-thepoe/security-audit": "1.0.0",
     "@its-thepoe/seo-audit": "1.0.0",
     "@its-thepoe/skeuomorphic-ui": "1.0.0",
     "@its-thepoe/solar-duotone-bold": "1.0.0",
@@ -142,6 +143,7 @@
     "@its-thepoe/webgl-landing-steering": "1.0.0",
     "@its-thepoe/webgl-laser": "1.0.0",
     "@its-thepoe/write-a-skill": "1.0.3",
+    "@its-thepoe/wxt": "1.0.1",
     "@its-thepoe/x-bookmark-quote-posts": "1.0.0"
   },
   "repository": {

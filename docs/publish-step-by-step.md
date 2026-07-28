@@ -13,6 +13,8 @@
 
 This is the **only** publish doc for this repo. If another doc or script disagrees with this one, this one wins — fix the other one to match.
 
+Preferred Codex workflow: give the command in chat first, run it from here, and only open the browser when npm actually needs auth approval.
+
 Official npm background: [docs.npmjs.com](https://docs.npmjs.com/), scoped public packages: [Creating and publishing scoped public packages](https://docs.npmjs.com/creating-and-publishing-scoped-public-packages).
 
 ---

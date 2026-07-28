@@ -1,0 +1,31 @@
+{
+  "name": "@its-thepoe/wxt",
+  "version": "1.0.1",
+  "description": "Agent Skill: build and ship browser extensions with WXT.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "wxt",
+    "browser-extension",
+    "web-extension",
+    "chrome-extension",
+    "firefox-extension"
+  ],
+  "files": [
+    "SKILL.md",
+    "reference.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./skill": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./reference": "./reference.md",
+    "./reference.md": "./reference.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/its-thepoe/skills.git",
+    "directory": "tools/wxt"
+  }
+}

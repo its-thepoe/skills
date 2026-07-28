@@ -29,6 +29,7 @@ const nameTags = {
   "swiftui-pro": ["swiftui"],
   "hugeicons": ["icons"],
   "iconsax": ["icons"],
+  "security-audit": ["security", "appsec", "owasp"],
 };
 
 const manifest = { skills: [] };

@@ -953,6 +953,20 @@
       ]
     },
     {
+      "name": "security-audit",
+      "package": "@its-thepoe/security-audit",
+      "path": "agent/security-audit",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing",
+        "security",
+        "appsec",
+        "owasp"
+      ]
+    },
+    {
       "name": "seo-audit",
       "package": "@its-thepoe/seo-audit",
       "path": "design/seo-audit",
@@ -1174,6 +1188,14 @@
       "tags": [
         "meta",
         "workflow"
+      ]
+    },
+    {
+      "name": "wxt",
+      "package": "@its-thepoe/wxt",
+      "path": "tools/wxt",
+      "tags": [
+        "tool"
       ]
     },
     {

@@ -486,6 +486,11 @@
       "path": "agent/screenshot"
     },
     {
+      "name": "security-audit",
+      "package": "@its-thepoe/security-audit",
+      "path": "agent/security-audit"
+    },
+    {
       "name": "seo-audit",
       "package": "@its-thepoe/seo-audit",
       "path": "design/seo-audit"
@@ -599,6 +604,11 @@
       "name": "write-a-skill",
       "package": "@its-thepoe/write-a-skill",
       "path": "meta/write-a-skill"
+    },
+    {
+      "name": "wxt",
+      "package": "@its-thepoe/wxt",
+      "path": "tools/wxt"
     },
     {
       "name": "x-bookmark-quote-posts",
