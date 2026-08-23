@@ -34,6 +34,22 @@ npm whoami                # MUST print: its-thepoe — do not proceed otherwise
 
 Or: `npm run publish:all` (same script).
 
+For a routine one- or few-package release, use the incremental modes:
+
+```bash
+# Publish workspaces changed relative to HEAD
+./scripts/publish-all.sh --changed
+
+# Publish exact workspaces; repeat the flag when the orchestrator also changed
+./scripts/publish-all.sh --workspace tools/wxt --workspace skills
+```
+
+The no-argument command remains the full release audit and recovery path. The
+incremental modes still validate selected packages, check npm versions in a
+bounded batch, publish skill packages serially, and publish `skills` last.
+They refuse ambiguous root workspace changes; use an explicit workspace or
+the full command in that case.
+
 That's it. With a real TTY, npm itself opens your browser (`otplease` / `webAuthOpener`), you approve with your security key, and publish continues. A short grace window usually covers the rest of a big batch after the first approval.
 
 Safe to re-run anytime — already-published versions are skipped.
@@ -54,11 +70,15 @@ Safe to re-run anytime — already-published versions are skipped.
 
 1. **Refuses to run without a real TTY** — so Cursor's agent can't half-break a publish.
 2. **Checks `npm whoami`.** Exits if it isn't `its-thepoe`.
-3. **Runs `npm run validate`** across every workspace.
-4. **Reads `workspaces` from root `package.json`** — no hardcoded skill list.
-5. **Publishes every skill package first**, then **`@its-thepoe/skills` last**.
-6. **Skips** any package whose local version already matches the registry.
-7. Runs **`npm publish` with no pipes** so stdin/stdout stay TTYs and npm can open the browser on EOTP.
+3. **Selects all or explicitly requested workspaces**; `--changed` uses the
+   current working tree relative to `HEAD`.
+4. **Validates selected packages** with bounded, visible pack checks.
+5. **Reads registry versions in a bounded batch**, instead of one sequential
+   `npm view` process per workspace.
+6. **Publishes skill packages first**, then **`@its-thepoe/skills` last** when
+   selected.
+7. **Skips** any package whose local version already matches the registry.
+8. Runs **`npm publish` with no pipes** so stdin/stdout stay TTYs and npm can open the browser on EOTP.
 
 ---
 
@@ -70,6 +90,8 @@ Safe to re-run anytime — already-published versions are skipped.
 4. Optionally `npm run rebuild-manifest` and update `README.md`.
 5. If the new skill's `package.json` is missing `repository`, run `node scripts/ensure-repository-field.mjs`.
 6. From Terminal.app: `npm login && npm whoami && ./scripts/publish-all.sh`.
+   For a routine targeted release, use `./scripts/publish-all.sh --changed` or
+   repeat `--workspace <path>` for the exact packages.
 
 ---
 
@@ -117,6 +139,8 @@ npx --yes @its-thepoe/skills@latest check
 | Browser opens for auth | Approve with security key — leave Terminal alone |
 | Only `auth/cli/***` visible, no browser | TTY broken — check for pipes / agent shell; pull latest `publish-all.sh` |
 | `Done, with failures` | Rerun `./scripts/publish-all.sh` — skips what already shipped |
+| `No workspaces changed relative to HEAD` | Use `--workspace <path>` for an explicit release or make the intended package change first |
+| `--changed cannot safely infer root workspace changes` | Use explicit `--workspace <path>` arguments or the no-argument full release command |
 | `404` from `npm view @its-thepoe/<skill-name> version` | The package is not on npm yet — publish again before `install --all` |
 | `cannot publish over the previously published versions` | Bump that package's `version`, rerun |
 | `404` on PUT `@its-thepoe/...` | Wrong account — must be `its-thepoe` |
@@ -135,7 +159,7 @@ Details in repo: `.github/workflows/publish.yml`, `scripts/publish-ci.sh`.
 
 | Script | When |
 | --- | --- |
-| **`scripts/publish-all.sh`** | **Always — Terminal.app, browser 2FA** |
+| **`scripts/publish-all.sh`** | **Always — Terminal.app, browser 2FA; use `--changed` or `--workspace` for routine releases** |
 | `scripts/publish-ci.sh` | Only from GitHub Actions OIDC, optional |
 | `scripts/lib/publish-common.sh` | Shared helpers — not run directly |
 | `scripts/ensure-repository-field.mjs` | Keep `repository` fields correct for packages |

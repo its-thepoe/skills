@@ -25,6 +25,25 @@ source "$ROOT/scripts/lib/publish-common.sh"
 FAILED_PACKAGES=()
 MAX_PUBLISH_ATTEMPTS=3
 
+print_help() {
+  cat <<'EOF'
+Usage: ./scripts/publish-all.sh [--all | --changed | --workspace <path> ...]
+
+Modes:
+  --all                  Publish every workspace (default; full release audit)
+  --changed              Publish workspaces changed relative to HEAD
+  --workspace <path>     Publish one workspace; may be repeated
+
+All modes require Terminal.app/iTerm, npm whoami -> its-thepoe, and a real TTY.
+Actual npm publishes remain serial and unpiped so browser WebAuthn works.
+EOF
+}
+
+if [ "$#" -gt 0 ] && { [ "$1" = "--help" ] || [ "$1" = "-h" ]; }; then
+  print_help
+  exit 0
+fi
+
 # Guard: if someone "improves" this script by piping publish again, fail loud.
 assert_no_publish_pipe() {
   if grep -E 'npm publish[^
@@ -62,18 +81,57 @@ fi
 echo "OK npm whoami -> $WHOAMI"
 echo
 
-echo "== Validating all packages =="
-npm run validate
+SELECTION_MODE="all"
+for arg in "$@"; do
+  case "$arg" in
+    --changed) SELECTION_MODE="changed" ;;
+    --workspace) SELECTION_MODE="explicit" ;;
+    --all) SELECTION_MODE="all" ;;
+  esac
+done
+
+SELECTED_OUTPUT="$(node "$ROOT/scripts/lib/publish-selection.mjs" --paths-only "$@")"
+SELECTED_WORKSPACES=()
+while IFS= read -r ws_path; do
+  [ -n "$ws_path" ] && SELECTED_WORKSPACES+=("$ws_path")
+done <<< "$SELECTED_OUTPUT"
+
+if [ "${#SELECTED_WORKSPACES[@]}" -eq 0 ]; then
+  if [ "$SELECTION_MODE" = "changed" ]; then
+    echo "ERROR: No workspaces changed relative to HEAD; nothing to publish."
+  else
+    echo "ERROR: Workspace selection is empty."
+  fi
+  exit 1
+fi
+
+echo "== Selected workspaces ($SELECTION_MODE): ${#SELECTED_WORKSPACES[@]} =="
+printf '  - %s\n' "${SELECTED_WORKSPACES[@]}"
+echo
+
+VALIDATE_ARGS=()
+if [ "$SELECTION_MODE" != "all" ]; then
+  for ws_path in "${SELECTED_WORKSPACES[@]}"; do
+    VALIDATE_ARGS+=(--workspace "$ws_path")
+  done
+fi
+
+echo "== Validating selected packages =="
+if [ "${#VALIDATE_ARGS[@]}" -gt 0 ]; then
+  npm run validate -- "${VALIDATE_ARGS[@]}"
+else
+  npm run validate
+fi
 echo
 
 publish_one() {
   local ws_path="$1"
-  local pkg_name local_version registry_version
+  local registry_version="$2"
+  local pkg_name local_version
   local attempt=1
 
   pkg_name=$(get_package_name "$ws_path")
   local_version=$(get_local_version "$ws_path")
-  registry_version=$(get_registry_version "$pkg_name")
 
   if [ -n "$registry_version" ] && [ "$local_version" = "$registry_version" ]; then
     echo "SKIP  $pkg_name@$local_version (already on registry)"
@@ -104,18 +162,40 @@ publish_one() {
 echo "== Publishing skill packages =="
 echo "(Browser may open for the first 2FA challenge — approve, then leave this Terminal alone.)"
 echo
-load_workspaces
+SKILL_WORKSPACES=()
+SKILLS_ORCHESTRATOR_WORKSPACE=""
+for ws_path in "${SELECTED_WORKSPACES[@]}"; do
+  if [ "$ws_path" = "skills" ]; then
+    SKILLS_ORCHESTRATOR_WORKSPACE="$ws_path"
+  else
+    SKILL_WORKSPACES+=("$ws_path")
+  fi
+done
+
+PACKAGE_NAMES=()
+for ws_path in "${SELECTED_WORKSPACES[@]}"; do
+  PACKAGE_NAMES+=("$(get_package_name "$ws_path")")
+done
+
+REGISTRY_URL="$(npm config get registry)"
+REGISTRY_VERSIONS_JSON="$(node "$ROOT/scripts/registry-versions.mjs" --json --registry "$REGISTRY_URL" "${PACKAGE_NAMES[@]}")"
+
+registry_version_for() {
+  node -e 'const data = JSON.parse(process.argv[1]); process.stdout.write(data[process.argv[2]] || "")' "$REGISTRY_VERSIONS_JSON" "$1"
+}
+
 for ws_path in "${SKILL_WORKSPACES[@]}"; do
-  publish_one "$ws_path"
+  pkg_name=$(get_package_name "$ws_path")
+  publish_one "$ws_path" "$(registry_version_for "$pkg_name")"
 done
 
 echo
 echo "== Publishing orchestrator (@its-thepoe/skills) =="
 if [ -n "$SKILLS_ORCHESTRATOR_WORKSPACE" ]; then
-  publish_one "$SKILLS_ORCHESTRATOR_WORKSPACE"
+  pkg_name=$(get_package_name "$SKILLS_ORCHESTRATOR_WORKSPACE")
+  publish_one "$SKILLS_ORCHESTRATOR_WORKSPACE" "$(registry_version_for "$pkg_name")"
 else
-  echo "ERROR: 'skills' workspace not found in package.json workspaces array."
-  exit 1
+  echo "No orchestrator selected; publishing selected skill packages only."
 fi
 
 echo

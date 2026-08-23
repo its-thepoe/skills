@@ -20,6 +20,16 @@ npm whoami                # MUST print: its-thepoe
 
 Or: `npm run publish:all` after login.
 
+For routine releases, the same entry point supports targeted modes:
+
+```bash
+./scripts/publish-all.sh --changed
+./scripts/publish-all.sh --workspace tools/wxt --workspace skills
+```
+
+No arguments remains the full release audit. `--changed` refuses ambiguous
+root workspace changes; use explicit `--workspace` paths or the full command.
+
 No tokens. No `NPM_OTP`. No `--otp`. No Bypass-2FA granular tokens for daily publish. Browser WebAuthn on this account.
 
 ## Hard invariants (violating any of these re-breaks publish)
@@ -29,6 +39,10 @@ No tokens. No `NPM_OTP`. No `--otp`. No Bypass-2FA granular tokens for daily pub
 3. **Do not run publish from the Cursor agent.** The agent has no usable TTY. Tell the user to run the commands in Terminal.app. Refuse to invent a "run it for me from here" workaround.
 4. **`scripts/publish-all.sh` is the only local publish entry point.** Do not create per-skill publish scripts. Do not hand-write `npm publish -w …` sequences for the user as the process.
 5. **Single doc:** [`docs/publish-step-by-step.md`](docs/publish-step-by-step.md). If you change publish behavior, update that doc in the same change. If a new doc/script conflicts with it, the step-by-step doc wins — delete or fix the other.
+
+6. **Incremental modes are still one entry point.** Do not create per-skill
+   publish scripts. `--changed` and repeated `--workspace <path>` only reduce
+   preflight scope; actual publishes remain serial and ordered.
 
 ## What works when TTY is intact
 
