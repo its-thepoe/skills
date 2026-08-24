@@ -1,0 +1,31 @@
+{
+  "name": "@its-thepoe/agentic-design-engineering",
+  "version": "1.0.0",
+  "description": "Agent Skill: adaptive multi-agent product design and engineering workflow.",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "multi-agent",
+    "orchestration",
+    "design-engineering",
+    "product-engineering",
+    "code-review",
+    "verification"
+  ],
+  "files": [
+    "README.md",
+    "SKILL.md",
+    "reference.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md",
+    "./reference.md": "./reference.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/its-thepoe/skills.git",
+    "directory": "agent/agentic-design-engineering"
+  }
+}

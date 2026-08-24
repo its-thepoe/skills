@@ -55,6 +55,7 @@ npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 | Skill | Command |
 | --- | --- |
 | alt-text | `npx @its-thepoe/skills@latest install alt-text` |
+| agentic-design-engineering | `npx @its-thepoe/skills@latest install agentic-design-engineering` |
 | animation-on-scroll | `npx @its-thepoe/skills@latest install animation-on-scroll` |
 | canva-app-builder | `npx @its-thepoe/skills@latest install canva-app-builder` |
 | cobejs | `npx @its-thepoe/skills@latest install cobejs` |
@@ -84,6 +85,7 @@ npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 | unicorn-studio | `npx @its-thepoe/skills@latest install unicorn-studio` |
 | vantajs | `npx @its-thepoe/skills@latest install vantajs` |
 | write-a-skill | `npx @its-thepoe/skills@latest install write-a-skill` |
+| copywriting | `npx @its-thepoe/skills@latest install copywriting` |
 
 Install several at once:
 
@@ -97,6 +99,7 @@ npx @its-thepoe/skills@latest install alt-text design-engineering hugeicons
 | --- | --- |
 | `@its-thepoe/skills` | CLI for installing, syncing, checking, and removing skills |
 | `@its-thepoe/alt-text` | Scans image usage and drafts better alt text for review |
+| `@its-thepoe/agentic-design-engineering` | Runs adaptive Specify/Plan/Build/Critique/Fix/Verify workflows |
 | `@its-thepoe/canva-app-builder` | Builds Canva Apps against SDK docs, UI kit, and review constraints |
 | `@its-thepoe/codebase-content-ideas` | Turns real repo work into blog, social, and writing ideas |
 | `@its-thepoe/design-and-refine` | Runs a Design Lab style workflow for UI variations and synthesis |
@@ -116,6 +119,7 @@ npx @its-thepoe/skills@latest install alt-text design-engineering hugeicons
 | `@its-thepoe/tailwindcss` | Implements Tailwind CSS (v3/v4) and debugs setup/version issues |
 | `@its-thepoe/tauri-best-practices` | Tauri v2 dev/build optimization, capabilities, IPC, and macOS bundle performance |
 | `@its-thepoe/write-a-skill` | Helps author and package new Agent Skills |
+| `@its-thepoe/copywriting` | Writes and reviews marketing copy, product UX copy, errors, and voice/tone |
 
 Each skill folder is self-contained and has a `SKILL.md` at the root. Most skills also include their own `README.md` and optional references.
 

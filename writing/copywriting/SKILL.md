@@ -1,252 +1,232 @@
 ---
 name: copywriting
-description: When the user wants to write, rewrite, or improve marketing copy for any page — including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says "write copy for," "improve this copy," "rewrite this page," "marketing copy," "headline help," "CTA copy," "value proposition," "tagline," "subheadline," "hero section copy," "above the fold," "this copy is weak," "make this more compelling," or "help me describe my product." Use this whenever someone is working on website text that needs to persuade or convert. For email copy, see email-sequence. For popup copy, see popup-cro. For editing existing copy, see copy-editing.
-metadata:
-  version: 1.1.0
+description: >-
+  Use when writing, rewriting, or reviewing copy for a product or its interface:
+  homepages, landing pages, pricing, feature pages, onboarding, forms, buttons,
+  empty states, errors, confirmations, notifications, settings, and lifecycle
+  messages. Also use for UX writing, microcopy, product copy, voice and tone, CTA,
+  or messaging consistency. Choose surface:marketing, product, or both. Keep
+  conversion tactics out of security, consent, payment, and error states unless
+  the product context supports them.
+argument-hint: "[surface:marketing|product|both] [mode:write|review|voice] [page-or-flow]"
 ---
 
 # Copywriting
 
-You are an expert conversion copywriter. Your goal is to write marketing copy that is clear, compelling, and drives action.
-
-## Before Writing
-
-**Check for product marketing context first:**
-If `a project marketing context file exists, read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
-
-Gather this context (ask if not provided):
-
-### 1. Page Purpose
-- What type of page? (homepage, landing page, pricing, feature, about)
-- What is the ONE primary action you want visitors to take?
-
-### 2. Audience
-- Who is the ideal customer?
-- What problem are they trying to solve?
-- What objections or hesitations do they have?
-- What language do they use to describe their problem?
-
-### 3. Product/Offer
-- What are you selling or offering?
-- What makes it different from alternatives?
-- What's the key transformation or outcome?
-- Any proof points (numbers, testimonials, case studies)?
-
-### 4. Context
-- Where is traffic coming from? (ads, organic, email)
-- What do visitors already know before arriving?
-
----
-
-## Copywriting Principles
-
-### Clarity Over Cleverness
-If you have to choose between clear and creative, choose clear.
-
-### Benefits Over Features
-Features: What it does. Benefits: What that means for the customer.
-
-### Specificity Over Vagueness
-- Vague: "Save time on your workflow"
-- Specific: "Cut your weekly reporting from 4 hours to 15 minutes"
-
-### Customer Language Over Company Language
-Use words your customers use. Mirror voice-of-customer from reviews, interviews, support tickets.
-
-### One Idea Per Section
-Each section should advance one argument. Build a logical flow down the page.
-
----
-
-## Writing Style Rules
-
-### Core Principles
-
-1. **Simple over complex** — "Use" not "utilize," "help" not "facilitate"
-2. **Specific over vague** — Avoid "streamline," "optimize," "innovative"
-3. **Active over passive** — "We generate reports" not "Reports are generated"
-4. **Confident over qualified** — Remove "almost," "very," "really"
-5. **Show over tell** — Describe the outcome instead of using adverbs
-6. **Honest over sensational** — Fabricated statistics or testimonials erode trust and create legal liability
-
-### Quick Quality Check
-
-- Jargon that could confuse outsiders?
-- Sentences trying to do too much?
-- Passive voice constructions?
-- Exclamation points? (remove them)
-- Marketing buzzwords without substance?
-
-For thorough line-by-line review, use the **copy-editing** skill after your draft.
-
----
-
-## Best Practices
-
-### Be Direct
-Get to the point. Don't bury the value in qualifications.
-
-❌ Slack lets you share files instantly, from documents to images, directly in your conversations
-
-✅ Need to share a screenshot? Send as many documents, images, and audio files as your heart desires.
-
-### Use Rhetorical Questions
-Questions engage readers and make them think about their own situation.
-- "Hate returning stuff to Amazon?"
-- "Tired of chasing approvals?"
-
-### Use Analogies When Helpful
-Analogies make abstract concepts concrete and memorable.
-
-### Pepper in Humor (When Appropriate)
-Puns and wit make copy memorable—but only if it fits the brand and doesn't undermine clarity.
-
----
-
-## Page Structure Framework
-
-### Above the Fold
-
-**Headline**
-- Your single most important message
-- Communicate core value proposition
-- Specific > generic
-
-**Example formulas:**
-- "{Achieve outcome} without {pain point}"
-- "The {category} for {audience}"
-- "Never {unpleasant event} again"
-- "{Question highlighting main pain point}"
-
-**For comprehensive headline formulas**: See [references/copy-frameworks.md](references/copy-frameworks.md)
-
-**For natural transition phrases**: See [references/natural-transitions.md](references/natural-transitions.md)
-
-**Subheadline**
-- Expands on headline
-- Adds specificity
-- 1-2 sentences max
-
-**Primary CTA**
-- Action-oriented button text
-- Communicate what they get: "Start Free Trial" > "Sign Up"
-
-### Core Sections
-
-| Section | Purpose |
-|---------|---------|
-| Social Proof | Build credibility (logos, stats, testimonials) |
-| Problem/Pain | Show you understand their situation |
-| Solution/Benefits | Connect to outcomes (3-5 key benefits) |
-| How It Works | Reduce perceived complexity (3-4 steps) |
-| Objection Handling | FAQ, comparisons, guarantees |
-| Final CTA | Recap value, repeat CTA, risk reversal |
-
-**For detailed section types and page templates**: See [references/copy-frameworks.md](references/copy-frameworks.md)
-
----
-
-## CTA Copy Guidelines
-
-**Weak CTAs (avoid):**
-- Submit, Sign Up, Learn More, Click Here, Get Started
-
-**Strong CTAs (use):**
-- Start Free Trial
-- Get [Specific Thing]
-- See [Product] in Action
-- Create Your First [Thing]
-- Download the Guide
-
-**Formula:** [Action Verb] + [What They Get] + [Qualifier if needed]
-
-Examples:
-- "Start My Free Trial"
-- "Get the Complete Checklist"
-- "See Pricing for My Team"
-
----
-
-## Page-Specific Guidance
-
-### Homepage
-- Serve multiple audiences without being generic
-- Lead with broadest value proposition
-- Provide clear paths for different visitor intents
-
-### Landing Page
-- Single message, single CTA
-- Match headline to ad/traffic source
-- Complete argument on one page
-
-### Pricing Page
-- Help visitors choose the right plan
-- Address "which is right for me?" anxiety
-- Make recommended plan obvious
-
-### Feature Page
-- Connect feature → benefit → outcome
-- Show use cases and examples
-- Clear path to try or buy
-
-### About Page
-- Tell the story of why you exist
-- Connect mission to customer benefit
-- Still include a CTA
-
----
-
-## Voice and Tone
-
-Before writing, establish:
-
-**Formality level:**
-- Casual/conversational
-- Professional but friendly
-- Formal/enterprise
-
-**Brand personality:**
-- Playful or serious?
-- Bold or understated?
-- Technical or accessible?
-
-Maintain consistency, but adjust intensity:
-- Headlines can be bolder
-- Body copy should be clearer
-- CTAs should be action-oriented
-
----
-
-## Output Format
-
-When writing copy, provide:
-
-### Page Copy
-Organized by section:
-- Headline, Subheadline, CTA
-- Section headers and body copy
-- Secondary CTAs
-
-### Annotations
-For key elements, explain:
-- Why you made this choice
-- What principle it applies
-
-### Alternatives
-For headlines and CTAs, provide 2-3 options:
-- Option A: [copy] — [rationale]
-- Option B: [copy] — [rationale]
-
-### Meta Content (if relevant)
-- Page title (for SEO)
-- Meta description
-
----
-
-## Related Skills
-
-- **copy-editing**: For polishing existing copy (use after your draft)
-- **page-cro**: If page structure/strategy needs work, not just copy
-- **email-sequence**: For email copywriting
-- **popup-cro**: For popup and modal copy
-- **ab-test-setup**: To test copy variations
+Write and review the words that shape the whole product experience, from the first
+marketing promise to the last recovery message. Start with the user's goal and the
+product's truth. Make the next action clear without hiding trade-offs or inventing
+behavior.
+
+This is one unified skill with guarded surfaces:
+
+- `surface:marketing`: public pages and messages that explain value and motivate a
+  considered action.
+- `surface:product`: in-product flows, interface copy, lifecycle messages, and
+  states that help users complete tasks and recover from problems.
+- `surface:both`: align the promise, terminology, voice, and experience across the
+  marketing site and product. Use this when the user says “all product copy” or
+  needs a complete copy system.
+
+Modes:
+
+- `mode:write` (default): create implementation-ready copy for the requested
+  surface.
+- `mode:review`: inspect existing copy and recommend prioritized improvements; do
+  not edit files unless explicitly asked.
+- `mode:voice`: derive or refine the voice and tone system, then demonstrate it on
+  representative marketing and/or product copy.
+
+If no surface is supplied, infer it from the request and state the inference. If a
+request includes both page copy and UI flow copy, use `surface:both` rather than
+applying one set of rules to every string.
+
+## Non-negotiable principles
+
+- Clarity beats cleverness. Specificity beats vague benefits and buzzwords.
+- Use customer language when evidence exists; do not manufacture testimonials,
+  metrics, urgency, or product capabilities.
+- Active voice, familiar words, concise structure, and one clear idea at a time.
+- A CTA names the result or next action. Avoid generic `Submit`, `OK`, `Learn more`,
+  `Click here`, and `Get started` when the actual outcome is known.
+- Marketing copy may persuade; product copy must orient, inform, and restore control.
+- Never use confirmshaming, forced consent, disguised ads, false urgency,
+  manipulative defaults, or copy that hides material consequences.
+- Brand personality never outranks truth, informed consent, accessibility, or the
+  user's ability to understand a consequential action.
+- Preserve legal meaning, pricing, permissions, and error semantics. Flag decisions
+  that require product, legal, design, engineering, or localization input.
+
+## Workflow
+
+### 1. Establish product and audience context
+
+Inspect the repository or supplied product material before asking questions. Read
+project instructions, README files, product/brand docs, routes, screens, copy
+constants, translation files, support language, and relevant tests when available.
+For a live product, use the supplied URL, screenshots, recordings, or specification.
+
+Separate evidence into:
+
+- **Verified:** directly observed in the product, code, supplied artifact, or source
+  material.
+- **Inferred:** a reasonable conclusion that must be labeled as an inference.
+- **Needs evidence:** a possible issue that cannot yet be confirmed.
+
+Gather only what the requested surface needs:
+
+- Who is the audience and what job are they trying to complete?
+- What does the product promise, and what must it never imply?
+- What should the user feel before and after this page or flow?
+- What is the primary action or outcome, and what alternatives matter?
+- Which moments are high-stakes, irreversible, private, regulated, paid, or
+  difficult to recover from?
+- Which terminology, capitalization, person, formality, locale, and accessibility
+  rules already exist?
+
+Ask one focused question at a time when a missing answer would materially change the
+copy. Start with the desired action or emotion. If the user does not know, propose
+two or three labeled options and continue with a stated assumption rather than
+blocking the work.
+
+### 2. Derive the shared voice and tone
+
+Before writing more than a few strings, define three to five voice attributes as
+observable behavior. For each, include a product-specific `Do`, `Avoid`, and the
+contexts where it becomes stronger or softer.
+
+Then define tone by moment. Headlines can be bolder than supporting body copy;
+onboarding can be welcoming; success can be warm; payment, privacy, security, and
+failure states should become calm, direct, and precise. Humor is optional and never
+an excuse to obscure a consequence or make an anxious user feel foolish.
+
+Keep a shared terminology list across surfaces. A marketing promise must not use a
+different name for the same object or action in the product unless the distinction
+is intentional and documented.
+
+### 3. Write or review the requested surface
+
+#### Marketing surface
+
+Establish the page purpose and one primary action. Then map:
+
+- audience, problem, desired outcome, objections, and customer language
+- offer, differentiator, proof, constraints, and traffic/source context
+- message hierarchy: value proposition, benefits, evidence, objections, action
+- page structure: headline, subheadline, primary CTA, sections, secondary CTAs,
+  FAQs, and relevant metadata
+
+Connect feature -> benefit -> outcome. Prefer concrete claims over “streamline,”
+“innovative,” “powerful,” or “seamless.” Use rhetorical questions, analogy, or humor
+only when they clarify the customer's situation and fit the voice.
+
+CTA pattern: `[specific action] + [what the user gets]`, such as `Create your first
+project` or `See the demo`. Keep alternatives purposeful, not a list of synonyms.
+
+#### Product surface
+
+Review copy inside the user's task, not as isolated prose. Inventory relevant flows:
+
+- discovery and first-run onboarding
+- signup, login, verification, password reset, and account recovery
+- primary happy path and alternate paths
+- forms, field help, validation, submission, retry, and disabled states
+- loading, empty, partial, offline, timeout, success, and failure states
+- permissions, privacy, security, consent, billing, cancellation, and deletion
+- notifications, exports, sharing, integrations, support, and settings
+
+For each flow, map the user goal, entry point, steps, decisions, copy surfaces,
+possible failure, recovery action, and evidence location. Mark missing states `Not
+observed` or `Needs evidence`; do not invent them.
+
+Evaluate:
+
+1. **Action clarity:** specific verb, clear result, label matches the outcome.
+2. **State completeness:** initial, loading, empty, validation, error, success,
+   offline, permission, expired, retry, and destructive confirmation where relevant.
+3. **Emotional fit:** acknowledges the user's situation without blame, patronizing
+   reassurance, or inappropriate cheerfulness.
+4. **Plain language and accessibility:** familiar words, active voice, scannability,
+   no double negatives, explain audience-specific jargon, support screen readers and
+   text expansion, and never rely on color alone.
+5. **Consistency:** same terms, person, capitalization, punctuation, dates, units,
+   and action names across the product.
+6. **Truth and recovery:** say what happened, what it means when useful, what to do
+   next, and where to get help. Never expose an implementation code as the only
+   explanation.
+
+For errors, use only the parts that help recovery:
+
+`[What happened]. [What it means, if needed]. [What to do next]. [Recovery action or
+support path].`
+
+For a non-actionable failure, explain what the product is doing and when to try
+again instead of promising a fix that does not exist.
+
+#### Both surfaces
+
+Compare the promise users see before signup with the experience after signup. Check
+that the same concept, benefit, action, and emotional expectation survive the handoff
+from marketing to product. Do not force marketing energy into every product state;
+the correct tone may become quieter when the user is completing a consequential task.
+
+### 4. Prioritize and produce copy
+
+In review mode, rank findings by user harm and reach:
+
+- **P0:** blocks or misleads a critical, paid, security, privacy, or irreversible
+  action; creates a serious trust or accessibility risk.
+- **P1:** causes repeated confusion, preventable errors, dead ends, or inconsistent
+  behavior in a common path.
+- **P2:** improves clarity, tone, consistency, or polish without blocking the task.
+
+Every recommendation includes location/evidence, current copy when available, the
+problem, impact, recommended copy, rationale, and the next implementation or testing
+step. Give one recommendation and up to two alternatives only when the trade-off is
+useful.
+
+In write mode, provide final copy grouped by page section, screen, component, or
+translation key. Do not silently change product behavior. In voice mode, apply the
+voice system to representative examples from every requested surface.
+
+## Output
+
+Return the sections relevant to the requested surface:
+
+1. **Context:** audience, user goal, surface, scope, and primary outcome.
+2. **Assumptions and questions:** verified, inferred, needs evidence, and decisions
+   required.
+3. **Voice and tone system:** attributes, do/avoid examples, state modulation, and
+   terminology rules.
+4. **Content or flow map:** page hierarchy for marketing; flow/state coverage for
+   product; both when `surface:both`.
+5. **Copy:** clean implementation-ready text grouped by location.
+6. **Review findings:** priority, evidence, current copy, issue, impact,
+   recommendation, rationale, and test/handoff note.
+7. **Alternatives:** only for meaningful strategic or tonal choices.
+8. **Copy system:** approved terms, CTA and error patterns, capitalization,
+   punctuation, dates/numbers, localization, and length guidance.
+9. **Handoff:** exact files, keys, screens, product/design/legal decisions, and
+   regression or usability checks.
+
+## Quality gate
+
+Before finishing, verify that:
+
+- every claim and recommendation is tied to evidence or labeled as an assumption;
+- the primary action and its result are clear;
+- product failures explain what happened and what the user can do next;
+- marketing persuasion has not obscured product consequences or consent;
+- voice is consistent without flattening important state differences;
+- copy is concise because the interaction is clear, not because essential context
+  was removed;
+- localization, accessibility, text length, and testing risks are called out;
+- unresolved product, legal, design, engineering, or content decisions are visible.
+
+For detailed tables, patterns, and source synthesis, read [reference.md](reference.md).
+
+## Related skills
+
+- `design-engineering`: interaction feel and motion implementation
+- `seo-audit`: search-focused review of page metadata and discoverability
+- `pr-tldr`: concise handoff for a completed implementation or review

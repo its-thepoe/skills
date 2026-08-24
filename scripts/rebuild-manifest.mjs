@@ -30,6 +30,7 @@ const nameTags = {
   "hugeicons": ["icons"],
   "iconsax": ["icons"],
   "security-audit": ["security", "appsec", "owasp"],
+  "agentic-design-engineering": ["multi-agent", "orchestration", "design-engineering", "verification"],
 };
 
 const manifest = { skills: [] };

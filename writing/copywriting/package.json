@@ -1,20 +1,28 @@
 {
   "name": "@its-thepoe/copywriting",
-  "version": "1.0.0",
-  "description": "Agent Skill: copywriting.",
+  "version": "1.1.0",
+  "description": "Agent Skill: unified marketing and product UX copywriting.",
   "license": "MIT",
   "keywords": [
     "agent-skills",
-    "copywriting"
+    "copywriting",
+    "ux-writing",
+    "content-design",
+    "microcopy",
+    "product-copy",
+    "voice-and-tone",
+    "accessibility"
   ],
   "files": [
     "README.md",
     "SKILL.md",
+    "reference.md",
     "package.json"
   ],
   "exports": {
     ".": "./SKILL.md",
-    "./SKILL.md": "./SKILL.md"
+    "./SKILL.md": "./SKILL.md",
+    "./reference.md": "./reference.md"
   },
   "repository": {
     "type": "git",

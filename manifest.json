@@ -21,6 +21,21 @@
       ]
     },
     {
+      "name": "agentic-design-engineering",
+      "package": "@its-thepoe/agentic-design-engineering",
+      "path": "agent/agentic-design-engineering",
+      "tags": [
+        "agent",
+        "debugging",
+        "browser",
+        "testing",
+        "multi-agent",
+        "orchestration",
+        "design-engineering",
+        "verification"
+      ]
+    },
+    {
       "name": "alt-text",
       "package": "@its-thepoe/alt-text",
       "path": "media/alt-text",
