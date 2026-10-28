@@ -118,9 +118,12 @@ Or open `https://www.npmjs.com/package/@its-thepoe/<name>`.
 
 ## Smoke test
 
-Before running `install --all`, confirm every newly added or bumped skill is
-visible on npm. If `npm view @its-thepoe/<skill-name> version` returns `404`,
-stop there — the package is not published yet, so `install --all` will fail.
+Before running the npm-based `@its-thepoe/skills install --all`, confirm every
+newly added or bumped skill is visible on npm. If
+`npm view @its-thepoe/<skill-name> version` returns `404`, that skill is not
+available through the npm installer yet. The GitHub-based route,
+`npx skills@latest add its-thepoe/skills --all`, can still install repository
+skills without publishing individual npm packages.
 
 ```bash
 npm view @its-thepoe/lemonsqueezy version
@@ -141,7 +144,7 @@ npx --yes @its-thepoe/skills@latest check
 | `Done, with failures` | Rerun `./scripts/publish-all.sh` — skips what already shipped |
 | `No workspaces changed relative to HEAD` | Use `--workspace <path>` for an explicit release or make the intended package change first |
 | `--changed cannot safely infer root workspace changes` | Use explicit `--workspace <path>` arguments or the no-argument full release command |
-| `404` from `npm view @its-thepoe/<skill-name> version` | The package is not on npm yet — publish again before `install --all` |
+| `404` from `npm view @its-thepoe/<skill-name> version` | The package is not on npm yet; publish it to make it available through the npm installer. GitHub-based installs remain available. |
 | `cannot publish over the previously published versions` | Bump that package's `version`, rerun |
 | `404` on PUT `@its-thepoe/...` | Wrong account — must be `its-thepoe` |
 

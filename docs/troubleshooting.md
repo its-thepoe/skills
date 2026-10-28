@@ -6,7 +6,7 @@ This page keeps the more operational notes out of the root README.
 
 | Problem | What to do |
 | --- | --- |
-| `npx ...` returns `404 Not Found` | The package may not be published yet, the name may be wrong, or npm may be using stale cache. Try again with `@latest`, or use a fresh cache. |
+| `npx @its-thepoe/...` returns `404 Not Found` | That npm package may not be published or the name may be wrong. Install the skill directly from GitHub with `npx skills@latest add its-thepoe/skills --skill <skill-name>`. |
 | `check` reports `MISSING` | Run `install` or `sync` again, then confirm the target skill folder exists. |
 | Skills do not appear in the agent | Restart or reload the editor/agent after install. |
 | Symlink errors on Windows | Use `--strategy copy`. |

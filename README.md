@@ -6,37 +6,39 @@ Over time I noticed there are certain things I always do, and I kept doing them 
 
 I care a lot about reusability when I am designing and building, so this is basically me treating my own habits as components and packaging them in a way that feels clean enough to reuse. If a skill is here, it probably means it bothered me at some point and I tried to solve for it properly instead of letting it keep annoying me in ten different places.
 
-As with a lot of things I make, this is a constant work in progress, so you can expect the skills to shift and improve over time. If you want to pull any of this into your own setup, you can install the skills directly from npm and wire them into your agent of choice.
+As with a lot of things I make, this is a constant work in progress, so you can expect the skills to shift and improve over time. Install directly from this GitHub repository with the `skills` CLI; individual skills do not need npm packages to be installable. An npm-based installer is also available for skills published under the **`@its-thepoe`** scope.
 
-Packages are published on [npm](https://www.npmjs.com/) under the **`@its-thepoe`** scope.
+Published packages are available on [npm](https://www.npmjs.com/) under the **`@its-thepoe`** scope.
 
 ---
 
 ## Quick Start
 
-Install all skills:
+Install every skill in this repository from GitHub:
+
+```bash
+npx skills@latest add its-thepoe/skills --all
+```
+
+This installs the repository's skills without requiring a separate npm package for each skill. Restart or reload your agent/editor after installing.
+
+Install one skill from GitHub:
+
+```bash
+npx skills@latest add its-thepoe/skills --skill <skill-name>
+```
+
+The npm-based installer is an alternative for skills included in its published manifest:
 
 ```bash
 npx @its-thepoe/skills@latest install --all
 ```
 
-Restart or reload your agent/editor after installing so it can pick up the new skill folders.
-
-Update installed skills:
-
-```bash
-npx @its-thepoe/skills@latest sync --all
-```
-
-Check installed skills:
-
-```bash
-npx @its-thepoe/skills@latest check
-```
+That npm route only includes skills available through the published npm packages. For example, `jony-ive` is available from GitHub but is not currently published as an individual npm package.
 
 ## Supported Agents
 
-The installer can write skills into the local folders used by:
+The npm installer can write skills into the local folders used by:
 
 - Codex
 - Cursor
@@ -52,10 +54,12 @@ npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 
 ## Install One Skill
 
-New in source: [jony-ive](design/jony-ive/) provides research-backed product and
-design critique, concept comparison, and prototyping guidance. Follow its
-[source installation instructions](design/jony-ive/README.md#install-from-this-repository)
-until the package is published to npm.
+[jony-ive](design/jony-ive/) provides research-backed product and design
+critique, concept comparison, and prototyping guidance. Install it directly from
+GitHub with `npx skills@latest add its-thepoe/skills --skill jony-ive`; no
+individual npm package is required.
+
+For skills published through npm, use the package-specific commands below:
 
 | Skill | Command |
 | --- | --- |
@@ -166,9 +170,10 @@ Remove all installed skills:
 npx @its-thepoe/skills@latest remove --all
 ```
 
-## From Source
+## Run the npm Installer from a Local Clone
 
-If you want to run the repo locally instead of using npm:
+To run this repository's npm workspace installer locally instead of downloading
+the published CLI:
 
 ```bash
 git clone https://github.com/its-thepoe/skills.git
@@ -204,7 +209,7 @@ Official paths vary. After you have a skill folder, symlink or copy it into the 
 
 | Problem | What to do |
 | --- | --- |
-| **`npx …` → 404 Not Found** | The package is not on npm yet, or the name is wrong. Use **From source** above, or ask the maintainer to publish. |
+| **`npx @its-thepoe/...` → 404 Not Found** | That npm package may not be published or the name may be wrong. Install the skill from GitHub with `npx skills@latest add its-thepoe/skills --skill <skill-name>`, or use the local-clone installer above. |
 | **EOTP** | Publish-time only. Run `./scripts/publish-all.sh` in **Terminal.app** — it opens the auth URL, you approve with your security key, press Enter, it continues. Never use `NPM_OTP`. End users never see this when installing. |
 | **`check` reports MISSING** | Run `install` or `sync` again; confirm paths like `~/.cursor/skills/<name>` exist. |
 | **Symlink errors (Windows)** | Use `--strategy copy`. |
@@ -212,7 +217,7 @@ Official paths vary. After you have a skill folder, symlink or copy it into the 
 
 ## Repository Layout (Contributors)
 
-This repo is an npm **workspace** with bucketed skill folders plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. The buckets are `agent/`, `design/`, `media/`, `meta/`, `tools/`, `web-design/`, and `writing/`. To add a skill, ship `SKILL.md`, add `package.json` (`name`: `@its-thepoe/<folder>`), a short **`README.md`** (npmjs.com shows this per package), list `README.md` in `package.json` **`files`**, add the folder to root **`package.json`** → **`workspaces`**, register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`.
+This repo is an npm **workspace** with bucketed skill folders plus [`skills/`](skills/) for the `@its-thepoe/skills` CLI. The buckets are `agent/`, `design/`, `media/`, `meta/`, `tools/`, `web-design/`, and `writing/`. A skill can be installed from GitHub as long as it has a discoverable `SKILL.md`. To distribute it through npm, also add `package.json` (`name`: `@its-thepoe/<folder>`), a short **`README.md`**, list `README.md` in `package.json` **`files`**, add the folder to root **`package.json`** → **`workspaces`**, register it in [`skills/skills.manifest.json`](skills/skills.manifest.json) and [`skills/package.json`](skills/package.json) `dependencies`, then run `npm run validate`.
 
 **Publishing (LOCKED — the path that works):** Terminal.app only:
 

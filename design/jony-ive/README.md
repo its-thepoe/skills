@@ -17,10 +17,17 @@ Examples:
 - “This feels wrong, but I don't know why. What would an Ive-informed approach change?”
 - “Help us reframe the brief before drawing another version.”
 
-## Install from this repository
+## Install from GitHub
 
-Copy this **entire folder**, including `references/` and `agents/`, into your
-agent's skill location. For a Codex project, from the clone's root:
+Install this skill directly from the repository with the `skills` CLI:
+
+```bash
+npx skills@latest add its-thepoe/skills --skill jony-ive
+```
+
+No individual npm package is required. You can also manually copy this **entire
+folder**, including `references/` and `agents/`, into your agent's skill
+location. For a Codex project, from the clone's root:
 
 ```bash
 mkdir -p /path/to/project/.agents/skills
@@ -29,8 +36,7 @@ cp -R design/jony-ive /path/to/project/.agents/skills/jony-ive
 
 Personal paths include `~/.agents/skills/jony-ive` (Codex),
 `~/.cursor/skills/jony-ive` (Cursor), and `~/.claude/skills/jony-ive` (Claude Code).
-Reload your agent if the new skill does not appear. The package and CLI manifests
-are prepared in this repo; pushing to GitHub does not itself publish to npm.
+Reload your agent if the new skill does not appear.
 
 ## What is inside
 
