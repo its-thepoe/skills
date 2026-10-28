@@ -696,6 +696,15 @@
       ]
     },
     {
+      "name": "jony-ive",
+      "package": "@its-thepoe/jony-ive",
+      "path": "design/jony-ive",
+      "tags": [
+        "design",
+        "ui"
+      ]
+    },
+    {
       "name": "lamp-section-header",
       "package": "@its-thepoe/lamp-section-header",
       "path": "web-design/lamp-section-header",

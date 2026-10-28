@@ -52,6 +52,11 @@ npx @its-thepoe/skills@latest install --all --only=codex,cursor,claude
 
 ## Install One Skill
 
+New in source: [jony-ive](design/jony-ive/) provides research-backed product and
+design critique, concept comparison, and prototyping guidance. Follow its
+[source installation instructions](design/jony-ive/README.md#install-from-this-repository)
+until the package is published to npm.
+
 | Skill | Command |
 | --- | --- |
 | alt-text | `npx @its-thepoe/skills@latest install alt-text` |

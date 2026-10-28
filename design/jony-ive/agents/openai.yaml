@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jony Ive"
+  short_description: "Critique products through Ive's documented design thinking"
+  default_prompt: "Use $jony-ive to assess this product or design, identify the underlying problem, and recommend concrete improvements with trade-offs and a prototype test."

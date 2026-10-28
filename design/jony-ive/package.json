@@ -1,0 +1,17 @@
+{
+  "name": "@its-thepoe/jony-ive",
+  "version": "1.0.0",
+  "description": "Agent Skill: practical product and design critique grounded in Jony Ive's documented thinking, with research synthesis, cases, and prototype methods.",
+  "license": "MIT",
+  "keywords": ["agent-skills", "jony-ive", "design", "product-design", "critique", "prototyping"],
+  "files": ["README.md", "SKILL.md", "references", "examples.md", "evaluations.md", "agents", "package.json"],
+  "exports": {
+    ".": "./SKILL.md",
+    "./SKILL.md": "./SKILL.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/its-thepoe/skills.git",
+    "directory": "design/jony-ive"
+  }
+}
